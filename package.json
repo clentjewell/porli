@@ -1,0 +1,14 @@
+{
+  "name": "porli",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=24.0.0" },
+  "scripts": {
+    "start": "node server.mjs",
+    "dev": "node --watch server.mjs",
+    "test": "node --test tests/*.test.mjs",
+    "check": "node --check server.mjs && node --check public/app.js && node --check public/experience.js",
+    "build": "npm run check"
+  }
+}

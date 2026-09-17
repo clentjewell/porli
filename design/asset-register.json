@@ -1,0 +1,77 @@
+{
+  "notice": "All images are fictional architectural studies generated through Higgsfield. Never use as photographs of actual listings.",
+  "assets": [
+    {
+      "file": "public/assets/courtyard.webp",
+      "purpose": "Homepage feature and Courtyard House",
+      "provider": "Higgsfield",
+      "model": "gpt_image_2_5",
+      "variant": "flare",
+      "generation_id": "fb53dc8b-7268-4b82-bfb1-2cb617e86e63",
+      "date": "2026-09-17",
+      "prompt": "A modest architect-renovated coastal courtyard house, viewed obliquely from shaded veranda through timber doorway into sunlit courtyard. Pale limewashed brick, weathered timber, olive foliage, one worn chair, linen curtain. Mid-morning raking light, deep olive shadows. Wide architectural magazine composition. Editorial architectural photography, natural restrained colours, realistic scale, straight verticals, tactile materials, subtle film grain, ivory and foliage green palette. No people, no text, no logo, no CGI sheen. Fictional concept property for Porli.",
+      "reference": null,
+      "fictional": true
+    },
+    {
+      "file": "public/assets/apartment.webp",
+      "purpose": "Fictional property imagery",
+      "provider": "Higgsfield",
+      "model": "gpt_image_2_5",
+      "variant": "flare",
+      "generation_id": "5f1c963e-7ef4-4728-af4b-80d96ffd5410",
+      "date": "2026-09-17",
+      "prompt": "A compact two-bedroom apartment living area opening to a planted balcony, oak shelves, pale plaster, linen sofa, one book on table. Soft daylight, restrained editorial styling. Editorial architectural photography, natural restrained colours, realistic scale, straight verticals, tactile materials, subtle film grain, ivory and foliage green palette. No people, no text, no logo, no CGI sheen. Fictional concept property for Porli.",
+      "reference": null,
+      "fictional": true
+    },
+    {
+      "file": "public/assets/townhouse.webp",
+      "purpose": "Fictional property imagery",
+      "provider": "Higgsfield",
+      "model": "gpt_image_2_5",
+      "variant": "flare",
+      "generation_id": "5f25718a-d601-4972-9d23-5ab9980ec52d",
+      "date": "2026-09-17",
+      "prompt": "A contemporary brick townhouse entrance with small front garden, tactile brickwork, olive-painted door and late-morning side light. Eye-level street perspective, modest scale, realistic neighbouring context. Editorial architectural photography, natural restrained colours, realistic scale, straight verticals, tactile materials, subtle film grain, ivory and foliage green palette. No people, no text, no logo, no CGI sheen. Fictional concept property for Porli.",
+      "reference": null,
+      "fictional": true
+    },
+    {
+      "file": "public/assets/veranda.webp",
+      "purpose": "Fictional property imagery",
+      "provider": "Higgsfield",
+      "model": "gpt_image_2_5",
+      "variant": "flare",
+      "generation_id": "43b80c32-6813-44ec-a667-f5c28abde52e",
+      "date": "2026-09-17",
+      "prompt": "A welcoming single-storey family home with practical garden and covered veranda. Natural timber, neutral brick, mature planting and believable wear. Bright soft daylight. Editorial architectural photography, natural restrained colours, realistic scale, straight verticals, tactile materials, subtle film grain, ivory and foliage green palette. No people, no text, no logo, no CGI sheen. Fictional concept property for Porli.",
+      "reference": null,
+      "fictional": true
+    },
+    {
+      "file": "public/assets/courtyard-veranda.webp",
+      "purpose": "Courtyard House gallery",
+      "provider": "Higgsfield",
+      "model": "gpt_image_2_5",
+      "variant": "flare",
+      "generation_id": "0bba8b22-e01b-420a-b863-8b0136cb8055",
+      "date": "2026-09-17",
+      "prompt": "Create a second architectural photograph of the SAME fictional courtyard house in the reference. Maintain its limewashed pale brick, aged oak door frames, stone pavers, olive tree, modest scale and muted warm palette. Camera now stands in the courtyard looking back toward the shaded veranda, a worn timber chair and linen curtain visible. Straight verticals, realistic architecture, understated magazine photograph, natural morning light. No text, people or logos. Match the existing building rather than inventing a different home.",
+      "reference": "fb53dc8b-7268-4b82-bfb1-2cb617e86e63",
+      "fictional": true
+    },
+    {
+      "file": "public/assets/courtyard-detail.webp",
+      "purpose": "Courtyard House gallery",
+      "provider": "Higgsfield",
+      "model": "gpt_image_2_5",
+      "variant": "flare",
+      "generation_id": "00e4b1bd-ebcc-48ec-96a9-e91c6aefa4a1",
+      "date": "2026-09-17",
+      "prompt": "Create a close architectural detail photograph of the SAME fictional courtyard house in the reference. Tight landscape composition of its open weathered timber doorway, pale limewashed masonry and linen curtain, with olive branches casting shadows across the stone threshold. Same materials and restrained daylight, tactile surfaces, natural grain, believable scale. A detail study of the existing reference, not a new room or unrelated house. No text, people, logos.",
+      "reference": "fb53dc8b-7268-4b82-bfb1-2cb617e86e63",
+      "fictional": true
+    }
+  ]
+}

@@ -1,0 +1,82 @@
+# Porli — working local marketplace
+
+The application is now implemented in this folder. Run it with **Node.js 24 or later**:
+
+```sh
+npm start
+```
+
+Open **http://127.0.0.1:4173**. On Windows you can also double-click `START-PORLI.cmd`. There are no dependencies to install. Keep the server running while using the site.
+
+Choose **Sign in → Explore as a customer** or **Open team workspace** to try the two sides of the local demo. These shortcuts are restricted to loopback. You can also create an ordinary password account using fictional details.
+
+## What works
+
+- Responsive Buy/Rent discovery, location/type/price/bedroom/bathroom filters, URL state, sorting and empty states.
+- Six locally stored Higgsfield-generated architectural images, a search-first homepage, interactive featured photographs, compact sticky header and expanded menu, consistent property grids and a keyboard-operated gallery, with reduced-motion support.
+- Real local password authentication, secure password hashing, server-side sessions and separate customer/staff/admin permissions.
+- SQLite-backed saves, one conversation per customer/property, idempotent messages, read markers, staff replies, private notes, assignment, stages, blocking and follow-ups.
+- Inspection requests, staff-created times, capacity-checked confirmations, completion and cancellation.
+- Listing drafts, image uploads, image ordering/cover selection, publication validation, preview, archive/restoration, availability and edit-conflict checks.
+- Dashboard queries, contacts from enquiries, homepage copy editing and team access management.
+
+## Verification
+
+`npm test` runs the API integration suite. `npm run check` checks both server and browser syntax. A manual browser pass also covered desktop/mobile presentation, saving, customer messaging, staff replies and inspection confirmation.
+
+## Data and operating limits
+
+This is a **local concept with persistent workflows**, not a public production launch. All properties, prices, locations and imagery are fictional. Records persist in ignored `var/porli.sqlite`; uploaded images persist in ignored `public/uploads/`. Do not share those folders with real personal data in them.
+
+Before public launch: choose hosting and operator/region details; add verified email, account recovery and notification delivery; review security/rate limiting, upload decoding/metadata stripping, backups and retention; supply authorised inventory and approved policies. Email is not sent. Maps, payments and external-agent publishing are outside this release. There is no automatic real-time refresh; inboxes have an explicit Refresh action. Uploaded files are signature/size checked; full server-side media processing remains a launch requirement. Reporting periods are rolling UTC windows, labelled by duration, rather than local calendar boundaries.
+
+The server defaults to loopback and refuses non-loopback binding while demo shortcuts are enabled. `PORLI_DEMO=0` disables shortcuts and automatic demo seeding, but does **not** make the application production-ready. `.env.example` documents environment variables; export them in your shell if overriding defaults (the server does not auto-load `.env`).
+
+See [implementation decision](docs/13-implementation.md), [verification record](docs/14-verification.md), [editorial redesign](docs/15-editorial-redesign.md), and [image provenance](design/asset-register.json).
+
+---
+
+## Original concept package
+
+**Find your next place.**
+
+Porli is a residential property marketplace for buying and renting, with fixed listing templates, direct in-site conversations and a private team workspace.
+
+Original package: concept and repository starter, version 1.0, 17 September 2026. The original archive supplied specifications and fictional fixtures; this folder now also contains the local application described above. The earlier GitHub prototype was not available in this workspace and has not been modified. Porli is the selected working name; availability has not been checked.
+
+## Start here
+
+1. Read `START-HERE-ASTRA.md` for the repository creation and implementation brief.
+2. Read `docs/01-product-brief.md` and `docs/02-scope-and-decisions.md`.
+3. Use the remaining specifications as the source of truth.
+4. Record changes and unresolved decisions rather than silently changing requirements.
+
+## Contents
+
+- `AGENTS.md`: guidance for coding agents.
+- `docs/01-product-brief.md`: proposition, audience and operating model.
+- `docs/02-scope-and-decisions.md`: approved direction, assumptions, deferred work and decisions.
+- `docs/03-brand-and-design.md`: visual system, voice and reusable components.
+- `docs/04-pages-and-journeys.md`: sitemap and end-to-end flows.
+- `docs/05-listings-and-content.md`: fixed template, validation and publication rules.
+- `docs/06-conversations-and-inspections.md`: inbox, follow-ups and bookings.
+- `docs/07-data-and-permissions.md`: conceptual model and access matrix.
+- `docs/08-dashboard-and-events.md`: unambiguous metrics and analytics.
+- `docs/09-technical-brief.md`: implementation boundaries and proposed architecture.
+- `docs/10-backlog-and-acceptance.md`: phased backlog and verification scenarios.
+- `docs/11-launch-and-operations.md`: launch decisions, operational ownership and risks.
+- `docs/12-decision-log.md`: decision history and template.
+- `design/tokens.json`: proposed design values; contrast must be validated in use.
+- `content/site-copy.md`: starter interface copy.
+- `data/demo-properties.json`: eight fictional properties for UI development.
+- `prompts/higgsfield-images.md`: image direction and generation prompts.
+- `.github/`: issue and pull-request templates.
+- `MASTER-BRIEF.md`: combined readable reference; individual documents are canonical.
+
+## Prototype defaults
+
+English (British), Australian-style fictional locations, AUD, square metres and Australia/Sydney display time zone are fixture assumptions only. They are not confirmed launch decisions. The first product serves one operating organisation; only staff publish listings.
+
+## Repository use
+
+Suggested repository name: `porli`. Prefer a private repository until ownership, content rights and launch settings are settled. Add application code after checking the target environment and documenting the stack choice. Never commit credentials or real personal data. No software licence is granted or selected by this starter.
