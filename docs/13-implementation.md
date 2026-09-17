@@ -1,0 +1,9 @@
+# Local implementation decision
+
+17 September 2026. Build a local, persistent single-organisation MVP using Node 24's HTTP, crypto and SQLite modules, semantic HTML, CSS and browser JavaScript. No paid infrastructure or framework dependency is needed to review the complete consumer-to-staff journey. SQLite foreign keys, transactions and prepared statements enforce relationships. Database migrations run at startup. This deliberately replaces the proposed TypeScript/React candidate with a smaller dependency-free implementation; a hosted stack remains a launch decision.
+
+Run `npm start`, then open http://127.0.0.1:4173. Run `npm test` for isolated API integration tests and `npm run check` for syntax validation. Runtime records are in ignored `var/`; do not commit them. Node's SQLite module is experimental in Node 24. Reference: https://nodejs.org/docs/latest-v24.x/api/sqlite.html.
+
+Local demo sign-in selects seeded accounts through a loopback-only endpoint. Ordinary registration and password sign-in use scrypt hashes and HttpOnly SameSite sessions. The server refuses non-loopback binding while demo access is enabled. Public deployment is not part of this build. Verified email, account recovery, notification delivery, jurisdiction-specific policies, production hardening and backups remain launch gates. No email is sent or claimed to be sent.
+
+All seed listings and generated imagery are fictional. Existing fixture publication states are preserved as specified visual scenarios, with three reference-based images for Courtyard House and one cover for the other homes; newly published listings require three distinct media entries. Image uploads and all account content persist locally. Seed statistics are labelled demo activity. No invented marketing claims, testimonials or listing counts.

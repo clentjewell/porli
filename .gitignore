@@ -1,0 +1,19 @@
+# Local secrets and generated application output
+.env
+.env.*
+!.env.example
+node_modules/
+.next/
+dist/
+coverage/
+*.log
+.DS_Store
+__pycache__/
+# Local generated imagery staging, not approved public assets
+.tmp/
+var/
+public/uploads/
+
+# Cloudflare Wrangler local state and secrets
+.wrangler/
+.dev.vars

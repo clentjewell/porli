@@ -1,0 +1,26 @@
+{
+  "$schema": "https://raw.githubusercontent.com/cloudflare/workers-sdk/main/packages/wrangler/config-schema.json",
+  "name": "porli",
+  "main": "worker/index.mjs",
+  "compatibility_date": "2026-09-01",
+  "compatibility_flags": ["nodejs_compat"],
+  "assets": {
+    "directory": "./public",
+    "binding": "ASSETS",
+    "html_handling": "none",
+    "not_found_handling": "none",
+    "run_worker_first": true
+  },
+  "durable_objects": {
+    "bindings": [{ "name": "PORLI_DB", "class_name": "PorliDatabase" }]
+  },
+  "migrations": [{ "tag": "v1", "new_sqlite_classes": ["PorliDatabase"] }],
+  "vars": {
+    // Demo sign-in shortcuts are loopback-only and must stay off on a public host.
+    "PORLI_DEMO": "0",
+    // Insert the fictional listings into an empty database.
+    "PORLI_SEED": "1"
+    // Set PORLI_ADMIN_EMAIL and PORLI_ADMIN_PASSWORD as secrets to create the first administrator.
+  },
+  "observability": { "enabled": true }
+}
