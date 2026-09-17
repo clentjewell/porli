@@ -72,6 +72,66 @@
       "prompt": "Create a close architectural detail photograph of the SAME fictional courtyard house in the reference. Tight landscape composition of its open weathered timber doorway, pale limewashed masonry and linen curtain, with olive branches casting shadows across the stone threshold. Same materials and restrained daylight, tactile surfaces, natural grain, believable scale. A detail study of the existing reference, not a new room or unrelated house. No text, people, logos.",
       "reference": "fb53dc8b-7268-4b82-bfb1-2cb617e86e63",
       "fictional": true
+    },
+    {
+      "file": "public/assets/grand-blue-aerial.webp",
+      "purpose": "GrandBlue Resort & Beachclub headline listing (cover)",
+      "provider": "grandbluethailand.com",
+      "source": "Photographs published on grandbluethailand.com (gallery), supplied by the property; resized to 1536×1032 WebP.",
+      "rights": "Use authorised by the client as the listing owner. Written confirmation from the property to be filed before public launch.",
+      "date": "2026-09-17",
+      "reference": null,
+      "fictional": false
+    },
+    {
+      "file": "public/assets/grand-blue-pool.webp",
+      "purpose": "GrandBlue Resort & Beachclub headline listing",
+      "provider": "grandbluethailand.com",
+      "source": "Photographs published on grandbluethailand.com (gallery), supplied by the property; resized to 1536×1032 WebP.",
+      "rights": "Use authorised by the client as the listing owner. Written confirmation from the property to be filed before public launch.",
+      "date": "2026-09-17",
+      "reference": null,
+      "fictional": false
+    },
+    {
+      "file": "public/assets/grand-blue-beach.webp",
+      "purpose": "GrandBlue Resort & Beachclub headline listing",
+      "provider": "grandbluethailand.com",
+      "source": "Photographs published on grandbluethailand.com (gallery), supplied by the property; resized to 1536×1032 WebP.",
+      "rights": "Use authorised by the client as the listing owner. Written confirmation from the property to be filed before public launch.",
+      "date": "2026-09-17",
+      "reference": null,
+      "fictional": false
+    },
+    {
+      "file": "public/assets/grand-blue-room.webp",
+      "purpose": "GrandBlue Resort & Beachclub headline listing",
+      "provider": "grandbluethailand.com",
+      "source": "Photographs published on grandbluethailand.com (gallery), supplied by the property; resized to 1536×1032 WebP.",
+      "rights": "Use authorised by the client as the listing owner. Written confirmation from the property to be filed before public launch.",
+      "date": "2026-09-17",
+      "reference": null,
+      "fictional": false
+    },
+    {
+      "file": "public/assets/grand-blue-sunset.webp",
+      "purpose": "GrandBlue Resort & Beachclub headline listing",
+      "provider": "grandbluethailand.com",
+      "source": "Photographs published on grandbluethailand.com (gallery), supplied by the property; resized to 1536×1032 WebP.",
+      "rights": "Use authorised by the client as the listing owner. Written confirmation from the property to be filed before public launch.",
+      "date": "2026-09-17",
+      "reference": null,
+      "fictional": false
+    },
+    {
+      "file": "public/assets/grand-blue-evening.webp",
+      "purpose": "GrandBlue Resort & Beachclub headline listing",
+      "provider": "grandbluethailand.com",
+      "source": "Photographs published on grandbluethailand.com (gallery), supplied by the property; resized to 1536×1032 WebP.",
+      "rights": "Use authorised by the client as the listing owner. Written confirmation from the property to be filed before public launch.",
+      "date": "2026-09-17",
+      "reference": null,
+      "fictional": false
     }
   ]
 }
