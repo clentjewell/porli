@@ -7,6 +7,7 @@ import { createPorli, securityHeaders, cacheControl, extname, isLoopbackHost } f
 import schema from '../migrations/001.sql';
 import fixture from '../data/demo-properties.json';
 
+const MAX_BODY = 8_000_000; // Matches the application core's request limit.
 const CHUNK = 1_000_000; // Durable Object rows are limited to 2 MB; uploads are stored in 1 MB chunks.
 const json = (status, data) => new Response(JSON.stringify(data), { status, headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' } });
 const demoEnabled = env => env.PORLI_DEMO === '1';
@@ -70,7 +71,16 @@ export default {
     if (url.pathname.startsWith('/api/') || url.pathname.startsWith('/uploads/')) {
       // Demo mode only: tests may point requests at an isolated database.
       const name = (demoEnabled(env) && request.headers.get('x-porli-database')) || 'porli';
-      return env.PORLI_DB.get(env.PORLI_DB.idFromName(name)).fetch(request);
+      let forwarded = request;
+      if (!['GET', 'HEAD'].includes(request.method)) {
+        // Buffer the body before handing it to the Durable Object. Streaming it would fail
+        // with an uncaught error whenever the object rejects a request before reading it.
+        if (Number(request.headers.get('content-length') || 0) > MAX_BODY) return json(413, { error: 'File is too large. Maximum upload is 5 MB.' });
+        const body = await request.arrayBuffer();
+        if (body.byteLength > MAX_BODY) return json(413, { error: 'File is too large. Maximum upload is 5 MB.' });
+        forwarded = new Request(request, { body });
+      }
+      return env.PORLI_DB.get(env.PORLI_DB.idFromName(name)).fetch(forwarded);
     }
     let response;
     if (!['GET', 'HEAD'].includes(request.method)) response = json(405, { error: 'Method not allowed.' });
