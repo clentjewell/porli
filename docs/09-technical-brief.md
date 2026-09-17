@@ -1,7 +1,7 @@
 # Technical brief
 
 ## Status
-The local implementation now uses Node 24, SQLite and browser JavaScript; see docs/13-implementation.md. No production hosting provider is approved. This pack defines behaviour. The implementation agent must inspect the target repository/environment and verify current official integration guidance. Do not infer that a previous unrelated project's services are provisioned for Porli.
+The local implementation now uses Node 24, SQLite and browser JavaScript; see docs/13-implementation.md. Hosting on Cloudflare Workers is configured; see docs/17-cloudflare-deployment.md. Public launch remains gated by the checklist in docs/11. This pack defines behaviour. The implementation agent must inspect the target repository/environment and verify current official integration guidance. Do not infer that a previous unrelated project's services are provisioned for Porli.
 
 ## Architecture proposal
 Use a responsive TypeScript web frontend, an authenticated server API, a relational database, object storage for property media and a notification job mechanism. A React-based framework is a candidate, not a requirement. GitHub holds source, migrations, fixtures and documentation. The database holds live listings, users and messages; GitHub is not the live customer database.

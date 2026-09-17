@@ -22,7 +22,11 @@ Choose **Sign in → Explore as a customer** or **Open team workspace** to try t
 
 ## Verification
 
-`npm test` runs the API integration suite. `npm run check` checks both server and browser syntax. A manual browser pass also covered desktop/mobile presentation, saving, customer messaging, staff replies and inspection confirmation.
+`npm test` runs the API integration suite. `npm run check` checks server, worker and browser syntax. A manual browser pass also covered desktop/mobile presentation, saving, customer messaging, staff replies and inspection confirmation.
+
+## Hosting on Cloudflare
+
+The application also deploys as a Cloudflare Worker (`porli`) with static assets and a SQLite-backed Durable Object; see [Cloudflare deployment](docs/17-cloudflare-deployment.md) for connecting the repository, the first administrator account and limits. `npm run cf:dev` runs the Worker locally on port 8788, and `PORLI_TEST_BASE=http://localhost:8788 npm test` runs the same test suite against it. The application logic is shared in `lib/porli.mjs`; `server.mjs` (Node.js) and `worker/index.mjs` (Cloudflare) are thin adapters.
 
 ## Data and operating limits
 
@@ -32,7 +36,7 @@ Before public launch: choose hosting and operator/region details; add verified e
 
 The server defaults to loopback and refuses non-loopback binding while demo shortcuts are enabled. `PORLI_DEMO=0` disables shortcuts and automatic demo seeding, but does **not** make the application production-ready. `.env.example` documents environment variables; export them in your shell if overriding defaults (the server does not auto-load `.env`).
 
-See [implementation decision](docs/13-implementation.md), [verification record](docs/14-verification.md), [editorial redesign](docs/15-editorial-redesign.md), and [image provenance](design/asset-register.json).
+See [implementation decision](docs/13-implementation.md), [verification record](docs/14-verification.md), [editorial redesign](docs/15-editorial-redesign.md), [Cloudflare deployment](docs/17-cloudflare-deployment.md), and [image provenance](design/asset-register.json).
 
 ---
 
@@ -66,6 +70,8 @@ Original package: concept and repository starter, version 1.0, 17 September 2026
 - `docs/10-backlog-and-acceptance.md`: phased backlog and verification scenarios.
 - `docs/11-launch-and-operations.md`: launch decisions, operational ownership and risks.
 - `docs/12-decision-log.md`: decision history and template.
+- `docs/17-cloudflare-deployment.md`: hosting on Cloudflare Workers and connecting the repository.
+- `wrangler.jsonc`, `worker/`: Cloudflare Worker configuration and adapter.
 - `design/tokens.json`: proposed design values; contrast must be validated in use.
 - `content/site-copy.md`: starter interface copy.
 - `data/demo-properties.json`: eight fictional properties for UI development.

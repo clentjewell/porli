@@ -9,7 +9,7 @@
 | D005 | Proposed | One consumer account with both interests | Avoids unnecessary duplicate accounts |
 | D006 | Proposed | Inspection requests and follow-ups in MVP | Completes enquiry journey |
 | D007 | Open | Launch country, currency and region | Fixture defaults do not settle this |
-| D008 | Open | Technology and hosting | Select after repository/environment review |
+| D008 | Confirmed | Node.js/SQLite implementation (docs/13); hosting on Cloudflare Workers with static assets and a SQLite Durable Object (docs/17) | User asked to connect the repository to Cloudflare; Pages cannot run the database-backed server, so the Workers successor platform is used |
 | D009 | Open | Commercial model and brand availability | Not investigated or approved |
 
 ## New decision template

@@ -13,3 +13,7 @@ __pycache__/
 .tmp/
 var/
 public/uploads/
+
+# Cloudflare Wrangler local state and secrets
+.wrangler/
+.dev.vars
