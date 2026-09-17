@@ -12,6 +12,8 @@ Choose **Sign in → Explore as a customer** or **Open team workspace** to try t
 
 ## What works
 
+- A real headline listing, GrandBlue Resort & Beachclub in Thailand (price to be confirmed), featured on the homepage with highlight chips, a photo gallery, property details and a sticky enquiry card. Fictional concept homes remain clearly labelled; see [headline listing](docs/18-headline-listing.md).
+
 - Responsive Buy/Rent discovery, location/type/price/bedroom/bathroom filters, URL state, sorting and empty states.
 - Six locally stored Higgsfield-generated architectural images, a search-first homepage, interactive featured photographs, compact sticky header and expanded menu, consistent property grids and a keyboard-operated gallery, with reduced-motion support.
 - Real local password authentication, secure password hashing, server-side sessions and separate customer/staff/admin permissions.
@@ -71,6 +73,7 @@ Original package: concept and repository starter, version 1.0, 17 September 2026
 - `docs/11-launch-and-operations.md`: launch decisions, operational ownership and risks.
 - `docs/12-decision-log.md`: decision history and template.
 - `docs/17-cloudflare-deployment.md`: hosting on Cloudflare Workers and connecting the repository.
+- `docs/18-headline-listing.md`: the real GrandBlue Resort headline listing, new listing fields and portal conventions.
 - `wrangler.jsonc`, `worker/`: Cloudflare Worker configuration and adapter.
 - `design/tokens.json`: proposed design values; contrast must be validated in use.
 - `content/site-copy.md`: starter interface copy.
