@@ -19,14 +19,17 @@ function wordStagger(html) {
   return html.split(/(<br\s*\/?>)/i).map(part => /^<br\s*\/?>$/i.test(part) ? part : part.split(' ').filter(Boolean).map(word => `<span class="w">${word}</span>`).join(' ')).join(' ');
 }
 
-export function homeView({ properties, state, esc, icon, money, price, card, empty, statusBadges, typeLabel }) {
+const HERO_LINES = ['Property to invest in.', 'Places to belong.', 'Offices to grow into.', 'Land to build on.'];
+
+export function homeView({ properties, state, esc, icon, money, price, card, empty, statusBadges, typeLabel, residentialTypes = [], commercialTypes = [], options = () => '' }) {
   const homes = properties.slice().sort((a, b) => b.featured - a.featured);
   const residentialHomes = homes.filter(p => (p.sector || 'residential') === 'residential');
   const featured = homes[0];
   const real = featured?.is_demo === false;
   const views = featured?.media || [];
-  const headline = state.content.headline === 'Find your next place.' ? 'Homes to buy.<br>Property to invest in.' : esc(state.content.headline);
-  const intro = state.content.intro === 'Residential and commercial property, with one team to talk to.' ? 'Browse residential and commercial property, keep a shortlist and speak directly with the team managing each listing.' : state.content.intro;
+  const defaultHeadline = state.content.headline === 'Find your next place.';
+  const headline = defaultHeadline ? `<span class="w">Homes</span> <span class="w">to</span> <span class="w">buy.</span><br><span class="w"><span class="hero-rotate" data-hero-rotate>${HERO_LINES[0]}</span></span>` : wordStagger(esc(state.content.headline));
+  const intro = state.content.intro === 'Residential and commercial property, with one team to talk to.' ? 'Search, shortlist and talk directly to the team.' : state.content.intro;
   const heroChip = featured ? (featured.transaction_status !== 'available' ? statusBadges({ ...featured, featured: 0, listed_at: '' }) : (featured.price_label ? '<span class="tag">Price on request</span>' : '')) : '';
   const carousel = featured && views.length ? `<div class="market-feature-image" tabindex="0" role="group" aria-roledescription="carousel" aria-label="Photographs of ${esc(featured.title)}">${views.map((m, i) => `<img class="market-view ${i === 0 ? 'is-current' : ''}" src="${esc(m.url)}" alt="${esc(m.alt)}" aria-hidden="${i !== 0}" data-hero-image="${i}" width="1024" height="688" ${i === 0 ? 'fetchpriority="high"' : 'loading="lazy"'}>`).join('')}<div class="feature-label-stack"><span class="feature-label">${esc(typeLabel(featured))} · ${esc(featured.locality)}</span>${heroChip}</div>${views.length > 1 ? `<div class="hero-carousel-controls"><button type="button" class="hero-nav-btn" data-action="hero-prev" aria-label="Previous photograph">${icon('chevron-left')}</button><button type="button" class="hero-nav-btn" data-action="hero-next" aria-label="Next photograph">${icon('chevron-right')}</button></div><div class="hero-meta"><span class="hero-counter" aria-hidden="true"><span data-hero-counter>1</span> / ${views.length}</span><div class="market-view-controls" aria-label="Choose a photograph">${views.map((m, i) => `<button class="${i === 0 ? 'is-current' : ''}" data-hero-pick="${i}" aria-label="Photograph ${i + 1} of ${views.length}" aria-pressed="${i === 0}"></button>`).join('')}</div></div>` : ''}<p class="sr-only" role="status" aria-live="polite" data-hero-status></p></div>` : '';
   // Headline listing facts (right column): locality, price, sale method (commercial, non-default only),
@@ -48,10 +51,10 @@ export function homeView({ properties, state, esc, icon, money, price, card, emp
       <div class="hero-scrim" aria-hidden="true"></div>
       <div class="hero-content">
         <div class="product-label"><span></span>Residential and commercial property, with Porli</div>
-        <h1 class="hero-heading">${wordStagger(headline)}</h1>
+        <h1 class="hero-heading">${headline}</h1>
         <p class="hero-intro">${esc(intro)}</p>
         <div class="hero-search-block">
-          <form class="home-search hero-search" data-form="home-search"><div class="switch switch-pill" aria-label="Property search sector"><span class="switch-thumb" aria-hidden="true"></span><button type="button" class="${state.sector === 'residential' ? 'selected' : ''}" data-action="sector" data-sector="residential" aria-pressed="${state.sector === 'residential'}">${icon('home')}Residential</button><button type="button" class="${state.sector === 'commercial' ? 'selected' : ''}" data-action="sector" data-sector="commercial" aria-pressed="${state.sector === 'commercial'}">${icon('building')}Commercial</button></div><label class="sr-only" for="home-location">Search by suburb, region or property name</label><div class="hero-search-field">${icon('search')}<input id="home-location" name="location" placeholder="Suburb, region or property name" autocomplete="off"></div><button class="btn hero-search-submit" aria-label="Search homes">Search ${icon('arrow')}</button></form>
+          <form class="home-search hero-search" data-form="home-search"><div class="hero-search-row"><div class="switch switch-pill" aria-label="Property search sector"><span class="switch-thumb" aria-hidden="true"></span><button type="button" class="${state.sector === 'residential' ? 'selected' : ''}" data-action="sector" data-sector="residential" aria-pressed="${state.sector === 'residential'}">${icon('home')}Residential</button><button type="button" class="${state.sector === 'commercial' ? 'selected' : ''}" data-action="sector" data-sector="commercial" aria-pressed="${state.sector === 'commercial'}">${icon('building')}Commercial</button></div><label class="sr-only" for="home-location">Search by suburb, region or property name</label><div class="hero-search-field">${icon('search')}<input id="home-location" name="location" placeholder="Suburb or property name" autocomplete="off"></div><button type="button" class="hero-filter-toggle" data-action="hero-filters" aria-expanded="false" aria-controls="hero-filters">${icon('filter')}<span>Filters</span><span class="filter-count" data-filter-count hidden></span></button><button class="btn hero-search-submit" aria-label="Search homes">Search ${icon('arrow')}</button></div><div class="hero-filters" id="hero-filters" hidden><fieldset class="hero-filter-set" data-sector="residential" ${state.sector === 'commercial' ? 'disabled hidden' : ''}><label>Property type<select name="type">${options(residentialTypes, '', 'All types')}</select></label><label>Bedrooms<select name="beds">${options([['0','Studio'],['1','1+ bedrooms'],['2','2+ bedrooms'],['3','3+ bedrooms'],['4','4+ bedrooms']], '', 'Any')}</select></label><label>Bathrooms<select name="baths">${options([['1','1+ bathrooms'],['2','2+ bathrooms'],['3','3+ bathrooms']], '', 'Any')}</select></label></fieldset><fieldset class="hero-filter-set" data-sector="commercial" ${state.sector === 'commercial' ? '' : 'disabled hidden'}><label>Category<select name="type">${options(commercialTypes, '', 'All categories')}</select></label><label>Tenancy<select name="tenancy">${options([['vacant','Vacant possession'],['leased','Leased investment'],['owner_occupied','Owner occupied']], '', 'Any')}</select></label><label>Minimum floor area (m²)<input type="number" min="0" name="min_floor" placeholder="No minimum"></label></fieldset><label>Min price (AUD)<input type="number" min="0" name="min" placeholder="No minimum"></label><label>Max price (AUD)<input type="number" min="0" name="max" placeholder="No maximum"></label><div class="hero-filter-actions"><label class="hero-filter-check"><input type="checkbox" name="pending" value="1">Include under offer</label><button type="button" class="link" data-action="hero-filters-reset">Reset</button><button class="btn small">Apply and search ${icon('arrow')}</button></div></div></form>
           <div class="market-locations"><span>Explore popular locations:</span><a href="/properties?sector=residential&location=Saltmere">Saltmere</a><a href="/properties?sector=residential&location=Fernwick">Fernwick</a><a href="/properties?sector=commercial&location=Thailand">Thailand</a></div>
         </div>
       </div>
@@ -126,6 +129,35 @@ export function mountExperience() {
   document.querySelectorAll('.hero-heading .w').forEach((el,i)=>el.style.setProperty('--i',i));
 
   const cleanups=[];
+
+  // Second headline line rotates through short phrases (static under reduced motion).
+  const rotate=document.querySelector('[data-hero-rotate]');
+  if (rotate && !reduced.matches && HERO_LINES.length>1) {
+    let line=0, swap=0;
+    const rotateTimer=setInterval(()=>{
+      rotate.classList.add('is-out');
+      swap=setTimeout(()=>{line=(line+1)%HERO_LINES.length;rotate.textContent=HERO_LINES[line];rotate.classList.add('is-in');rotate.classList.remove('is-out');void rotate.offsetWidth;rotate.classList.remove('is-in');},360);
+    },3800);
+    cleanups.push(()=>{clearInterval(rotateTimer);clearTimeout(swap);});
+  }
+
+  // Hero filters: toggle the panel, swap the sector-specific fields, reset, and count active filters.
+  const heroForm=document.querySelector('.hero-search');
+  if (heroForm) {
+    const toggleBtn=heroForm.querySelector('[data-action="hero-filters"]');
+    const panel=heroForm.querySelector('.hero-filters');
+    const count=heroForm.querySelector('[data-filter-count]');
+    const setSets=(sector=heroForm.querySelector('.switch-pill button.selected')?.dataset.sector||'residential')=>{heroForm.querySelectorAll('.hero-filter-set').forEach(set=>{const on=set.dataset.sector===sector;set.hidden=!on;set.disabled=!on;});};
+    const updateCount=()=>{const data=new FormData(heroForm);let n=0;for(const [k,v] of data) if(k!=='location'&&String(v).trim())n++;count.textContent=String(n);count.hidden=!n;};
+    heroForm.addEventListener('click',event=>{
+      const button=event.target.closest('[data-action]');if(!button)return;
+      if(button.dataset.action==='hero-filters'){const open=panel.hidden;panel.hidden=!open;toggleBtn.setAttribute('aria-expanded',String(open));toggleBtn.classList.toggle('is-open',open);if(open)panel.querySelector('select,input')?.focus({preventScroll:true});}
+      if(button.dataset.action==='hero-filters-reset'){panel.querySelectorAll('select,input').forEach(el=>{if(el.type==='checkbox')el.checked=false;else el.value='';});updateCount();}
+      if(button.dataset.action==='sector'){setSets(button.dataset.sector);updateCount();}
+    },{signal});
+    heroForm.addEventListener('change',updateCount,{signal});heroForm.addEventListener('input',updateCount,{signal});
+    setSets();
+  }
 
   // Search placeholder gently cycles through example locations while the field is empty and unfocused.
   const searchInput=document.querySelector('#home-location');
