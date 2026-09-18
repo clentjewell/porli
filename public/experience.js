@@ -1,23 +1,53 @@
 // Presentation and motion are isolated from the marketplace's data and workflows.
+
+const HERO_PLACEHOLDERS = {
+  residential: ['Saltmere', 'Fernwick', 'Rayong, Thailand'],
+  commercial: ['Fernwick', 'Rayong, Thailand', 'Highstreet'],
+};
+
+// Wraps each word of a heading in <span class="w"> so mountExperience can stagger them with --i,
+// without disturbing an existing <br> (kept as its own token, never wrapped or split).
+function wordStagger(html) {
+  return html.split(/(<br\s*\/?>)/i).map(part => /^<br\s*\/?>$/i.test(part) ? part : part.split(' ').filter(Boolean).map(word => `<span class="w">${word}</span>`).join(' ')).join(' ');
+}
+
 export function homeView({ properties, state, esc, icon, money, price, card, empty, statusBadges, typeLabel }) {
-  const homes=properties.slice().sort((a,b)=>b.featured-a.featured);
-  const residentialHomes=homes.filter(p=>(p.sector||'residential')==='residential');
-  const featured=homes[0];
-  const real=featured?.is_demo===false;
-  const views=featured?.media||[];
-  const headline=state.content.headline==='Find your next place.'?'Homes to buy.<br>Property to invest in.':esc(state.content.headline);
-  const intro=state.content.intro==='Residential and commercial property, with one team to talk to.'?'Browse residential and commercial property, keep a shortlist and speak directly with the team managing each listing.':state.content.intro;
-  const heroInfo=featured?(real?`<div class="market-feature-info headline"><div class="eyebrow">Headline listing</div><span class="feature-price">${price(featured)}</span><h2>${esc(featured.title)}</h2><p>${esc(featured.locality)}</p>${featured.has_location?`<a class="link small view-on-map" href="/properties/${esc(featured.slug)}#location">View on map ${icon('arrow')}</a>`:''}${(featured.highlights||[]).length?`<div class="chip-row">${featured.highlights.slice(0,3).map(h=>`<span class="chip">${esc(h)}</span>`).join('')}</div>`:''}<div class="feature-actions"><a class="btn" href="/properties/${esc(featured.slug)}">View the property ${icon('arrow')}</a><a class="btn secondary" href="/properties/${esc(featured.slug)}?enquire=1">Enquire</a></div></div>`:`<a class="market-feature-info" href="/properties/${esc(featured.slug)}"><div><span class="feature-price">${money(featured)}</span><h2>${esc(featured.title)}</h2><p>${featured.bedrooms} bedrooms <span>·</span> ${featured.bathrooms} bathrooms <span>·</span> ${featured.parking} car spaces</p></div><span class="feature-open" aria-label="View property">${icon('arrow')}</span></a>`):'';
+  const homes = properties.slice().sort((a, b) => b.featured - a.featured);
+  const residentialHomes = homes.filter(p => (p.sector || 'residential') === 'residential');
+  const featured = homes[0];
+  const real = featured?.is_demo === false;
+  const views = featured?.media || [];
+  const headline = state.content.headline === 'Find your next place.' ? 'Homes to buy.<br>Property to invest in.' : esc(state.content.headline);
+  const intro = state.content.intro === 'Residential and commercial property, with one team to talk to.' ? 'Browse residential and commercial property, keep a shortlist and speak directly with the team managing each listing.' : state.content.intro;
+  const heroChip = featured ? (featured.transaction_status !== 'available' ? statusBadges({ ...featured, featured: 0, listed_at: '' }) : (featured.price_label ? '<span class="tag">Price on request</span>' : '')) : '';
+  const heroInfo = featured ? (real ? `<div class="market-feature-info headline"><div class="eyebrow">Headline listing</div><h2>${esc(featured.title)}</h2><p>${esc(featured.locality)}</p><span class="feature-price">${price(featured)}</span>${featured.has_location ? `<a class="link small view-on-map" href="/properties/${esc(featured.slug)}#location">View on map ${icon('external')}</a>` : ''}${(featured.highlights || []).length ? `<div class="chip-row">${featured.highlights.slice(0, 3).map(h => `<span class="chip">${esc(h)}</span>`).join('')}</div>` : ''}<div class="feature-actions"><a class="btn" href="/properties/${esc(featured.slug)}">View the property ${icon('arrow')}</a><a class="btn secondary" href="/properties/${esc(featured.slug)}?enquire=1">Enquire</a></div></div>` : `<a class="market-feature-info" href="/properties/${esc(featured.slug)}"><div><span class="feature-price">${money(featured)}</span><h2>${esc(featured.title)}</h2><p>${featured.bedrooms} bedrooms <span>·</span> ${featured.bathrooms} bathrooms <span>·</span> ${featured.parking} car spaces</p></div><span class="feature-open" aria-label="View property">${icon('arrow')}</span></a>`) : '';
+  const carousel = featured && views.length ? `<div class="market-feature-image" tabindex="0" role="group" aria-roledescription="carousel" aria-label="Photographs of ${esc(featured.title)}">${views.map((m, i) => `<img class="market-view ${i === 0 ? 'is-current' : ''}" src="${esc(m.url)}" alt="${esc(m.alt)}" aria-hidden="${i !== 0}" data-hero-image="${i}" width="1024" height="688" ${i === 0 ? 'fetchpriority="high"' : 'loading="lazy"'}>`).join('')}<div class="feature-label-stack"><span class="feature-label">${esc(typeLabel(featured))} · ${esc(featured.locality)}</span>${heroChip}</div>${views.length > 1 ? `<div class="hero-carousel-controls"><button type="button" class="hero-nav-btn" data-action="hero-prev" aria-label="Previous photograph">${icon('chevron-left')}</button><button type="button" class="hero-nav-btn" data-action="hero-next" aria-label="Next photograph">${icon('chevron-right')}</button></div><div class="hero-meta"><span class="hero-counter" aria-hidden="true"><span data-hero-counter>1</span> / ${views.length}</span><div class="market-view-controls" aria-label="Choose a photograph">${views.map((m, i) => `<button class="${i === 0 ? 'is-current' : ''}" data-hero-pick="${i}" aria-label="Photograph ${i + 1} of ${views.length}" aria-pressed="${i === 0}"></button>`).join('')}</div></div>` : ''}<p class="sr-only" role="status" aria-live="polite" data-hero-status></p></div>` : '';
   return `<div class="market-home">
     <section class="market-intro market-width" aria-label="Find a home with Porli">
-      <div class="market-intro-copy"><div class="product-label"><span></span>Residential and commercial property, with Porli</div><h1>${headline}</h1><p class="product-summary">${esc(intro)}</p>
-        <form class="home-search market-search" data-form="home-search"><div class="switch" aria-label="Property search sector"><button type="button" class="${state.sector==='residential'?'selected':''}" data-action="sector" data-sector="residential" aria-pressed="${state.sector==='residential'}">Residential</button><button type="button" class="${state.sector==='commercial'?'selected':''}" data-action="sector" data-sector="commercial" aria-pressed="${state.sector==='commercial'}">Commercial</button></div><label for="home-location">Where are you looking?</label><div class="search-input">${icon('search')}<input id="home-location" name="location" aria-label="Search suburb or property" placeholder="Enter a suburb or property name" autocomplete="off"><button class="btn" aria-label="Search homes">Search ${icon('arrow')}</button></div><div class="market-locations"><span>Explore:</span><a href="/properties?sector=residential&location=Saltmere">Saltmere</a><a href="/properties?sector=residential&location=Fernwick">Fernwick</a><a href="/properties?sector=commercial&location=Thailand">Thailand</a></div></form>
+      <div class="market-intro-copy"><div class="product-label"><span></span>Residential and commercial property, with Porli</div><h1 class="hero-heading">${wordStagger(headline)}</h1><p class="product-summary">${esc(intro)}</p>
+        <form class="home-search market-search" data-form="home-search"><div class="switch switch-pill" aria-label="Property search sector"><span class="switch-thumb" aria-hidden="true"></span><button type="button" class="${state.sector === 'residential' ? 'selected' : ''}" data-action="sector" data-sector="residential" aria-pressed="${state.sector === 'residential'}">${icon('home')}Residential</button><button type="button" class="${state.sector === 'commercial' ? 'selected' : ''}" data-action="sector" data-sector="commercial" aria-pressed="${state.sector === 'commercial'}">${icon('building')}Commercial</button></div><label class="sr-only" for="home-location">Search by suburb or property name</label><div class="search-input">${icon('search')}<input id="home-location" name="location" placeholder="Enter a suburb or property name" autocomplete="off"><button class="btn" aria-label="Search homes">Search ${icon('arrow')}</button></div><div class="market-locations"><span>Explore popular locations:</span><a href="/properties?sector=residential&location=Saltmere">Saltmere</a><a href="/properties?sector=residential&location=Fernwick">Fernwick</a><a href="/properties?sector=commercial&location=Thailand">Thailand</a></div></form>
         <div class="search-account-note">${icon('heart')}Save homes and manage enquiries with a free account.</div>
       </div>
-      ${featured?`<div class="market-feature"><div class="market-feature-image">${views.map((m,i)=>`<img class="market-view ${i===0?'is-current':''}" src="${esc(m.url)}" alt="${esc(m.alt)}" aria-hidden="${i!==0}" data-hero-image="${i}" width="1024" height="688" ${i===0?'fetchpriority="high"':'loading="lazy"'}>`).join('')}<div class="feature-label-stack"><span class="feature-label">${esc(typeLabel(featured))} · ${esc(featured.locality)}</span>${featured.transaction_status!=='available'?statusBadges({...featured,featured:0,listed_at:''}):featured.price_label?'<span class="tag">Price on request</span>':''}</div><div class="market-view-controls" aria-label="Property photographs">${views.map((m,i)=>`<button class="${i===0?'is-current':''}" data-hero-pick="${i}" aria-label="View ${i+1} of ${esc(featured.title)}" aria-pressed="${i===0}">${i+1}</button>`).join('')}</div></div>${heroInfo}<div class="feature-disclosure">${real?'Photographs supplied by the property. Price to be confirmed.':'Fictional listing. Photographs are generated concept images.'}</div></div>`:''}
+      ${featured ? `<div class="market-feature" data-reveal>${carousel}${heroInfo}<div class="feature-disclosure">${real ? 'Photographs supplied by the property. Price to be confirmed.' : 'Fictional listing. Photographs are generated concept images.'}</div></div>` : ''}
+      <aside class="hero-aside"><span class="hero-aside-label">Property · People · Possibilities</span><div class="hero-aside-photo"><img src="/assets/grand-blue-sunset.webp" alt="Sunset over the beach at GrandBlue Resort &amp; Beachclub, Thailand — photograph supplied by the property" loading="lazy" width="1536" height="1032" data-parallax></div><div class="hero-aside-words" data-reveal-group><span data-reveal>Live</span><span data-reveal>Invest</span><span data-reveal>Belong</span></div><p class="hero-aside-note">One team to talk to.</p></aside>
     </section>
-    <section class="market-listings market-width" aria-labelledby="available-heading"><div class="market-section-title" data-reveal><div><h2 id="available-heading">Available homes</h2><p>Compare prices, property details and availability.</p></div><div class="listing-links"><a href="/properties?sector=residential">View residential ${icon('arrow')}</a><a href="/properties?sector=commercial">View commercial ${icon('arrow')}</a></div></div><div class="market-property-grid">${residentialHomes.length?residentialHomes.slice(0,3).map(p=>`<div data-reveal>${card(p)}</div>`).join(''):empty('No available homes right now.','Check back for new listings.','','')}</div></section>
-    <section class="market-service"><div class="market-width service-layout"><div class="service-explanation" data-reveal><span class="product-label">What Porli does</span><h2>Find the property.<br>Talk to the people<br>who manage it.</h2><p>Porli is a residential and commercial property marketplace for buyers and investors. The Porli team publishes the listings, answers your questions and manages inspection requests.</p><a class="link" href="/about">How Porli works ${icon('arrow')}</a></div><div class="service-steps"><div data-reveal><span class="service-icon">${icon('search')}</span><div><h3>Search available properties</h3><p>Choose Residential or Commercial, then filter by location, budget and the space you need.</p></div></div><div data-reveal><span class="service-icon">${icon('heart')}</span><div><h3>Save a shortlist</h3><p>Keep the homes you're considering together in your account.</p></div></div><div data-reveal><span class="service-icon">${icon('message')}</span><div><h3>Enquire or arrange a viewing</h3><p>Message the team from a listing. Request an inspection and track its confirmation in your account.</p></div></div></div></div></section>
+    <section class="market-values market-width" aria-label="Why choose Porli" data-reveal-group>
+      <div class="value-item" data-reveal><span class="value-icon">${icon('grid')}</span><div><h3>Curated listings</h3><p>Residential and commercial, every listing checked by the team.</p></div></div>
+      <div class="value-item" data-reveal><span class="value-icon">${icon('message')}</span><div><h3>Direct to the team</h3><p>Enquire from any listing and get a reply in your account.</p></div></div>
+      <div class="value-item" data-reveal><span class="value-icon">${icon('heart')}</span><div><h3>Save and compare</h3><p>Keep a shortlist and come back to it on any device.</p></div></div>
+      <div class="value-item" data-reveal><span class="value-icon">${icon('layers')}</span><div><h3>A more open market</h3><p>Sale method, areas, zoning and tenancy shown plainly.</p></div></div>
+    </section>
+    <section class="market-destinations market-width" data-reveal aria-label="Featured destinations">
+      <div class="market-section-title"><div><span class="eyebrow">Explore</span><h2>Featured destinations</h2></div><a class="link" href="/properties?sector=residential">View all locations ${icon('arrow')}</a></div>
+      <div class="destination-grid" data-reveal-group>
+        <a class="destination-card" data-reveal href="/properties?sector=residential&location=Saltmere"><img src="/assets/courtyard.webp" alt="Fictional coastal courtyard home — generated concept image" loading="lazy" width="1024" height="688"><span class="destination-scrim" aria-hidden="true"></span><span class="destination-body"><strong>Saltmere</strong><em>Coastal living, reimagined.</em></span><span class="destination-arrow" aria-hidden="true">${icon('external')}</span></a>
+        <a class="destination-card" data-reveal href="/properties?sector=commercial&location=Fernwick"><img src="/assets/highstreet-offices.webp" alt="Fictional office building — generated concept image" loading="lazy" width="1024" height="688"><span class="destination-scrim" aria-hidden="true"></span><span class="destination-body"><strong>Fernwick</strong><em>Business. Lifestyle. Opportunity.</em></span><span class="destination-arrow" aria-hidden="true">${icon('external')}</span></a>
+        <a class="destination-card" data-reveal href="/properties?sector=commercial&location=Thailand"><img src="/assets/grand-blue-beach.webp" alt="GrandBlue beachfront — photograph supplied by the property" loading="lazy" width="1536" height="1032"><span class="destination-scrim" aria-hidden="true"></span><span class="destination-body"><strong>Thailand</strong><em>Extraordinary places, real opportunities.</em></span><span class="destination-arrow" aria-hidden="true">${icon('external')}</span></a>
+      </div>
+      <p class="destination-caption small muted">Saltmere and Fernwick are fictional places used for the concept. Thailand listing photographs are supplied by the property.</p>
+    </section>
+    <section class="market-listings market-width" aria-labelledby="available-heading"><div class="market-section-title" data-reveal><div><h2 id="available-heading">Available homes</h2><p>Compare prices, property details and availability.</p></div><div class="listing-links"><a href="/properties?sector=residential">View residential ${icon('arrow')}</a><a href="/properties?sector=commercial">View commercial ${icon('arrow')}</a></div></div><div class="market-property-grid" data-reveal-group>${residentialHomes.length ? residentialHomes.slice(0, 3).map(p => `<div data-reveal>${card(p)}</div>`).join('') : empty('No available homes right now.', 'Check back for new listings.', '', '')}</div></section>
+    <section class="market-service"><div class="market-width service-layout"><div class="service-explanation" data-reveal><span class="product-label">What Porli does</span><h2>Find the property.<br>Talk to the people<br>who manage it.</h2><p>Porli is a residential and commercial property marketplace for buyers and investors. The Porli team publishes the listings, answers your questions and manages inspection requests.</p><a class="link" href="/about">How Porli works ${icon('arrow')}</a></div><div class="service-steps"><div data-reveal><div class="step-head"><span class="step-number">01</span><span class="service-icon">${icon('search')}</span></div><div><h3>Search available properties</h3><p>Choose Residential or Commercial, then filter by location, budget and the space you need.</p></div></div><div data-reveal><div class="step-head"><span class="step-number">02</span><span class="service-icon">${icon('heart')}</span></div><div><h3>Save a shortlist</h3><p>Keep the homes you're considering together in your account.</p></div></div><div data-reveal><div class="step-head"><span class="step-number">03</span><span class="service-icon">${icon('message')}</span></div><div><h3>Enquire or arrange a viewing</h3><p>Message the team from a listing. Request an inspection and track its confirmation in your account.</p></div></div></div></div></section>
     <section class="market-commercial market-width" data-reveal><a class="commercial-photo" href="/properties?sector=commercial"><img src="/assets/highstreet-offices.webp" alt="Highstreet Offices, a fictional three-storey office building — generated concept image" loading="lazy" width="1024" height="688"><span>Generated concept image</span></a><div class="commercial-description"><span class="product-label">Commercial property</span><h2>Offices, retail, industrial<br>and leisure assets.</h2><p>Browse commercial listings with floor and land areas, zoning, tenancy and sale method shown clearly. Enquire from the listing when you're ready to talk.</p><a class="btn" href="/properties?sector=commercial">Browse commercial property ${icon('arrow')}</a></div></section>
     <section class="market-account market-width" data-reveal><div><h2>Your property search, in one place.</h2><p>Saved homes, conversations and inspection requests.</p></div><a class="btn secondary" href="/account/saved">Open your account ${icon('arrow')}</a></section>
   </div>`;
@@ -49,16 +79,75 @@ export function mountExperience() {
   document.addEventListener('click',event=>{if(!header.contains(event.target)&&!panel.hidden)setMenu(false);},{signal});
   header.addEventListener('focusout',()=>queueMicrotask(()=>{if(!header.contains(document.activeElement))setMenu(false);}),{signal});
 
+  // Scroll reveal. Elements inside [data-reveal-group] get an incremental --i so grids cascade.
+  document.querySelectorAll('[data-reveal-group]').forEach(group=>{
+    [...group.children].filter(el=>el.hasAttribute('data-reveal')).forEach((el,i)=>el.style.setProperty('--i',i));
+  });
   const reveals=[...document.querySelectorAll('[data-reveal]')];
   const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('has-arrived');observer.unobserve(entry.target);}}),{threshold:.12});
   reveals.forEach(el=>observer.observe(el));
-  const picks=[...document.querySelectorAll('[data-hero-pick]')];
-  const images=[...document.querySelectorAll('[data-hero-image]')];
-  picks.forEach(button=>button.addEventListener('click',()=>{
-    const index=button.dataset.heroPick;
-    picks.forEach(p=>{const active=p.dataset.heroPick===index;p.classList.toggle('is-current',active);p.setAttribute('aria-pressed',String(active));});
-    images.forEach(image=>{const active=image.dataset.heroImage===index;image.classList.toggle('is-current',active);image.setAttribute('aria-hidden',String(!active));});
-  },{signal}));
+
+  // Hero heading: word-by-word rise, staggered with --i (CSS keyframes; instant under reduced motion).
+  document.querySelectorAll('.hero-heading .w').forEach((el,i)=>el.style.setProperty('--i',i));
+
+  const cleanups=[];
+
+  // Search placeholder gently cycles through example locations while the field is empty and unfocused.
+  const searchInput=document.querySelector('#home-location');
+  if (searchInput && !reduced.matches) {
+    let step=0;
+    const cycle=()=>{
+      if (document.activeElement===searchInput || searchInput.value) return;
+      const sector=document.querySelector('.switch-pill button.selected')?.dataset.sector || 'residential';
+      const list=HERO_PLACEHOLDERS[sector]||HERO_PLACEHOLDERS.residential;
+      step=(step+1)%list.length;
+      searchInput.placeholder=`Try "${list[step]}"`;
+    };
+    const placeholderTimer=setInterval(cycle,2600);
+    cleanups.push(()=>clearInterval(placeholderTimer));
+  }
+
+  // Headline listing carousel: prev/next, dots, keyboard, swipe, autoplay with pause, Ken Burns and aria-live status.
+  const heroFrame=document.querySelector('.market-feature-image');
+  if (heroFrame) {
+    const images=[...heroFrame.querySelectorAll('[data-hero-image]')];
+    const dots=[...document.querySelectorAll('[data-hero-pick]')];
+    const prevBtn=document.querySelector('[data-action="hero-prev"]');
+    const nextBtn=document.querySelector('[data-action="hero-next"]');
+    const counter=document.querySelector('[data-hero-counter]');
+    const status=document.querySelector('[data-hero-status]');
+    const total=images.length;
+    let index=0,autoplayId=0;
+    const show=(next,{announce=true}={})=>{
+      index=((next%total)+total)%total;
+      images.forEach((el,i)=>{const active=i===index;el.classList.toggle('is-current',active);el.setAttribute('aria-hidden',String(!active));});
+      dots.forEach((el,i)=>{const active=i===index;el.classList.toggle('is-current',active);el.setAttribute('aria-pressed',String(active));});
+      if (counter) counter.textContent=String(index+1);
+      if (status && announce) status.textContent=`Photograph ${index+1} of ${total}: ${images[index].alt}`;
+    };
+    const stop=()=>{clearInterval(autoplayId);autoplayId=0;};
+    const start=()=>{if(reduced.matches||total<2||document.hidden)return;stop();autoplayId=setInterval(()=>show(index+1),5000);};
+    const restart=()=>{stop();start();};
+    prevBtn?.addEventListener('click',()=>{show(index-1);restart();},{signal});
+    nextBtn?.addEventListener('click',()=>{show(index+1);restart();},{signal});
+    dots.forEach((dot,i)=>dot.addEventListener('click',()=>{show(i);restart();},{signal}));
+    heroFrame.addEventListener('keydown',event=>{if(event.key==='ArrowLeft'){event.preventDefault();show(index-1);restart();}if(event.key==='ArrowRight'){event.preventDefault();show(index+1);restart();}},{signal});
+    let touchX=null;
+    heroFrame.addEventListener('pointerdown',event=>{touchX=event.clientX;},{signal});
+    heroFrame.addEventListener('pointerup',event=>{if(touchX===null)return;const dx=event.clientX-touchX;touchX=null;if(Math.abs(dx)>40){dx<0?show(index+1):show(index-1);restart();}},{signal});
+    heroFrame.addEventListener('pointercancel',()=>{touchX=null;},{signal});
+    heroFrame.addEventListener('pointerenter',stop,{signal});
+    heroFrame.addEventListener('pointerleave',start,{signal});
+    heroFrame.addEventListener('focusin',stop,{signal});
+    heroFrame.addEventListener('focusout',start,{signal});
+    document.addEventListener('visibilitychange',()=>{document.hidden?stop():start();},{signal});
+    reduced.addEventListener('change',()=>{reduced.matches?stop():start();},{signal});
+    show(0,{announce:false});
+    start();
+    cleanups.push(stop);
+  }
+
+  const parallaxPhoto=document.querySelector('[data-parallax]');
   let frame=0;
   const progress=header.querySelector('.reading-progress');
   const schedule=()=>{if(!frame)frame=requestAnimationFrame(update);};
@@ -67,10 +156,11 @@ export function mountExperience() {
     header.classList.toggle('is-scrolled',window.scrollY>70);
     const range=document.documentElement.scrollHeight-window.innerHeight;
     progress?.style.setProperty('transform',`scaleX(${range>0?window.scrollY/range:0})`);
+    if (parallaxPhoto) parallaxPhoto.style.setProperty('--py',reduced.matches?'0px':`${Math.max(-18,Math.min(18,window.scrollY*-0.05))}px`);
   }
   window.addEventListener('scroll',schedule,{signal,passive:true});
   window.addEventListener('resize',schedule,{signal,passive:true});
   reduced.addEventListener('change',schedule,{signal});
   schedule();
-  dispose=()=>{abort.abort();observer.disconnect();cancelAnimationFrame(frame);};
+  dispose=()=>{abort.abort();observer.disconnect();cancelAnimationFrame(frame);cleanups.forEach(fn=>fn());};
 }
