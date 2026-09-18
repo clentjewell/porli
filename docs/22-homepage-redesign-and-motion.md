@@ -3,21 +3,23 @@
 18 September 2026. The homepage was rebuilt to the supplied mockup and the whole site was given restrained movement: the request was to make everything interactive, with movements and animations. This document records what changed, how each interaction behaves, and the accessibility rules every animation follows.
 
 ## The homepage, section by section
-1. **Hero, three columns.** Copy on the left (eyebrow, headline, intro, sector toggle, search, popular locations, account note). The headline listing card in the middle. A decorative side panel on the right that reads "Property · People · Possibilities", shows a GrandBlue sunset photograph and the words *Live, Invest, Belong*. The side panel is hidden below 1180px and the hero stacks below 560px.
-2. **Value strip.** Four items with icons: Curated listings, Direct to the team, Save and compare, A more open market. Two columns on tablets, one column on phones.
-3. **Featured destinations.** Saltmere ("Coastal living, reimagined."), Fernwick ("Business. Lifestyle. Opportunity.") and Thailand ("Extraordinary places, real opportunities."). Each card is one link to the marketplace filtered by that location. Saltmere and Fernwick use existing generated concept images; Thailand uses a photograph supplied by the property. A caption under the grid says which places are fictional. The mockup spelt the second place "Fenwick"; the repository's fixtures and URLs use **Fernwick**, so that spelling is kept.
-4. **Available homes**, the existing residential grid, followed by **What Porli does** (now with 01/02/03 step markers), the **Commercial property** section and the account band.
+1. **Full-page hero, search first.** The hero fills the first screen under the header. Three GrandBlue photographs crossfade slowly behind a dark scrim (a caption credits the property); the copy is centred in white: eyebrow, headline, one-line intro, then the dominant search card with the Residential/Commercial toggle, a large input and the Search button, followed by the popular-location pills and a "Scroll" cue. A first version placed the headline listing and a decorative side panel beside the copy; the user judged it messy, so both were moved out of the hero.
+2. **Headline listing.** GrandBlue Resort & Beachclub in its own section: the photo carousel on the left, and on the right the locality with a "View on map" pill, the price line, the sale method, up to four short facts, highlight chips, the View and Enquire buttons and the disclosure. A link leads to all commercial property.
+3. **Value strip.** Four items with icons: Curated listings, Direct to the team, Save and compare, A more open market. Two columns on tablets, one column on phones.
+4. **Featured destinations.** Saltmere ("Coastal living, reimagined."), Fernwick ("Business. Lifestyle. Opportunity.") and Thailand ("Extraordinary places, real opportunities."). Each card is one link to the marketplace filtered by that location. Saltmere and Fernwick use existing generated concept images; Thailand uses a photograph supplied by the property. A caption under the grid says which places are fictional. The mockup spelt the second place "Fenwick"; the repository's fixtures and URLs use **Fernwick**, so that spelling is kept.
+5. **Available homes**, the existing residential grid, followed by **What Porli does** (now with 01/02/03 step markers), the **Commercial property** section and the account band.
 
-No new images were generated or added. Every picture on the page already exists in `public/assets/` and is listed in `design/asset-register.json`. Honest labelling is unchanged: fictional listings say so, and the headline listing repeats "Photographs supplied by the property. Price to be confirmed."
+No new images were generated or added. Every picture on the page already exists in `public/assets/` and is listed in `design/asset-register.json`. Honest labelling is unchanged: fictional listings say so, the hero credits the property for its photographs, and the headline listing repeats "Photographs supplied by the property. Price to be confirmed."
 
 ## Interactions
 | Element | Behaviour |
 |---|---|
+| Hero background | Three photographs crossfade every 7 s with a slow zoom; only the first, static photograph under reduced motion. |
 | Headline word rise | Each word of the h1 rises into place on first paint, 70 ms apart. |
 | Sector toggle | Pill switch with house and building icons. An olive thumb slides behind the active choice. Choosing a sector also rewrites the popular-location links to that sector. |
 | Search box | Olive ring and a 1px lift on focus. While the field is empty and not focused the placeholder cycles through example places every 2.6 s (Saltmere, Fernwick, Rayong for residential; Fernwick, Rayong, Highstreet for commercial). A typed value is never overwritten. |
 | Headline listing carousel | Previous and next buttons, a "1 / 6" counter, dot controls, left and right arrow keys when the carousel has focus, and a horizontal swipe on touch (40px threshold). Autoplay every 5 s pauses while hovered or focused, when the tab is hidden, and never runs under reduced motion. The active photograph has a slow 8 s zoom. Changes are announced to screen readers through a visually hidden live region ("Photograph 3 of 6: …"). |
-| Side panel photograph | Moves up to 18px with the scroll for a light parallax. |
+| Scroll cue | A "Scroll" label with a bobbing chevron links to the headline listing. |
 | Scroll reveal | Sections and cards fade and rise 14px as they enter the viewport. Children of a `data-reveal-group` cascade 80 ms apart. |
 | Destination cards | Image scales to 1.04 over 600 ms on hover or focus; the round arrow button lifts and fills olive. |
 | Value items | The icon circle fills olive on hover. |
@@ -26,8 +28,8 @@ No new images were generated or added. Every picture on the page already exists 
 | Page changes | Every route now fades and rises in over 320 ms (previously disabled on the front page). |
 
 ## Accessibility and performance rules
-- Every animation is transform or opacity only, so nothing triggers layout during motion.
-- `prefers-reduced-motion: reduce` removes all transitions and animations site-wide (a rule in `styles.css`), and `experience.css` adds overrides so that nothing that starts hidden stays hidden: revealed sections, the headline words and the carousel image are shown immediately. Autoplay, parallax, the zoom and the cycling placeholder are switched off in script as well.
+- Every animation is transform or opacity only, so nothing triggers layout during motion. The hero height comes from a `--header-h` custom property measured from the real header, so it fills exactly one screen.
+- `prefers-reduced-motion: reduce` removes all transitions and animations site-wide (a rule in `styles.css`), and `experience.css` adds overrides so that nothing that starts hidden stays hidden: revealed sections, the headline words and the carousel image are shown immediately. Autoplay, the background crossfade, the zoom and the cycling placeholder are switched off in script as well.
 - No inline scripts, inline styles or inline event handlers: the Content Security Policy is unchanged (`script-src 'self'; style-src 'self'`). Stagger indexes are set as CSS custom properties from script.
 - All controls have accessible names and states (`aria-pressed` on toggles and dots, labelled carousel buttons, a live region for slide changes). Focus rings remain visible. Tap targets are at least 38px on phones.
 - Listeners registered by the homepage are attached with the shared abort signal and cleared on route change, together with the autoplay and placeholder timers.
@@ -41,6 +43,6 @@ No new images were generated or added. Every picture on the page already exists 
 `public/experience.js` (homepage view and all homepage behaviour), `public/experience.css` (layout, motion and breakpoints), `public/app.js` (five new icons; the sector action also updates the popular-location links), `public/index.html` (cache-busting version and page description). Cloudflare deployment is unchanged: static assets only.
 
 ## Limitations and remaining decisions
-- The side panel words and the destination taglines are marketing copy written for the concept; they should be reviewed with the brand work in docs/21 before launch.
+- The destination taglines are marketing copy written for the concept; they should be reviewed with the brand work in docs/21 before launch.
 - Destination cards link to marketplace searches, so Thailand shows only the headline listing until more commercial stock exists.
 - Chromium's full-page screenshot duplicates the sticky header when captured while scrolled; that is a capture artefact, not a rendering defect.
