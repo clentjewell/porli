@@ -17,7 +17,8 @@ export function createApp({
   demo = process.env.PORLI_DEMO !== '0',
   seed = process.env.PORLI_SEED ? process.env.PORLI_SEED !== '0' : demo,
   adminEmail = process.env.PORLI_ADMIN_EMAIL || '',
-  adminPassword = process.env.PORLI_ADMIN_PASSWORD || ''
+  adminPassword = process.env.PORLI_ADMIN_PASSWORD || '',
+  mapsEmbedKey = process.env.PORLI_MAPS_EMBED_KEY || ''
 } = {}) {
   if (dbPath !== ':memory:') mkdirSync(dirname(resolve(dbPath)), { recursive: true });
   const db = new DatabaseSync(dbPath);
@@ -38,7 +39,7 @@ export function createApp({
     db: storage, files,
     schema: readFileSync(join(root, 'migrations/001.sql'), 'utf8'),
     fixture: JSON.parse(readFileSync(join(root, 'data/demo-properties.json'), 'utf8')),
-    demo, seed, adminEmail, adminPassword
+    demo, seed, adminEmail, adminPassword, mapsEmbedKey
   });
   const notFound = () => new Response(JSON.stringify({ error: 'Not found.' }), { status: 404, headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' } });
   async function serveStatic(request) {

@@ -34,7 +34,7 @@ The application also deploys as a Cloudflare Worker (`porli`) with static assets
 
 This is a **local concept with persistent workflows**, not a public production launch. All properties, prices, locations and imagery are fictional. Records persist in ignored `var/porli.sqlite`; uploaded images persist in ignored `public/uploads/`. Do not share those folders with real personal data in them.
 
-Before public launch: choose hosting and operator/region details; add verified email, account recovery and notification delivery; review security/rate limiting, upload decoding/metadata stripping, backups and retention; supply authorised inventory and approved policies. Email is not sent. Maps, payments and external-agent publishing are outside this release. There is no automatic real-time refresh; inboxes have an explicit Refresh action. Uploaded files are signature/size checked; full server-side media processing remains a launch requirement. Reporting periods are rolling UTC windows, labelled by duration, rather than local calendar boundaries.
+Before public launch: choose hosting and operator/region details; add verified email, account recovery and notification delivery; review security/rate limiting, upload decoding/metadata stripping, backups and retention; supply authorised inventory and approved policies. Email is not sent. Maps load from Google only when a visitor chooses to show them; payments and external-agent publishing are outside this release. There is no automatic real-time refresh; inboxes have an explicit Refresh action. Uploaded files are signature/size checked; full server-side media processing remains a launch requirement. Reporting periods are rolling UTC windows, labelled by duration, rather than local calendar boundaries.
 
 The server defaults to loopback and refuses non-loopback binding while demo shortcuts are enabled. `PORLI_DEMO=0` disables shortcuts and automatic demo seeding, but does **not** make the application production-ready. `.env.example` documents environment variables; export them in your shell if overriding defaults (the server does not auto-load `.env`).
 
@@ -75,6 +75,7 @@ Original package: concept and repository starter, version 1.0, 17 September 2026
 - `docs/17-cloudflare-deployment.md`: hosting on Cloudflare Workers and connecting the repository.
 - `docs/18-headline-listing.md`: the real GrandBlue Resort headline listing, new listing fields and portal conventions.
 - `docs/19-sale-only-and-commercial.md`: renting removed; residential and commercial sectors.
+- `docs/20-location-and-maps.md`: listing location, click-to-load map, navigation links and directions.
 - `wrangler.jsonc`, `worker/`: Cloudflare Worker configuration and adapter.
 - `design/tokens.json`: proposed design values; contrast must be validated in use.
 - `content/site-copy.md`: starter interface copy.
