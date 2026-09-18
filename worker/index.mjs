@@ -53,7 +53,8 @@ export class PorliDatabase extends DurableObject {
       demo: demoEnabled(env),
       seed: env.PORLI_SEED !== '0',
       adminEmail: env.PORLI_ADMIN_EMAIL || '',
-      adminPassword: env.PORLI_ADMIN_PASSWORD || ''
+      adminPassword: env.PORLI_ADMIN_PASSWORD || '',
+      mapsEmbedKey: env.PORLI_MAPS_EMBED_KEY || ''
     });
   }
   fetch(request) {
