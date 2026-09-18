@@ -76,6 +76,7 @@ Original package: concept and repository starter, version 1.0, 17 September 2026
 - `docs/18-headline-listing.md`: the real GrandBlue Resort headline listing, new listing fields and portal conventions.
 - `docs/19-sale-only-and-commercial.md`: renting removed; residential and commercial sectors.
 - `docs/20-location-and-maps.md`: listing location, click-to-load map, navigation links and directions.
+- `docs/21-plan-on-a-page.md`: digest of the Jewell plan-on-a-page pack (V01, 18 September 2026); the original deck and page renders are in `docs/plans/`.
 - `wrangler.jsonc`, `worker/`: Cloudflare Worker configuration and adapter.
 - `design/tokens.json`: proposed design values; contrast must be validated in use.
 - `content/site-copy.md`: starter interface copy.
