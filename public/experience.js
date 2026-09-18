@@ -5,6 +5,14 @@ const HERO_PLACEHOLDERS = {
   commercial: ['Fernwick', 'Rayong, Thailand', 'Highstreet'],
 };
 
+const SALE_METHOD_PHRASES = {
+  private_sale: 'Private sale',
+  expressions_of_interest: 'Sale by expressions of interest',
+  auction: 'Auction',
+  tender: 'Tender',
+  price_on_application: 'Price on application',
+};
+
 // Wraps each word of a heading in <span class="w"> so mountExperience can stagger them with --i,
 // without disturbing an existing <br> (kept as its own token, never wrapped or split).
 function wordStagger(html) {
@@ -20,17 +28,41 @@ export function homeView({ properties, state, esc, icon, money, price, card, emp
   const headline = state.content.headline === 'Find your next place.' ? 'Homes to buy.<br>Property to invest in.' : esc(state.content.headline);
   const intro = state.content.intro === 'Residential and commercial property, with one team to talk to.' ? 'Browse residential and commercial property, keep a shortlist and speak directly with the team managing each listing.' : state.content.intro;
   const heroChip = featured ? (featured.transaction_status !== 'available' ? statusBadges({ ...featured, featured: 0, listed_at: '' }) : (featured.price_label ? '<span class="tag">Price on request</span>' : '')) : '';
-  const heroInfo = featured ? (real ? `<div class="market-feature-info headline"><div class="eyebrow">Headline listing</div><h2>${esc(featured.title)}</h2><p>${esc(featured.locality)}</p><span class="feature-price">${price(featured)}</span>${featured.has_location ? `<a class="link small view-on-map" href="/properties/${esc(featured.slug)}#location">View on map ${icon('external')}</a>` : ''}${(featured.highlights || []).length ? `<div class="chip-row">${featured.highlights.slice(0, 3).map(h => `<span class="chip">${esc(h)}</span>`).join('')}</div>` : ''}<div class="feature-actions"><a class="btn" href="/properties/${esc(featured.slug)}">View the property ${icon('arrow')}</a><a class="btn secondary" href="/properties/${esc(featured.slug)}?enquire=1">Enquire</a></div></div>` : `<a class="market-feature-info" href="/properties/${esc(featured.slug)}"><div><span class="feature-price">${money(featured)}</span><h2>${esc(featured.title)}</h2><p>${featured.bedrooms} bedrooms <span>·</span> ${featured.bathrooms} bathrooms <span>·</span> ${featured.parking} car spaces</p></div><span class="feature-open" aria-label="View property">${icon('arrow')}</span></a>`) : '';
   const carousel = featured && views.length ? `<div class="market-feature-image" tabindex="0" role="group" aria-roledescription="carousel" aria-label="Photographs of ${esc(featured.title)}">${views.map((m, i) => `<img class="market-view ${i === 0 ? 'is-current' : ''}" src="${esc(m.url)}" alt="${esc(m.alt)}" aria-hidden="${i !== 0}" data-hero-image="${i}" width="1024" height="688" ${i === 0 ? 'fetchpriority="high"' : 'loading="lazy"'}>`).join('')}<div class="feature-label-stack"><span class="feature-label">${esc(typeLabel(featured))} · ${esc(featured.locality)}</span>${heroChip}</div>${views.length > 1 ? `<div class="hero-carousel-controls"><button type="button" class="hero-nav-btn" data-action="hero-prev" aria-label="Previous photograph">${icon('chevron-left')}</button><button type="button" class="hero-nav-btn" data-action="hero-next" aria-label="Next photograph">${icon('chevron-right')}</button></div><div class="hero-meta"><span class="hero-counter" aria-hidden="true"><span data-hero-counter>1</span> / ${views.length}</span><div class="market-view-controls" aria-label="Choose a photograph">${views.map((m, i) => `<button class="${i === 0 ? 'is-current' : ''}" data-hero-pick="${i}" aria-label="Photograph ${i + 1} of ${views.length}" aria-pressed="${i === 0}"></button>`).join('')}</div></div>` : ''}<p class="sr-only" role="status" aria-live="polite" data-hero-status></p></div>` : '';
+  // Headline listing facts (right column): locality, price, sale method (commercial, non-default only),
+  // up to four short detail pairs, highlight chips, then the view/enquire actions. Works for the real
+  // GrandBlue listing and for a fictional fallback featured listing alike, from the same fields.
+  const saleMethodLine = featured && (featured.sector || 'residential') === 'commercial' && featured.sale_method && featured.sale_method !== 'private_sale' ? `<p class="headline-sale-method">${esc(SALE_METHOD_PHRASES[featured.sale_method] || SALE_METHOD_PHRASES.private_sale)}</p>` : '';
+  const factPairs = featured ? (featured.details || []).filter(d => Array.isArray(d) && d.length === 2 && String(d[1]).length <= 36).slice(0, 4) : [];
+  const factList = factPairs.length ? `<dl class="headline-fact-list">${factPairs.map(([label, value]) => `<div><dt>${esc(label)}</dt><dd>${esc(value)}</dd></div>`).join('')}</dl>` : '';
+  const highlightChips = featured && (featured.highlights || []).length ? `<div class="chip-row">${featured.highlights.slice(0, 4).map(h => `<span class="chip">${esc(h)}</span>`).join('')}</div>` : '';
+  const mapLink = featured?.has_location ? `<a class="link small view-on-map" href="/properties/${esc(featured.slug)}#location">View on map ${icon('external')}</a>` : '';
+  const headlineFacts = featured ? `<div class="headline-facts"><p class="headline-locality">${icon('pin')}${esc(featured.locality)}</p>${mapLink}<p class="headline-price">${price(featured)}</p>${saleMethodLine}${factList}${highlightChips}<div class="feature-actions"><a class="btn" href="/properties/${esc(featured.slug)}">View the property ${icon('arrow')}</a><a class="btn secondary" href="/properties/${esc(featured.slug)}?enquire=1">Enquire</a></div></div>` : '';
   return `<div class="market-home">
-    <section class="market-intro market-width" aria-label="Find a home with Porli">
-      <div class="market-intro-copy"><div class="product-label"><span></span>Residential and commercial property, with Porli</div><h1 class="hero-heading">${wordStagger(headline)}</h1><p class="product-summary">${esc(intro)}</p>
-        <form class="home-search market-search" data-form="home-search"><div class="switch switch-pill" aria-label="Property search sector"><span class="switch-thumb" aria-hidden="true"></span><button type="button" class="${state.sector === 'residential' ? 'selected' : ''}" data-action="sector" data-sector="residential" aria-pressed="${state.sector === 'residential'}">${icon('home')}Residential</button><button type="button" class="${state.sector === 'commercial' ? 'selected' : ''}" data-action="sector" data-sector="commercial" aria-pressed="${state.sector === 'commercial'}">${icon('building')}Commercial</button></div><label class="sr-only" for="home-location">Search by suburb or property name</label><div class="search-input">${icon('search')}<input id="home-location" name="location" placeholder="Enter a suburb or property name" autocomplete="off"><button class="btn" aria-label="Search homes">Search ${icon('arrow')}</button></div><div class="market-locations"><span>Explore popular locations:</span><a href="/properties?sector=residential&location=Saltmere">Saltmere</a><a href="/properties?sector=residential&location=Fernwick">Fernwick</a><a href="/properties?sector=commercial&location=Thailand">Thailand</a></div></form>
-        <div class="search-account-note">${icon('heart')}Save homes and manage enquiries with a free account.</div>
+    <section class="market-hero" aria-label="Find a home with Porli">
+      <div class="hero-bg-layer" aria-hidden="true">
+        <img class="hero-bg is-current" src="/assets/grand-blue-beach.webp" alt="" width="1536" height="1032" fetchpriority="high">
+        <img class="hero-bg" src="/assets/grand-blue-aerial.webp" alt="" width="1536" height="1032" loading="lazy">
+        <img class="hero-bg" src="/assets/grand-blue-sunset.webp" alt="" width="1536" height="1032" loading="lazy">
       </div>
-      ${featured ? `<div class="market-feature" data-reveal>${carousel}${heroInfo}<div class="feature-disclosure">${real ? 'Photographs supplied by the property. Price to be confirmed.' : 'Fictional listing. Photographs are generated concept images.'}</div></div>` : ''}
-      <aside class="hero-aside"><span class="hero-aside-label">Property · People · Possibilities</span><div class="hero-aside-photo"><img src="/assets/grand-blue-sunset.webp" alt="Sunset over the beach at GrandBlue Resort &amp; Beachclub, Thailand — photograph supplied by the property" loading="lazy" width="1536" height="1032" data-parallax></div><div class="hero-aside-words" data-reveal-group><span data-reveal>Live</span><span data-reveal>Invest</span><span data-reveal>Belong</span></div><p class="hero-aside-note">One team to talk to.</p></aside>
+      <div class="hero-scrim" aria-hidden="true"></div>
+      <div class="hero-content">
+        <div class="product-label"><span></span>Residential and commercial property, with Porli</div>
+        <h1 class="hero-heading">${wordStagger(headline)}</h1>
+        <p class="hero-intro">${esc(intro)}</p>
+        <div class="hero-search-block">
+          <form class="home-search hero-search" data-form="home-search"><div class="switch switch-pill" aria-label="Property search sector"><span class="switch-thumb" aria-hidden="true"></span><button type="button" class="${state.sector === 'residential' ? 'selected' : ''}" data-action="sector" data-sector="residential" aria-pressed="${state.sector === 'residential'}">${icon('home')}Residential</button><button type="button" class="${state.sector === 'commercial' ? 'selected' : ''}" data-action="sector" data-sector="commercial" aria-pressed="${state.sector === 'commercial'}">${icon('building')}Commercial</button></div><label class="sr-only" for="home-location">Search by suburb, region or property name</label><div class="hero-search-field">${icon('search')}<input id="home-location" name="location" placeholder="Suburb, region or property name" autocomplete="off"></div><button class="btn hero-search-submit" aria-label="Search homes">Search ${icon('arrow')}</button></form>
+          <div class="market-locations"><span>Explore popular locations:</span><a href="/properties?sector=residential&location=Saltmere">Saltmere</a><a href="/properties?sector=residential&location=Fernwick">Fernwick</a><a href="/properties?sector=commercial&location=Thailand">Thailand</a></div>
+        </div>
+      </div>
+      <a class="scroll-cue" href="#headline-listing"><span>Scroll</span>${icon('down')}</a>
+      <p class="hero-caption">GrandBlue Resort &amp; Beachclub, Thailand · Photographs supplied by the property</p>
     </section>
+    ${featured ? `<section class="market-headline market-width" id="headline-listing" data-reveal aria-label="Headline listing">
+      <div class="market-section-title"><div><span class="eyebrow">Headline listing</span><h2>${esc(featured.title)}</h2></div><a class="link" href="/properties?sector=commercial">All commercial property ${icon('arrow')}</a></div>
+      <div class="headline-layout"><div class="market-feature">${carousel}</div>${headlineFacts}</div>
+      <div class="feature-disclosure headline-disclosure">${real ? 'Photographs supplied by the property. Price to be confirmed.' : 'Fictional listing. Photographs are generated concept images.'}</div>
+    </section>` : ''}
     <section class="market-values market-width" aria-label="Why choose Porli" data-reveal-group>
       <div class="value-item" data-reveal><span class="value-icon">${icon('grid')}</span><div><h3>Curated listings</h3><p>Residential and commercial, every listing checked by the team.</p></div></div>
       <div class="value-item" data-reveal><span class="value-icon">${icon('message')}</span><div><h3>Direct to the team</h3><p>Enquire from any listing and get a reply in your account.</p></div></div>
@@ -66,6 +98,9 @@ export function mountExperience() {
   document.body.classList.toggle('edition-front',location.pathname==='/');
   document.body.classList.toggle('edition-market',location.pathname==='/properties');
   document.body.classList.toggle('edition-property',location.pathname.startsWith('/properties/'));
+  // The full-viewport hero measures the sticky header so it fills exactly what's left of the first screen.
+  const setHeaderHeight=()=>document.documentElement.style.setProperty('--header-h',`${header.offsetHeight}px`);
+  setHeaderHeight();
   // Re-rendered account navigation keeps the same enhancement without duplicate listeners.
   if (!header.querySelector('.explore-toggle')) {
     header.querySelector('.nav-end')?.insertAdjacentHTML('beforeend','<button class="explore-toggle" aria-label="Open navigation menu" aria-expanded="false"><span></span><span></span></button>');
@@ -105,6 +140,20 @@ export function mountExperience() {
     };
     const placeholderTimer=setInterval(cycle,2600);
     cleanups.push(()=>clearInterval(placeholderTimer));
+  }
+
+  // Hero background: three GrandBlue photographs crossfade with a slow zoom. No autoplay under reduced
+  // motion or while the tab is hidden — the first photograph then simply stays put.
+  const heroBgs=[...document.querySelectorAll('.hero-bg')];
+  if (heroBgs.length > 1) {
+    let bgIndex=0,bgTimer=0;
+    const showBg=next=>{bgIndex=((next%heroBgs.length)+heroBgs.length)%heroBgs.length;heroBgs.forEach((el,i)=>el.classList.toggle('is-current',i===bgIndex));};
+    const bgStop=()=>{clearInterval(bgTimer);bgTimer=0;};
+    const bgStart=()=>{if(reduced.matches||document.hidden)return;bgStop();bgTimer=setInterval(()=>showBg(bgIndex+1),7000);};
+    document.addEventListener('visibilitychange',()=>{document.hidden?bgStop():bgStart();},{signal});
+    reduced.addEventListener('change',()=>{reduced.matches?bgStop():bgStart();},{signal});
+    bgStart();
+    cleanups.push(bgStop);
   }
 
   // Headline listing carousel: prev/next, dots, keyboard, swipe, autoplay with pause, Ken Burns and aria-live status.
@@ -147,16 +196,15 @@ export function mountExperience() {
     cleanups.push(stop);
   }
 
-  const parallaxPhoto=document.querySelector('[data-parallax]');
   let frame=0;
   const progress=header.querySelector('.reading-progress');
   const schedule=()=>{if(!frame)frame=requestAnimationFrame(update);};
   function update(){
     frame=0;
     header.classList.toggle('is-scrolled',window.scrollY>70);
+    setHeaderHeight();
     const range=document.documentElement.scrollHeight-window.innerHeight;
     progress?.style.setProperty('transform',`scaleX(${range>0?window.scrollY/range:0})`);
-    if (parallaxPhoto) parallaxPhoto.style.setProperty('--py',reduced.matches?'0px':`${Math.max(-18,Math.min(18,window.scrollY*-0.05))}px`);
   }
   window.addEventListener('scroll',schedule,{signal,passive:true});
   window.addEventListener('resize',schedule,{signal,passive:true});
