@@ -15,6 +15,7 @@ Choose **Sign in → Explore as a customer** or **Open team workspace** to try t
 - A real headline listing, GrandBlue Resort & Beachclub in Thailand (price to be confirmed), featured on the homepage with highlight chips, a photo gallery, property details and a sticky enquiry card. Fictional concept homes remain clearly labelled; see [headline listing](docs/18-headline-listing.md).
 
 - Responsive residential and commercial discovery (sale only), location, category, price, bedroom, bathroom, tenancy and floor-area filters, URL state, sorting and empty states.
+- A homepage built to the September 2026 mockup: a three-column hero with a headline-listing carousel, a value strip and featured destinations, with scroll reveals, hover and focus feedback and full reduced-motion fallbacks (see [homepage redesign and motion](docs/22-homepage-redesign-and-motion.md)).
 - Six locally stored Higgsfield-generated architectural images, a search-first homepage, interactive featured photographs, compact sticky header and expanded menu, consistent property grids and a keyboard-operated gallery, with reduced-motion support.
 - Real local password authentication, secure password hashing, server-side sessions and separate customer/staff/admin permissions.
 - SQLite-backed saves, one conversation per customer/property, idempotent messages, read markers, staff replies, private notes, assignment, stages, blocking and follow-ups.
@@ -77,6 +78,7 @@ Original package: concept and repository starter, version 1.0, 17 September 2026
 - `docs/19-sale-only-and-commercial.md`: renting removed; residential and commercial sectors.
 - `docs/20-location-and-maps.md`: listing location, click-to-load map, navigation links and directions.
 - `docs/21-plan-on-a-page.md`: digest of the Jewell plan-on-a-page pack (V01, 18 September 2026); the original deck and page renders are in `docs/plans/`.
+- `docs/22-homepage-redesign-and-motion.md`: the homepage rebuilt to the mockup, every interaction and animation, and the reduced-motion rules.
 - `wrangler.jsonc`, `worker/`: Cloudflare Worker configuration and adapter.
 - `design/tokens.json`: proposed design values; contrast must be validated in use.
 - `content/site-copy.md`: starter interface copy.
