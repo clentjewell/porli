@@ -79,6 +79,7 @@ Original package: concept and repository starter, version 1.0, 17 September 2026
 - `docs/20-location-and-maps.md`: listing location, click-to-load map, navigation links and directions.
 - `docs/21-plan-on-a-page.md`: digest of the Jewell plan-on-a-page pack (V01, 18 September 2026); the original deck and page renders are in `docs/plans/`.
 - `docs/22-homepage-redesign-and-motion.md`: the homepage rebuilt to the mockup, every interaction and animation, and the reduced-motion rules.
+- `docs/23-handover-brief.md`: handover to Lizelle Vertera: where to work, guardrails, what to borrow from realestate.com.au, how to highlight GrandBlue, and imagery sourcing without Higgsfield.
 - `wrangler.jsonc`, `worker/`: Cloudflare Worker configuration and adapter.
 - `design/tokens.json`: proposed design values; contrast must be validated in use.
 - `content/site-copy.md`: starter interface copy.
