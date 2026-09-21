@@ -102,9 +102,11 @@ of their hierarchy rather than a current record of it.
 
 ## Limitations
 
-- **Only GrandBlue has more than one photograph**, so the carousel is invisible on every other
-  card. It is correct behaviour and it will fill out as imagery arrives, but it means the feature
-  currently improves exactly one listing.
+- **Two listings have more than one photograph**: GrandBlue with six and Courtyard House with
+  three. The carousel is invisible on the other four cards. That is correct behaviour and it will
+  fill out as imagery arrives, but it means the feature currently improves two listings. (An
+  earlier version of this document said only GrandBlue had more than one photograph. That was
+  wrong; the imagery audit in docs/27 found Courtyard House's gallery.)
 - **The save button is a 32px tap target**, below the 40px floor in docs/23. It predates this
   change and appears on every card across the site, including the homepage, so widening it is a
   site-wide change rather than a search-results one. Recorded here rather than fixed in passing.

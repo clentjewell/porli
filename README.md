@@ -79,6 +79,7 @@ Original package: concept and repository starter, version 1.0, 17 September 2026
 - `docs/20-location-and-maps.md`: listing location, click-to-load map, navigation links and directions.
 - `docs/21-plan-on-a-page.md`: digest of the Jewell plan-on-a-page pack (V01, 18 September 2026); the original deck and page renders are in `docs/plans/`.
 - `docs/22-homepage-redesign-and-motion.md`: the homepage rebuilt to the mockup, every interaction and animation, and the reduced-motion rules.
+- `docs/27-imagery-pass.md`: the imagery audit: alt text stating its source on every listing image, register corrections, and why no new imagery was sourced.
 - `docs/26-homepage-modules.md`: homepage destination profiles and the recently viewed strip, and why the proof strip and hero were left alone.
 - `docs/25-search-results.md`: the marketplace search results: featured-first ordering, capped badges, sticky filter bar, card photo carousels and closed-listing states.
 - `docs/24-grandblue-listing-page.md`: the GrandBlue listing page rebuilt for the handover: "Why GrandBlue", grouped features, document slots, inspection times and similar properties.
