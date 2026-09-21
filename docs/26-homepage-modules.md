@@ -23,6 +23,8 @@ question over a photograph.
 
 ## Recently viewed
 
+**Superseded, 21 September 2026: the strip was removed from the homepage and view history is no longer recorded. See docs/36 for the measurement and the restore note. The rest of this section describes how it worked.**
+
 A strip of the last four listings opened in this browser, newest first, using the same card as
 every other grid. It appears only when there is something to show, so a first-time visitor never
 sees an empty module.

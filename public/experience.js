@@ -21,6 +21,12 @@ function wordStagger(html) {
 
 const HERO_LINES = ['Property to invest in.', 'Places to belong.', 'Offices to grow into.', 'Land to build on.'];
 
+// PARKED, 21 September 2026. The Recently viewed strip is not rendered and nothing is recorded:
+// with six listings it could only ever repeat the grid below it, and a site that stores what you
+// looked at must say so, which it can no longer do with the strip gone. See docs/36.
+// To restore: render the section in homeView again and call rememberViewed from detail() in
+// app.js. Both functions are kept here so that is a two-line change rather than a rebuild.
+//
 // The last few listings this browser opened, newest first. Local storage only: no account, and
 // nothing leaves the device. Any read can throw in a private window, so it fails to an empty list.
 export function recentlyViewed(properties) {
@@ -45,7 +51,6 @@ export function homeView({ properties, state, esc, icon, money, price, card, emp
     const from = money({ price_minor: priced[0], currency: rows[0].currency });
     return priced.length === rows.length && priced[0] === priced.at(-1) ? `${count} · ${from}`
       : `${count} · from ${from}`; };
-  const viewed = recentlyViewed(properties);
   const featured = homes[0];
   // Everything available but the headline listing, which already has the section above it, and the
   // types actually present so a pill can never return an empty grid.
@@ -101,11 +106,6 @@ export function homeView({ properties, state, esc, icon, money, price, card, emp
       </div>
       <p class="destination-caption small muted">Saltmere and Fernwick are fictional places used for the concept.</p>
     </section>
-    ${viewed.length ? `<section class="market-viewed market-width" data-reveal aria-labelledby="viewed-heading">
-      <div class="market-section-title"><div><span class="eyebrow">Pick up where you left off</span><h2 id="viewed-heading">Recently viewed</h2></div></div>
-      <div class="market-property-grid" data-reveal-group>${viewed.map(p => `<div data-reveal>${card(p)}</div>`).join('')}</div>
-      <p class="small muted">Kept on this device only. No account, and nothing is sent to the team.</p>
-    </section>` : ''}
     <section class="market-listings market-width" aria-labelledby="available-heading">
       <div class="market-section-title" data-reveal><div><h2 id="available-heading">Available properties</h2><p>Compare prices, property details and availability.</p></div><a class="link" href="/properties?sector=all">Every property ${icon('arrow')}</a></div>
       ${gridTypes.length > 1 ? `<div class="type-pills" role="group" aria-label="Filter by property type" data-reveal>
