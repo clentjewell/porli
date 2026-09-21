@@ -187,6 +187,18 @@ export function mountExperience() {
   document.querySelectorAll('[data-reveal-group]').forEach(group=>{
     [...group.children].filter(el=>el.hasAttribute('data-reveal')).forEach((el,i)=>el.style.setProperty('--i',i));
   });
+  // Explore list: pointing at or tabbing to a row brings its photograph forward. Every row is a
+  // link first, so the list works with the script absent and on a touch screen, where the
+  // photograph simply stays on the first property. Opacity only.
+  const exploreRows=[...document.querySelectorAll('.ed-explore-row')];
+  if (exploreRows.length) {
+    const shots=[...document.querySelectorAll('[data-explore-img]')];
+    const show=i=>{exploreRows.forEach(r=>r.classList.toggle('is-on',r.dataset.explore===String(i)));
+      shots.forEach(im=>im.classList.toggle('is-current',im.dataset.exploreImg===String(i)));};
+    exploreRows.forEach(row=>{const i=row.dataset.explore;
+      row.addEventListener('mouseenter',()=>show(i),{signal});
+      row.addEventListener('focusin',()=>show(i),{signal});});
+  }
   const reveals=[...document.querySelectorAll('[data-reveal]')];
   const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('has-arrived');observer.unobserve(entry.target);}}),{threshold:.12});
   reveals.forEach(el=>observer.observe(el));
@@ -352,17 +364,18 @@ export function editorialView({ lead: given, properties, esc, icon, price, typeL
       ${shots[4] ? plate(shots[4], 'ed-plate-wide') : ''}
     </section>` : ''}
     <section class="ed-rest" id="ed-rest" aria-labelledby="ed-rest-head">
-      <div class="ed-rest-head" data-reveal><h2 id="ed-rest-head">Also with RealDistrict</h2><a class="link" href="/properties?sector=all">Every property ${icon('arrow')}</a></div>
-      ${rest.map((p, i) => `<article class="ed-row ${i % 2 ? 'is-flipped' : ''}" data-reveal>
-        <div class="ed-row-figure"><a class="ed-row-media" href="/properties/${esc(p.slug)}" tabindex="-1">${p.media?.[0] ? shot(p.media[0]) : ''}</a><span class="ed-row-plate" aria-hidden="true">${esc(typeLabel(p))} · ${esc(p.locality)}</span></div>
-        <div class="ed-row-copy">
-          <p class="sr-only">${esc(typeLabel(p))} · ${esc(p.locality)}</p>
-          <h3><a href="/properties/${esc(p.slug)}">${esc(p.title)}</a></h3>
-          <p>${esc(p.summary || '')}</p>
-          <p class="ed-row-price">${price(p)}</p>
-          <p class="small muted">${p.is_demo === false ? '' : 'Fictional listing · Generated image'}</p>
-        </div>
-      </article>`).join('')}
+      <div class="ed-rest-head" data-reveal>
+        <span class="eyebrow">Also with RealDistrict</span>
+        <h2 id="ed-rest-head">Explore the other properties</h2>
+        <p>Five more listings, residential and commercial.</p>
+      </div>
+      <div class="ed-explore" data-reveal>
+        <ul class="ed-explore-list">${rest.map((p, i) => `<li class="ed-explore-row ${i ? '' : 'is-on'}" data-explore="${i}">
+          <a href="/properties/${esc(p.slug)}"><span class="ed-explore-name">${esc(p.title)}</span><span class="ed-explore-meta">${price(p)}</span>${p.is_demo === false ? '' : '<span class="ed-explore-flag">Fictional listing</span>'}</a>
+        </li>`).join('')}</ul>
+        <div class="ed-explore-media">${rest.map((p, i) => p.media?.[0] ? `<img class="${i ? '' : 'is-current'}" data-explore-img="${i}" src="${esc(p.media[0].url)}" alt="${esc(p.media[0].alt)}" loading="lazy" width="1024" height="688">` : '').join('')}</div>
+      </div>
+      <p class="ed-explore-all"><a class="link" href="/properties?sector=all">Every property ${icon('arrow')}</a></p>
     </section>
     <section class="ed-close" id="ed-enquire" data-reveal><h2>Talk to the people who manage it.</h2><p>Enquire from any listing and the team replies in your account.</p><a class="btn" href="/properties/${esc(lead.slug)}?enquire=1">Enquire about ${esc(lead.title)} ${icon('arrow')}</a></section>
   </div>`;
