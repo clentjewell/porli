@@ -1099,6 +1099,42 @@ full-page screenshot taken without scrolling first shows several cards with blan
 a capture artefact, like the duplicated sticky header recorded in docs/22, not a rendering defect.
 The harness scrolls the page before capturing.
 
+## Traceability of the "Why GrandBlue" text
+
+21 September 2026. Every claim was checked against the property's own website rather than taken
+from the repository's existing description. Source pages: the homepage, `/grandblue-location`,
+`/grandblue-resort-beachclub`, `/grandblue-large-rooms-and-suites` and
+`/stay-green-stay-by-the-sea`.
+
+| Claim in the section | Where it comes from |
+|---|---|
+| Full-service oceanfront hotel | Homepage: "A full-service oceanfront hotel nestled on Mae Phim Beach" |
+| Mae Phim Beach, 4.3 km long | Location: "Mae Phim is situated on a beach, 4.3 km long" |
+| Eastern seaboard of Thailand | Location: "at the eastern coast of Thailand" |
+| Airport about 2 hours, Bangkok about 2.5 | Location: "Bangkok Suvarnabhumi airport 170 km's, 2 hours by car"; "Bangkok City 190 km's, 2,5 hours by car" |
+| Pattaya 100 km, Rayong city 45 km | Location: "Pattaya 100 km's, 1,2 hours by car"; "Rayong City 45 km's, 30 minutes by car" |
+| Koh Samet a short boat trip | Location: "Koh Samed island, just a short boat trip away" |
+| De Luxe rooms, family rooms, penthouse suite | The Resort: "spacious De Luxe Rooms, Family Rooms and a Penthouse/Honeymoon Suite"; "Our Family 2 Bedroom unit" |
+| Oversized pool and children's pool | The Resort: "almost magic oversized swimming pool"; "the children's pool area with a sparkling waterfall" |
+| Restaurant, bar, wine shop, beachclub lounge | Homepage and footer: "GrandBlue Restaurant", "Well stocked bar", "Wineshop", "Beachclub lounge" |
+| Conference centre | Footer: "Conference Centre" |
+| Massage and fitness centre with Finnish sauna | Homepage: "unwind in our Finnish sauna or have a workout in our gym" |
+| Green resort, solar panels, water treatment | Stay Green: "proud to be a Green Resort"; "Our solar panel system"; "our advanced water treatment system" |
+
+Two things the check turned up:
+
+- **One claim was corrected.** The text first read "about two hours by road from Bangkok and
+  Suvarnabhumi International Airport", following the property's own summary line. Its Location
+  page is more precise: the airport is two hours, Bangkok city two and a half. The text now says
+  so, which also matches the details table the listing already carried.
+- **The source contradicts itself on one figure.** The homepage and the Location introduction both
+  say Bangkok is "just 180 kilometres"; the Location page's own distance list says 190 km. The
+  listing follows the distance list, as it did before. Worth settling with the property along with
+  the other facts.
+
+The property spells the island "Koh Samed"; the repository uses "Koh Samet" throughout. Both are
+accepted transliterations and the repository spelling is kept for consistency.
+
 ## Limitations and what is still blocked
 
 - **The document slots cannot be filled yet.** The upload endpoint accepts images only, so a
