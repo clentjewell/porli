@@ -58,20 +58,25 @@ test('why, feature groups and documents round-trip and reject malformed input',a
   assert.deepEqual(ok.data.property.feature_groups,[['Outdoor',['Courtyard','Veranda']]]);
   assert.deepEqual(ok.data.property.documents,[['Floor plan','https://example.com/plan.pdf']]);});
 
-test('a featured real listing leads the default sort but never overrides a chosen one',async t=>{const{visitor}=await fixture(t);
+test('Featured is a named sort the visitor can turn off, not a hidden override',async t=>{const{visitor}=await fixture(t);
   const def=(await visitor('/properties?sector=commercial')).data.properties;
-  assert.equal(def[0].slug,'grand-blue-hotel-thailand','the one sellable listing leads the default view');
+  assert.equal(def[0].slug,'grand-blue-hotel-thailand','the one sellable listing leads by default');
   assert.equal(def[0].featured,1);assert.equal(def[0].is_demo,false);
+  const featured=(await visitor('/properties?sector=commercial&sort=featured')).data.properties;
+  assert.deepEqual(featured.map(p=>p.slug),def.map(p=>p.slug),'the default is the Featured sort, named');
+  // Choosing any other sort turns Featured off completely rather than quietly reordering on top.
   const newest=(await visitor('/properties?sector=commercial&sort=newest')).data.properties;
-  assert.deepEqual(newest.map(p=>p.slug),def.map(p=>p.slug),'an explicit newest sort matches the default');
-  // A chosen price sort is left strictly alone: the price-label rule in docs/18 still sorts it last.
+  assert.notEqual(newest[0].slug,'grand-blue-hotel-thailand','newest must not be overridden by Featured');
   const asc=(await visitor('/properties?sector=commercial&sort=price-asc')).data.properties;
-  assert.equal(asc.at(-1).slug,'grand-blue-hotel-thailand','a price sort is not overridden by the featured rule');
+  assert.equal(asc.at(-1).slug,'grand-blue-hotel-thailand','a price label still sorts last (docs/18)');
   const prices=asc.filter(p=>p.price_minor>0).map(p=>p.price_minor);
   assert.deepEqual(prices,[...prices].sort((a,b)=>a-b));
-  // Every listing still reaches the results; the rule reorders, it never filters.
-  assert.equal(def.length,asc.length);
-  assert.deepEqual([...def.map(p=>p.slug)].sort(),[...asc.map(p=>p.slug)].sort());});
+  // An unknown sort falls back to the default rather than erroring or returning an odd order.
+  const junk=(await visitor('/properties?sector=commercial&sort=nonsense')).data.properties;
+  assert.deepEqual(junk.map(p=>p.slug),def.map(p=>p.slug));
+  // Every sort returns the same listings; sorting reorders, it never filters.
+  for(const rows of [featured,newest,asc,junk]){assert.equal(rows.length,def.length);
+    assert.deepEqual([...rows.map(p=>p.slug)].sort(),[...def.map(p=>p.slug)].sort());}});
 
 test('listing cards receive every photograph they carry, for the card carousel',async t=>{const{visitor}=await fixture(t);
   const list=(await visitor('/properties?sector=commercial')).data.properties;

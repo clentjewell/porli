@@ -1227,6 +1227,36 @@ these documents describe a layout as the reference portal's, that attribution co
 not from anyone on this change having looked at the site. If the hierarchy is ever revisited,
 someone with browser access should check the list in docs/23 against the real thing first.
 
+## Checked against the reference site, after the fact
+
+21 September 2026. realestate.com.au is unreachable directly (see the section above), but the
+Internet Archive holds copies and the archive is not blocked. A search results page archived on
+4 January 2026 and the homepage archived on 20 September 2026 were read and rendered. Reading a
+public archive is not the same as defeating the live site's bot protection, so this was done.
+
+Two things the real page showed that the list in docs/23 section 4 did not, and both are now built:
+
+**"Featured" is a named sort, not a hidden rule.** Their sort control offers Featured, Date
+(newest and oldest), Price (both directions), Next inspection and Next auction, with Featured
+selected by default. This change had originally reordered the default view behind the visitor's
+back: there was no way to see why one listing led, and no way to turn it off. Featured is now the
+first option in the sort control and the default. Choosing any other sort switches it off
+completely rather than reordering on top of the choice. An unknown sort value falls back to
+Featured instead of producing an arbitrary order.
+
+**The heading describes the search.** Theirs reads "Real Estate & Property for sale in Melbourne,
+VIC" rather than a fixed category name. Ours now names the sector or property type and the
+location searched for: "Commercial property in Rayong.", "Houses in Saltmere.", "Offices.".
+Residential type labels are singular in the fixtures, so they are pluralised for the heading;
+commercial labels already read as categories and are used unchanged. Only filters with a plain
+language form are named. The rest stay in the removable chips below, which already show them.
+
+Two things seen and deliberately not adopted: their card heading is the street address, which does
+not suit a named property like GrandBlue where the locality line already carries the address; and
+their view tabs are List, Map, Inspections and Auctions, where there is no auction stock and one
+property with viewing times. The archived search page is nine months old, so it is good evidence
+of their hierarchy rather than a current record of it.
+
 ## Verification
 
 - `npm run check` and `npm test` pass; 26 tests, up from 24. The new tests cover the ordering rule
