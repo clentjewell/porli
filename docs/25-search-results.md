@@ -42,6 +42,20 @@ these states, so they were verified by setting the status through the staff API 
 would show a single pin and five absent listings — worse than no map. This is a recommendation, not
 a decision: it should be revisited when more stock is geocoded. Flagged to Clent.
 
+## Where the borrowed hierarchy came from
+
+realestate.com.au could not be reached from the build environment. It sits behind Kasada bot
+protection and returns 429 to automated clients, including a genuine unmodified Chromium that was
+given thirty seconds to complete the challenge; realcommercial.com.au does the same and
+domain.com.au returns 403. Working around that would mean defeating an anti-bot system, which was
+not done.
+
+So nothing here was copied from observing the reference site. Every item implemented is named in
+the list in docs/23 section 4, with the conventions already adopted recorded in docs/18. Where
+these documents describe a layout as the reference portal's, that attribution comes from docs/23,
+not from anyone on this change having looked at the site. If the hierarchy is ever revisited,
+someone with browser access should check the list in docs/23 against the real thing first.
+
 ## Verification
 
 - `npm run check` and `npm test` pass; 26 tests, up from 24. The new tests cover the ordering rule
