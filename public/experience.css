@@ -158,3 +158,9 @@ h1,h2,h3{font-family:var(--serif);font-weight:500;letter-spacing:-.012em;line-he
   .ed-actions .btn{flex:1 1 auto;justify-content:center}
 }
 @media(prefers-reduced-motion:reduce){.ed-open-media img{animation:none}}
+
+/* The feature link sits with the headline listing's actions but is not a third button: the two
+   buttons are the job to be done, the feature is the long read behind them. */
+.headline-feature-link{align-self:center;min-height:40px;display:inline-flex;align-items:center}
+@media(max-width:560px){.headline-feature-link{flex:1 1 100%;margin-top:4px}}
+.why-block .link{margin-top:6px;display:inline-flex}

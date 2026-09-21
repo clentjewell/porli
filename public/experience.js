@@ -63,7 +63,7 @@ export function homeView({ properties, state, esc, icon, money, price, card, emp
   const factList = factPairs.length ? `<dl class="headline-fact-list">${factPairs.map(([label, value]) => `<div><dt>${esc(label)}</dt><dd>${esc(value)}</dd></div>`).join('')}</dl>` : '';
   const highlightChips = featured && (featured.highlights || []).length ? `<div class="chip-row">${featured.highlights.slice(0, 4).map(h => `<span class="chip">${esc(h)}</span>`).join('')}</div>` : '';
   const mapLink = featured?.has_location ? `<a class="link small view-on-map" href="/properties/${esc(featured.slug)}#location">View on map ${icon('external')}</a>` : '';
-  const headlineFacts = featured ? `<div class="headline-facts"><p class="headline-locality">${icon('pin')}${esc(featured.locality)}</p>${mapLink}<p class="headline-price">${price(featured)}</p>${saleMethodLine}${factList}${highlightChips}<div class="feature-actions"><a class="btn" href="/properties/${esc(featured.slug)}">View the property ${icon('arrow')}</a><a class="btn secondary" href="/properties/${esc(featured.slug)}?enquire=1">Enquire</a></div></div>` : '';
+  const headlineFacts = featured ? `<div class="headline-facts"><p class="headline-locality">${icon('pin')}${esc(featured.locality)}</p>${mapLink}<p class="headline-price">${price(featured)}</p>${saleMethodLine}${factList}${highlightChips}<div class="feature-actions"><a class="btn" href="/properties/${esc(featured.slug)}">View the property ${icon('arrow')}</a><a class="btn secondary" href="/properties/${esc(featured.slug)}?enquire=1">Enquire</a>${featured.why ? `<a class="link headline-feature-link" href="/feature/${esc(featured.slug)}">Read the feature ${icon('arrow')}</a>` : ''}</div></div>` : '';
   return `<div class="market-home">
     <section class="market-hero" aria-label="Find a home with Porli">
       <div class="hero-bg-layer" aria-hidden="true">
@@ -299,8 +299,8 @@ export function mountExperience() {
 // An editorial homepage: one property told properly, then the rest as rows rather than a grid.
 // Served at /editorial beside the existing homepage so the two can be compared on the real site.
 // Honest labelling is unchanged: fictional listings say so on every row.
-export function editorialView({ properties, esc, icon, price, typeLabel, card }) {
-  const lead = properties.find(p => p.featured && p.is_demo === false) || properties[0];
+export function editorialView({ lead: given, properties, esc, icon, price, typeLabel, card }) {
+  const lead = given || properties.find(p => p.featured && p.is_demo === false) || properties[0];
   if (!lead) return '<div class="wrap section"><h1>Nothing is listed yet.</h1></div>';
   const rest = properties.filter(p => p.id !== lead.id);
   const shots = lead.media || [];
