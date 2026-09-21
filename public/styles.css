@@ -45,3 +45,21 @@ dialog{border:1px solid var(--line);padding:0;background:var(--paper);color:var(
 .slot-list li{display:flex;align-items:center;gap:10px;font-size:14px}
 .slot-list svg{width:17px;height:17px;color:var(--olive)}
 @media(max-width:560px){.why-block{padding:18px 20px}.feature-groups{gap:18px}.feature-group .features{grid-template-columns:1fr;gap:10px}.document-row{flex-wrap:wrap;gap:4px 16px}}
+.edition-market .page-top{padding-bottom:22px}
+.edition-market .search-bar{position:sticky;top:var(--header-h,72px);z-index:30;background:var(--paper);padding:16px 0;margin-bottom:8px}
+.edition-market .search-bar:after{content:'';position:absolute;left:0;right:0;bottom:0;height:1px;background:var(--line)}
+.card-gallery{display:block;position:relative;aspect-ratio:1024/688}
+.card-gallery img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .34s ease}
+.card-gallery img.is-active{opacity:1}
+.card-nav{position:absolute;top:50%;width:34px;height:34px;margin-top:-17px;border:0;border-radius:50%;background:rgba(255,255,255,.92);color:var(--ink);display:flex;align-items:center;justify-content:center;padding:0;min-height:auto;opacity:0;transition:opacity .2s ease,transform .2s ease;box-shadow:0 1px 5px rgba(0,0,0,.22)}
+.card-nav svg{width:18px;height:18px}
+.card-prev{left:10px}.card-next{right:10px}
+.property-card:hover .card-nav,.property-card:focus-within .card-nav,.card-nav:focus{opacity:1}
+.card-nav:hover{transform:scale(1.06)}
+.card-count{position:absolute;right:10px;bottom:10px;background:rgba(0,0,0,.6);color:#fff;font-size:11px;padding:3px 9px;border-radius:11px}
+.card-dots{position:absolute;left:0;right:0;bottom:11px;display:flex;gap:5px;justify-content:center;pointer-events:none}
+.card-dots i{width:5px;height:5px;border-radius:50%;background:rgba(255,255,255,.6)}
+.card-dots i.on{background:#fff;width:15px;border-radius:3px}
+.property-card.is-closed .card-image img{filter:saturate(.4) brightness(.93)}
+.card-ribbon{position:absolute;left:0;right:0;bottom:0;background:var(--clay);color:#fff;font-size:12px;letter-spacing:.07em;text-transform:uppercase;padding:7px 12px;text-align:center;z-index:2}
+@media(max-width:800px){.edition-market .search-bar{position:static}.card-nav{opacity:1;width:40px;height:40px;margin-top:-20px}.card-dots{display:none}}
