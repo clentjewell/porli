@@ -295,3 +295,49 @@ export function mountExperience() {
   schedule();
   dispose=()=>{abort.abort();observer.disconnect();cancelAnimationFrame(frame);cleanups.forEach(fn=>fn());};
 }
+
+// An editorial homepage: one property told properly, then the rest as rows rather than a grid.
+// Served at /editorial beside the existing homepage so the two can be compared on the real site.
+// Honest labelling is unchanged: fictional listings say so on every row.
+export function editorialView({ properties, esc, icon, price, typeLabel, card }) {
+  const lead = properties.find(p => p.featured && p.is_demo === false) || properties[0];
+  if (!lead) return '<div class="wrap section"><h1>Nothing is listed yet.</h1></div>';
+  const rest = properties.filter(p => p.id !== lead.id);
+  const shots = lead.media || [];
+  const why = String(lead.why || '').split(/\n\s*\n/).filter(Boolean);
+  const facts = (lead.details || []).filter(d => Array.isArray(d) && String(d[1]).length <= 40).slice(0, 4);
+  const shot = (m, cls = '') => `<img class="${cls}" src="${esc(m.url)}" alt="${esc(m.alt)}" loading="lazy" width="1536" height="1032">`;
+  return `<div class="ed">
+    <section class="ed-open" aria-labelledby="ed-lead">
+      <div class="ed-open-media">${shots[0] ? `<img src="${esc(shots[0].url)}" alt="${esc(shots[0].alt)}" width="1536" height="1032" fetchpriority="high">` : ''}<span class="ed-scrim" aria-hidden="true"></span></div>
+      <div class="ed-open-copy">
+        <p class="eyebrow">${esc(typeLabel(lead))} · ${esc(lead.locality)}</p>
+        <h1 id="ed-lead">${esc(lead.title)}</h1>
+        <p class="ed-lede">${esc(lead.summary || '')}</p>
+        <p class="ed-price">${price(lead)}</p>
+        <div class="ed-actions"><a class="btn" href="/properties/${esc(lead.slug)}">View the property ${icon('arrow')}</a><a class="btn light" href="/properties/${esc(lead.slug)}?enquire=1">Enquire</a></div>
+      </div>
+    </section>
+    ${why.length ? `<section class="ed-why" data-reveal><p class="eyebrow">The property</p><div class="ed-why-text"><p class="ed-why-lead">${esc(why[0])}</p>${why.slice(1, 2).map(t => `<p>${esc(t)}</p>`).join('')}</div></section>` : ''}
+    ${facts.length ? `<section class="ed-facts" data-reveal aria-label="Key facts"><dl>${facts.map(([k, v]) => `<div><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`).join('')}</dl></section>` : ''}
+    ${shots.length > 2 ? `<section class="ed-plates" aria-label="Photographs of ${esc(lead.title)}">
+      <figure class="ed-plate ed-plate-wide" data-reveal>${shot(shots[1])}</figure>
+      <div class="ed-plate-pair">${shots.slice(2, 4).map(m => `<figure class="ed-plate" data-reveal>${shot(m)}</figure>`).join('')}</div>
+      ${shots[4] ? `<figure class="ed-plate ed-plate-wide" data-reveal>${shot(shots[4])}</figure>` : ''}
+    </section>` : ''}
+    <section class="ed-rest" aria-labelledby="ed-rest-head">
+      <div class="ed-rest-head" data-reveal><h2 id="ed-rest-head">Also with Porli</h2><a class="link" href="/properties?sector=all">Every property ${icon('arrow')}</a></div>
+      ${rest.map((p, i) => `<article class="ed-row ${i % 2 ? 'is-flipped' : ''}" data-reveal>
+        <a class="ed-row-media" href="/properties/${esc(p.slug)}" tabindex="-1">${p.media?.[0] ? shot(p.media[0]) : ''}</a>
+        <div class="ed-row-copy">
+          <p class="eyebrow">${esc(typeLabel(p))} · ${esc(p.locality)}</p>
+          <h3><a href="/properties/${esc(p.slug)}">${esc(p.title)}</a></h3>
+          <p>${esc(p.summary || '')}</p>
+          <p class="ed-row-price">${price(p)}</p>
+          <p class="small muted">${p.is_demo === false ? '' : 'Fictional listing · Generated image'}</p>
+        </div>
+      </article>`).join('')}
+    </section>
+    <section class="ed-close" data-reveal><h2>Talk to the people who manage it.</h2><p>Enquire from any listing and the team replies in your account.</p><a class="btn" href="/properties/${esc(lead.slug)}?enquire=1">Enquire about ${esc(lead.title)} ${icon('arrow')}</a></section>
+  </div>`;
+}
