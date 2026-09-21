@@ -1,4 +1,4 @@
-# Porli — working local marketplace
+# RealDistrict — working local marketplace
 
 The application is now implemented in this folder. Run it with **Node.js 24 or later**:
 
@@ -47,9 +47,9 @@ See [implementation decision](docs/13-implementation.md), [verification record](
 
 **Find your next place.**
 
-Porli is a residential property marketplace for buying and renting, with fixed listing templates, direct in-site conversations and a private team workspace.
+RealDistrict is a residential property marketplace for buying and renting, with fixed listing templates, direct in-site conversations and a private team workspace.
 
-Original package: concept and repository starter, version 1.0, 17 September 2026. The original archive supplied specifications and fictional fixtures; this folder now also contains the local application described above. The earlier GitHub prototype was not available in this workspace and has not been modified. Porli is the selected working name; availability has not been checked.
+Original package: concept and repository starter, version 1.0, 17 September 2026. The original archive supplied specifications and fictional fixtures; this folder now also contains the local application described above. The earlier GitHub prototype was not available in this workspace and has not been modified. RealDistrict is the selected working name; availability has not been checked.
 
 ## Start here
 
