@@ -177,4 +177,8 @@ document.addEventListener('keydown',e=>{if($('#modal').open&&$('#modal').classLi
 $('#modal').addEventListener('cancel',()=>{state.pending=null;});
 $('#modal').addEventListener('click',e=>{if(e.target===$('#modal')){const r=e.target.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)closeModal();}});
 async function boot(){try{const[session,content]=await Promise.all([api('/session'),api('/content')]);Object.assign(state,session,{content,mapsEmbedKey:session.maps_embed_key||''});if(state.user)state.saved=new Set((await api('/saves')).ids);await render();}catch(e){$('#main').innerHTML=`<div class="wrap section"><div class="error">${esc(e.message)} Start the Porli server and reload.</div></div>`;}}
+// The Recently viewed strip is gone and nothing is recorded any more (docs/36), but a visitor who
+// used the site before still has their history on their device for a feature that no longer exists
+// and no longer discloses itself. Clear it once, on the first load of a build that does not use it.
+try { localStorage.removeItem('porli-viewed'); } catch { /* private window, or storage disabled */ }
 boot();

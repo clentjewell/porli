@@ -46,6 +46,12 @@ is not tidiness: docs/26 argued that a site which quietly remembers what you loo
 that it does, and the line saying so lived in the strip. Storing a browsing history with nothing on
 the site disclosing it would be worse than storing none.
 
+**History already on a device is cleared.** Removing the write stops new history; it does not
+remove what a visitor stored under the old build. Leaving it there is the same problem in a
+quieter form — data held on someone's device for a feature that no longer exists and no longer
+discloses itself. The key is removed once on load, in a `try`/`catch` like every other storage
+access here.
+
 **The code is kept**, parked rather than deleted: `recentlyViewed` and `rememberViewed` stay in
 `experience.js` behind a comment explaining why they are unused and how to restore them, and the
 strip's CSS stays with one rule added that fixes the height defect above, so a restored strip does
@@ -65,6 +71,8 @@ The disclosure line must come back with it.
 - `npm run check` and `npm test` pass; 28 tests, unchanged.
 - Three listings opened, then local storage read directly: `porli-viewed` is `null`, so nothing is
   stored.
+- A visitor carrying history from the old build was simulated by writing the key and reloading: it
+  reads `null` afterwards, with no error and no strip.
 - The homepage as a returning visitor: no strip, five modules, five cards, and **no listing name
   appearing twice**.
 - 28 routes walked at 1440px and 390px: no horizontal overflow, no console errors, no failed
