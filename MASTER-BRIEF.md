@@ -1027,8 +1027,8 @@ and what is still blocked on the property.
 ## What changed
 
 **Key facts under the title.** The facts strip (beach, airport, Bangkok) moved out of the body
-copy and sits directly beneath the title and locality, as the reference portal does. A buyer sees
-where the property is before scrolling.
+copy and sits directly beneath the title and locality, which is the placement docs/23 section 4
+asks for. A buyer sees where the property is before scrolling.
 
 **"Why GrandBlue".** A new section above the description, in its own pale block, giving the case
 for the property in three short paragraphs: what it is and where, what it already trades as, and
@@ -1040,7 +1040,7 @@ trust us. The heading uses the first word of the listing title, so the section r
 GrandBlue" rather than a generic label.
 
 **Grouped property features.** The flat eleven-item list became three groups — Outdoor, Indoor
-and Sustainability — matching the reference portal's outdoor/indoor/other grouping. A test asserts
+and Sustainability — the outdoor/indoor/other grouping docs/23 section 4 asks for. A test asserts
 that the grouped features are exactly the flat feature list, so a group can never quietly drop or
 invent a feature. Listings without groups still render the flat list.
 
@@ -1064,6 +1064,20 @@ highlight chip, as the price line and as a row in the details table. The price l
 duplicate chip and the duplicate details row are filtered out when they only repeat the price
 label. Genuine unknowns that are not the price ("Rooms", "Land and floor area") still show as
 "to be confirmed", because they are.
+
+## Where the borrowed hierarchy came from
+
+realestate.com.au could not be reached from the build environment. It sits behind Kasada bot
+protection and returns 429 to automated clients, including a genuine unmodified Chromium that was
+given thirty seconds to complete the challenge; realcommercial.com.au does the same and
+domain.com.au returns 403. Working around that would mean defeating an anti-bot system, which was
+not done.
+
+So nothing here was copied from observing the reference site. Every item implemented is named in
+the list in docs/23 section 4, with the conventions already adopted recorded in docs/18. Where
+these documents describe a layout as the reference portal's, that attribution comes from docs/23,
+not from anyone on this change having looked at the site. If the hierarchy is ever revisited,
+someone with browser access should check the list in docs/23 against the real thing first.
 
 ## Data model additions
 
@@ -1198,6 +1212,20 @@ these states, so they were verified by setting the status through the staff API 
 **No map and list toggle**, though docs/23 lists one. Only GrandBlue has coordinates, so a map view
 would show a single pin and five absent listings — worse than no map. This is a recommendation, not
 a decision: it should be revisited when more stock is geocoded. Flagged to Clent.
+
+## Where the borrowed hierarchy came from
+
+realestate.com.au could not be reached from the build environment. It sits behind Kasada bot
+protection and returns 429 to automated clients, including a genuine unmodified Chromium that was
+given thirty seconds to complete the challenge; realcommercial.com.au does the same and
+domain.com.au returns 403. Working around that would mean defeating an anti-bot system, which was
+not done.
+
+So nothing here was copied from observing the reference site. Every item implemented is named in
+the list in docs/23 section 4, with the conventions already adopted recorded in docs/18. Where
+these documents describe a layout as the reference portal's, that attribution comes from docs/23,
+not from anyone on this change having looked at the site. If the hierarchy is ever revisited,
+someone with browser access should check the list in docs/23 against the real thing first.
 
 ## Verification
 
