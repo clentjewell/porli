@@ -67,6 +67,22 @@ So neither module here is borrowed from them. Both come from the list in docs/23
 proposed them for Porli rather than reporting them from the reference site. Recorded so nobody
 later assumes the reference site was the source.
 
+## The strip's own grid, 21 September 2026
+
+Checked on the live site after release. The strip works — absent for a first-time visitor, capped
+at four, newest first, links correct, and the page still renders when local storage throws — but it
+looked wrong once four listings had been viewed. It was borrowing the three-column track used by
+the grid below it, so the fourth card dropped to a second row and sat alone beside a wide gap.
+
+It now has its own four-column track on desktop, two below 1100px and one below 560px. Every
+length from one to four was checked at all three widths: desktop is always a single full row. At
+the middle width a strip of three still wraps to two and one, which is what any two-column grid
+does with an odd count and what the grid below it does there too; four, the steady state once
+someone has browsed, fills both rows.
+
+The narrower cards are a side effect worth keeping, since they read as the secondary module the
+strip is meant to be.
+
 ## Verification
 
 - `npm run check` and `npm test` pass; 26 tests, unchanged. Both modules are presentation over

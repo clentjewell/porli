@@ -55,3 +55,9 @@ h1,h2,h3{font-family:var(--sans);font-weight:600;letter-spacing:-.04em;line-heig
    what gives the reference template its calm. No colour changes. */
 .market-section-title h2{letter-spacing:-.035em}
 .destination-card,.market-viewed .property-card .card-image{border-radius:var(--radius)}
+/* Recently viewed holds up to four, where the grid below it holds three. Giving the strip its own
+   four-column track keeps the row full instead of stranding a fourth card on a line of its own,
+   and the narrower cards read as the secondary module it is. */
+.market-viewed .market-property-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:22px}
+@media(max-width:1100px){.market-viewed .market-property-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:560px){.market-viewed .market-property-grid{grid-template-columns:minmax(0,1fr)}}
