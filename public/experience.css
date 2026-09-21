@@ -48,3 +48,6 @@ h1,h2,h3{font-family:var(--sans);font-weight:600;letter-spacing:-.04em;line-heig
 .destination-facts{display:block;margin-top:7px;font-size:12px;letter-spacing:.02em;color:#e7ece2}
 .market-viewed{padding-top:10px}
 .market-viewed .small.muted{margin-top:14px}
+/* Tap targets reach the 40px floor in docs/23 section 3. This file loads after styles.css,
+   so the phone override belongs here alongside the 32px rule it corrects. */
+@media(max-width:800px){.save-button{height:40px;width:40px}.save-button svg{width:19px;height:19px}}
