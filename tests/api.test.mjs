@@ -46,6 +46,18 @@ test('listing pages expose location fields; the hotel is geocoded and fictional 
 test('saving coordinates requires both values within range and round-trips a valid pair',async t=>{const{staff}=await fixture(t);const p=(await staff('/properties/courtyard-house')).data.property;assert.equal((await staff('/admin/properties','PATCH',{...p,latitude:12.5,longitude:0})).status,400);assert.equal((await staff('/admin/properties','PATCH',{...p,latitude:95,longitude:100})).status,400);const ok=await staff('/admin/properties','PATCH',{...p,latitude:12.5,longitude:101.5,address:'1 Test Street, Testville',directions:'Turn left at the corner.'});assert.equal(ok.status,200);assert.equal(ok.data.property.latitude,12.5);assert.equal(ok.data.property.longitude,101.5);assert.equal(ok.data.property.has_location,true);assert.equal(ok.data.property.address,'1 Test Street, Testville');assert.equal(ok.data.property.address_display,'full');assert.equal(ok.data.property.directions,'Turn left at the corner.');});
 test('/api/session exposes the maps embed key configuration',async t=>{const{visitor}=await fixture(t);assert.equal((await visitor('/session')).data.maps_embed_key,'');});
 test('security headers allow the Google Maps embed frame',async t=>{const{base}=await fixture(t);const res=await fetch(base+'/api/session');assert.ok(res.headers.get('content-security-policy').includes('frame-src https://www.google.com'));});
+test('the hotel carries a Why paragraph and grouped features, sourced from the property',async t=>{const{visitor}=await fixture(t);const p=(await visitor('/properties/grand-blue-hotel-thailand')).data.property;assert.ok(p.why.length>0);assert.ok(/Mae Phim Beach/.test(p.why));assert.ok(!/\$|\bTHB\b|\bbaht\b/i.test(p.why),'the Why paragraph must never state a price');assert.ok(Array.isArray(p.feature_groups)&&p.feature_groups.length>0);assert.ok(p.feature_groups.every(g=>Array.isArray(g)&&g.length===2&&typeof g[0]==='string'&&Array.isArray(g[1])));const grouped=p.feature_groups.flatMap(([,items])=>items);assert.deepEqual([...grouped].sort(),[...p.features].sort(),'every flat feature belongs to exactly one group');});
+
+test('why, feature groups and documents round-trip and reject malformed input',async t=>{const{staff}=await fixture(t);const p=(await staff('/properties/courtyard-house')).data.property;
+  assert.equal((await staff('/admin/properties','PATCH',{...p,feature_groups:['Outdoor']})).status,400);
+  assert.equal((await staff('/admin/properties','PATCH',{...p,feature_groups:[['Outdoor','Pool']]})).status,400);
+  assert.equal((await staff('/admin/properties','PATCH',{...p,documents:[['Floor plan','javascript:alert(1)']]})).status,400);
+  assert.equal((await staff('/admin/properties','PATCH',{...p,documents:[['Floor plan','/uploads/../secret.pdf']]})).status,400);
+  const ok=await staff('/admin/properties','PATCH',{...p,why:'A sourced paragraph.',feature_groups:[['Outdoor',['Courtyard','Veranda']]],documents:[['Floor plan','https://example.com/plan.pdf']]});
+  assert.equal(ok.status,200);assert.equal(ok.data.property.why,'A sourced paragraph.');
+  assert.deepEqual(ok.data.property.feature_groups,[['Outdoor',['Courtyard','Veranda']]]);
+  assert.deepEqual(ok.data.property.documents,[['Floor plan','https://example.com/plan.pdf']]);});
+
 test('legacy rent rows migrate to buy on every start, idempotently',{skip:!!remote},async()=>{
   const path=join(tmpdir(),'porli-test-'+randomUUID()+'.sqlite');
   try{
