@@ -21,8 +21,31 @@ function wordStagger(html) {
 
 const HERO_LINES = ['Property to invest in.', 'Places to belong.', 'Offices to grow into.', 'Land to build on.'];
 
+// The last few listings this browser opened, newest first. Local storage only: no account, and
+// nothing leaves the device. Any read can throw in a private window, so it fails to an empty list.
+export function recentlyViewed(properties) {
+  try { const ids = JSON.parse(localStorage.getItem('porli-viewed') || '[]');
+    return ids.map(id => properties.find(p => p.id === id)).filter(Boolean).slice(0, 4);
+  } catch { return []; }
+}
+export function rememberViewed(id) {
+  try { const ids = JSON.parse(localStorage.getItem('porli-viewed') || '[]').filter(v => v !== id);
+    localStorage.setItem('porli-viewed', JSON.stringify([id, ...ids].slice(0, 8)));
+  } catch { /* private browsing, or storage disabled: remembering is a convenience, not a feature */ }
+}
 export function homeView({ properties, state, esc, icon, money, price, card, empty, statusBadges, typeLabel, residentialTypes = [], commercialTypes = [], options = () => '' }) {
   const homes = properties.slice().sort((a, b) => b.featured - a.featured);
+  // Destination cards became profiles: what is actually listed there, counted from the same
+  // listings the marketplace serves, so the numbers cannot drift from the search results.
+  const profile = (location, sector) => { const rows = properties.filter(p => (p.sector || 'residential') === sector && (p.locality || '').toLowerCase().includes(location.toLowerCase()));
+    if (!rows.length) return 'No listings yet';
+    const priced = rows.filter(p => p.price_minor > 0).map(p => p.price_minor).sort((a, b) => a - b);
+    const count = `${rows.length} ${rows.length === 1 ? 'listing' : 'listings'}`;
+    if (!priced.length) return `${count} · price on request`;
+    const from = money({ price_minor: priced[0], currency: rows[0].currency });
+    return priced.length === rows.length && priced[0] === priced.at(-1) ? `${count} · ${from}`
+      : `${count} · from ${from}`; };
+  const viewed = recentlyViewed(properties);
   const residentialHomes = homes.filter(p => (p.sector || 'residential') === 'residential');
   const featured = homes[0];
   const real = featured?.is_demo === false;
@@ -75,12 +98,17 @@ export function homeView({ properties, state, esc, icon, money, price, card, emp
     <section class="market-destinations market-width" data-reveal aria-label="Featured destinations">
       <div class="market-section-title"><div><span class="eyebrow">Explore</span><h2>Featured destinations</h2></div><a class="link" href="/properties?sector=residential">View all locations ${icon('arrow')}</a></div>
       <div class="destination-grid" data-reveal-group>
-        <a class="destination-card" data-reveal href="/properties?sector=residential&location=Saltmere"><img src="/assets/courtyard.webp" alt="Fictional coastal courtyard home — generated concept image" loading="lazy" width="1024" height="688"><span class="destination-scrim" aria-hidden="true"></span><span class="destination-body"><strong>Saltmere</strong><em>Coastal living, reimagined.</em></span><span class="destination-arrow" aria-hidden="true">${icon('external')}</span></a>
-        <a class="destination-card" data-reveal href="/properties?sector=commercial&location=Fernwick"><img src="/assets/highstreet-offices.webp" alt="Fictional office building — generated concept image" loading="lazy" width="1024" height="688"><span class="destination-scrim" aria-hidden="true"></span><span class="destination-body"><strong>Fernwick</strong><em>Business. Lifestyle. Opportunity.</em></span><span class="destination-arrow" aria-hidden="true">${icon('external')}</span></a>
-        <a class="destination-card" data-reveal href="/properties?sector=commercial&location=Thailand"><img src="/assets/grand-blue-beach.webp" alt="GrandBlue beachfront — photograph supplied by the property" loading="lazy" width="1536" height="1032"><span class="destination-scrim" aria-hidden="true"></span><span class="destination-body"><strong>Thailand</strong><em>Extraordinary places, real opportunities.</em></span><span class="destination-arrow" aria-hidden="true">${icon('external')}</span></a>
+        <a class="destination-card" data-reveal href="/properties?sector=residential&location=Saltmere"><img src="/assets/courtyard.webp" alt="Fictional coastal courtyard home — generated concept image" loading="lazy" width="1024" height="688"><span class="destination-scrim" aria-hidden="true"></span><span class="destination-body"><strong>Saltmere</strong><em>Coastal living, reimagined.</em><span class="destination-facts">${esc(profile('Saltmere','residential'))}</span></span><span class="destination-arrow" aria-hidden="true">${icon('external')}</span></a>
+        <a class="destination-card" data-reveal href="/properties?sector=commercial&location=Fernwick"><img src="/assets/highstreet-offices.webp" alt="Fictional office building — generated concept image" loading="lazy" width="1024" height="688"><span class="destination-scrim" aria-hidden="true"></span><span class="destination-body"><strong>Fernwick</strong><em>Business. Lifestyle. Opportunity.</em><span class="destination-facts">${esc(profile('Fernwick','commercial'))}</span></span><span class="destination-arrow" aria-hidden="true">${icon('external')}</span></a>
+        <a class="destination-card" data-reveal href="/properties?sector=commercial&location=Thailand"><img src="/assets/grand-blue-beach.webp" alt="GrandBlue beachfront — photograph supplied by the property" loading="lazy" width="1536" height="1032"><span class="destination-scrim" aria-hidden="true"></span><span class="destination-body"><strong>Thailand</strong><em>Extraordinary places, real opportunities.</em><span class="destination-facts">${esc(profile('Thailand','commercial'))}</span></span><span class="destination-arrow" aria-hidden="true">${icon('external')}</span></a>
       </div>
       <p class="destination-caption small muted">Saltmere and Fernwick are fictional places used for the concept. Thailand listing photographs are supplied by the property.</p>
     </section>
+    ${viewed.length ? `<section class="market-viewed market-width" data-reveal aria-labelledby="viewed-heading">
+      <div class="market-section-title"><div><span class="eyebrow">Pick up where you left off</span><h2 id="viewed-heading">Recently viewed</h2></div></div>
+      <div class="market-property-grid" data-reveal-group>${viewed.map(p => `<div data-reveal>${card(p)}</div>`).join('')}</div>
+      <p class="small muted">Kept on this device only. No account, and nothing is sent to the team.</p>
+    </section>` : ''}
     <section class="market-listings market-width" aria-labelledby="available-heading"><div class="market-section-title" data-reveal><div><h2 id="available-heading">Available homes</h2><p>Compare prices, property details and availability.</p></div><div class="listing-links"><a href="/properties?sector=residential">View residential ${icon('arrow')}</a><a href="/properties?sector=commercial">View commercial ${icon('arrow')}</a></div></div><div class="market-property-grid" data-reveal-group>${residentialHomes.length ? residentialHomes.slice(0, 3).map(p => `<div data-reveal>${card(p)}</div>`).join('') : empty('No available homes right now.', 'Check back for new listings.', '', '')}</div></section>
     <section class="market-service"><div class="market-width service-layout"><div class="service-explanation" data-reveal><span class="product-label">What Porli does</span><h2>Find the property.<br>Talk to the people<br>who manage it.</h2><p>Porli is a residential and commercial property marketplace for buyers and investors. The Porli team publishes the listings, answers your questions and manages inspection requests.</p><a class="link" href="/about">How Porli works ${icon('arrow')}</a></div><div class="service-steps"><div data-reveal><div class="step-head"><span class="step-number">01</span><span class="service-icon">${icon('search')}</span></div><div><h3>Search available properties</h3><p>Choose Residential or Commercial, then filter by location, budget and the space you need.</p></div></div><div data-reveal><div class="step-head"><span class="step-number">02</span><span class="service-icon">${icon('heart')}</span></div><div><h3>Save a shortlist</h3><p>Keep the homes you're considering together in your account.</p></div></div><div data-reveal><div class="step-head"><span class="step-number">03</span><span class="service-icon">${icon('message')}</span></div><div><h3>Enquire or arrange a viewing</h3><p>Message the team from a listing. Request an inspection and track its confirmation in your account.</p></div></div></div></div></section>
     <section class="market-commercial market-width" data-reveal><a class="commercial-photo" href="/properties?sector=commercial"><img src="/assets/highstreet-offices.webp" alt="Highstreet Offices, a fictional three-storey office building — generated concept image" loading="lazy" width="1024" height="688"><span>Generated concept image</span></a><div class="commercial-description"><span class="product-label">Commercial property</span><h2>Offices, retail, industrial<br>and leisure assets.</h2><p>Browse commercial listings with floor and land areas, zoning, tenancy and sale method shown clearly. Enquire from the listing when you're ready to talk.</p><a class="btn" href="/properties?sector=commercial">Browse commercial property ${icon('arrow')}</a></div></section>
