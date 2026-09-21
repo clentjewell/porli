@@ -73,7 +73,7 @@ export function homeView({ properties, state, esc, icon, money, price, card, emp
   const mapLink = featured?.has_location ? `<a class="link small view-on-map" href="/properties/${esc(featured.slug)}#location">View on map ${icon('external')}</a>` : '';
   const headlineFacts = featured ? `<div class="headline-facts"><p class="headline-locality">${icon('pin')}${esc(featured.locality)}</p>${mapLink}<p class="headline-price">${price(featured)}</p>${saleMethodLine}${factList}${highlightChips}<div class="feature-actions"><a class="btn" href="/properties/${esc(featured.slug)}">View the property ${icon('arrow')}</a><a class="btn secondary" href="/properties/${esc(featured.slug)}?enquire=1">Enquire</a>${featured.why ? `<a class="link headline-feature-link" href="/feature/${esc(featured.slug)}">Read the feature ${icon('arrow')}</a>` : ''}</div></div>` : '';
   return `<div class="market-home">
-    <section class="market-hero" aria-label="Find a home with Porli">
+    <section class="market-hero" aria-label="Find a home with RealDistrict">
       <div class="hero-bg-layer" aria-hidden="true">
         <img class="hero-bg is-current" src="/assets/grand-blue-beach.webp" alt="" width="1536" height="1032" fetchpriority="high">
         <img class="hero-bg" src="/assets/grand-blue-aerial.webp" alt="" width="1536" height="1032" loading="lazy">
@@ -81,7 +81,7 @@ export function homeView({ properties, state, esc, icon, money, price, card, emp
       </div>
       <div class="hero-scrim" aria-hidden="true"></div>
       <div class="hero-content">
-        <div class="product-label"><span></span>Residential and commercial property, with Porli</div>
+        <div class="product-label"><span></span>Residential and commercial property, with RealDistrict</div>
         <h1 class="hero-heading">${headline}</h1>
         <p class="hero-intro">${esc(intro)}</p>
         <div class="hero-search-block">
@@ -119,11 +119,11 @@ export function homeView({ properties, state, esc, icon, money, price, card, emp
       <div class="service-split">
         <div class="service-photo"><img src="/assets/apartment.webp" alt="A fictional apartment interior with a low sofa and doors onto a garden. Generated concept image." loading="lazy" width="1024" height="688"></div>
         <div class="service-panel"><div class="service-panel-inner">
-          <span class="product-label" data-reveal>What Porli does</span>
+          <span class="product-label" data-reveal>What RealDistrict does</span>
           <h2 id="service-heading" data-reveal>Find the property.<br>Talk to the people<br>who manage it.</h2>
-          <p class="service-intro" data-reveal>Porli is a residential and commercial property marketplace for buyers and investors. The Porli team publishes the listings, answers your questions and manages inspection requests. Sale method, areas, zoning and tenancy are shown plainly on every listing.</p>
+          <p class="service-intro" data-reveal>RealDistrict is a residential and commercial property marketplace for buyers and investors. The RealDistrict team publishes the listings, answers your questions and manages inspection requests. Sale method, areas, zoning and tenancy are shown plainly on every listing.</p>
           <div class="service-steps" data-reveal-group><div class="step-card" data-reveal><span class="step-number">01</span><div><h3>Search available properties</h3><p>Choose Residential or Commercial, then filter by location, budget and the space you need.</p></div></div><div class="step-card" data-reveal><span class="step-number">02</span><div><h3>Save a shortlist</h3><p>Keep the homes you're considering together in your account.</p></div></div><div class="step-card" data-reveal><span class="step-number">03</span><div><h3>Enquire or arrange a viewing</h3><p>Message the team from a listing. Request an inspection and track its confirmation in your account.</p></div></div></div>
-          <div class="service-actions" data-reveal><a class="btn secondary" href="/account/saved">Open your account ${icon('arrow')}</a><a class="link" href="/about">How Porli works ${icon('arrow')}</a></div>
+          <div class="service-actions" data-reveal><a class="btn secondary" href="/account/saved">Open your account ${icon('arrow')}</a><a class="link" href="/about">How RealDistrict works ${icon('arrow')}</a></div>
         </div></div>
       </div>
     </section>
@@ -173,7 +173,7 @@ export function mountExperience() {
   // Re-rendered account navigation keeps the same enhancement without duplicate listeners.
   if (!header.querySelector('.explore-toggle')) {
     header.querySelector('.nav-end')?.insertAdjacentHTML('beforeend','<button class="explore-toggle" aria-label="Open navigation menu" aria-expanded="false"><span></span><span></span></button>');
-    header.insertAdjacentHTML('beforeend',`<div class="explore-panel" hidden><div class="explore-panel-inner"><div><span class="edition-label">Explore Porli</span><a href="/properties?sector=residential"><span>Residential property</span><span>01 ↗</span></a><a href="/properties?sector=commercial"><span>Commercial property</span><span>02 ↗</span></a><a href="/account/saved"><span>Your shortlist</span><span>03 ↗</span></a><a href="/about"><span>How Porli works</span><span>04 ↗</span></a></div><a class="menu-image" href="/properties?sector=residential"><img src="/assets/courtyard-detail.webp" alt="Explore fictional architectural homes"><span>Find your next place. ↗</span></a></div><p>Porli concept · Includes fictional homes with generated imagery</p></div><span class="reading-progress" aria-hidden="true"></span>`);
+    header.insertAdjacentHTML('beforeend',`<div class="explore-panel" hidden><div class="explore-panel-inner"><div><span class="edition-label">Explore RealDistrict</span><a href="/properties?sector=residential"><span>Residential property</span><span>01 ↗</span></a><a href="/properties?sector=commercial"><span>Commercial property</span><span>02 ↗</span></a><a href="/account/saved"><span>Your shortlist</span><span>03 ↗</span></a><a href="/about"><span>How RealDistrict works</span><span>04 ↗</span></a></div><a class="menu-image" href="/properties?sector=residential"><img src="/assets/courtyard-detail.webp" alt="Explore fictional architectural homes"><span>Find your next place. ↗</span></a></div><p>RealDistrict concept · Includes fictional homes with generated imagery</p></div><span class="reading-progress" aria-hidden="true"></span>`);
   }
   const toggle=header.querySelector('.explore-toggle'),panel=header.querySelector('.explore-panel');
   if(!panel.querySelector('.menu-account')) panel.querySelector('.explore-panel-inner>div')?.insertAdjacentHTML('beforeend','<a class="menu-account" href="/account/messages"><span>Your account</span><span>05 ↗</span></a>');
@@ -329,7 +329,7 @@ export function editorialView({ lead: given, properties, esc, icon, price, typeL
     why.length ? ['#ed-why', 'The property'] : null,
     facts.length ? ['#ed-facts', 'Key facts'] : null,
     shots.length > 2 ? ['#ed-plates', 'Photographs'] : null,
-    rest.length ? ['#ed-rest', 'Also with Porli'] : null,
+    rest.length ? ['#ed-rest', 'Also with RealDistrict'] : null,
     ['#ed-enquire', 'Enquire'],
   ].filter(Boolean);
   return `<div class="ed">
@@ -352,7 +352,7 @@ export function editorialView({ lead: given, properties, esc, icon, price, typeL
       ${shots[4] ? plate(shots[4], 'ed-plate-wide') : ''}
     </section>` : ''}
     <section class="ed-rest" id="ed-rest" aria-labelledby="ed-rest-head">
-      <div class="ed-rest-head" data-reveal><h2 id="ed-rest-head">Also with Porli</h2><a class="link" href="/properties?sector=all">Every property ${icon('arrow')}</a></div>
+      <div class="ed-rest-head" data-reveal><h2 id="ed-rest-head">Also with RealDistrict</h2><a class="link" href="/properties?sector=all">Every property ${icon('arrow')}</a></div>
       ${rest.map((p, i) => `<article class="ed-row ${i % 2 ? 'is-flipped' : ''}" data-reveal>
         <div class="ed-row-figure"><a class="ed-row-media" href="/properties/${esc(p.slug)}" tabindex="-1">${p.media?.[0] ? shot(p.media[0]) : ''}</a><span class="ed-row-plate" aria-hidden="true">${esc(typeLabel(p))} · ${esc(p.locality)}</span></div>
         <div class="ed-row-copy">
