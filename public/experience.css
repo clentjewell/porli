@@ -302,3 +302,65 @@ h1,h2,h3{font-family:var(--serif);font-weight:500;letter-spacing:-.012em;line-he
   .card-foot .price{font-size:16px}
   .card-place{font-size:11px;left:10px;bottom:9px;right:62px}
 }
+
+/* ---------------------------------------------------------------------------
+   Showcase grid (docs/35). The Available properties grid becomes photographs
+   first — three across, then two wider — with each card's detail panel resting
+   out of sight and arriving when the pointer is over the card.
+   Three rules keep that from costing anyone the information:
+   · the panel is always in the document, so a screen reader reads it in place;
+   · it is only ever hidden where a fine pointer exists, so touch and every
+     narrow screen keep the card they had;
+   · it arrives on focus as well as hover, so the keyboard sees what the mouse
+     sees, and the fictional label sits in the badges, visible at rest.
+   --------------------------------------------------------------------------- */
+.showcase-grid{grid-template-columns:repeat(6,minmax(0,1fr));gap:22px}
+.showcase-grid>[data-type]{grid-column:span 2}
+/* Three across, then two wider, which is exactly five. Only when nothing is
+   filtered: a filtered grid has a different count and falls back to thirds. */
+.showcase-grid[data-filter="all"]>[data-type]:nth-child(4),
+.showcase-grid[data-filter="all"]>[data-type]:nth-child(5){grid-column:span 3}
+
+.property-card.is-showcase{position:relative;padding:0;border:0;background:none;box-shadow:none}
+.property-card.is-showcase:hover{transform:none;box-shadow:none}
+.is-showcase .card-image{aspect-ratio:auto;height:clamp(250px,23vw,340px);border-radius:var(--radius)}
+/* The gradient existed to carry the locality; the locality is not shown here and the panel is
+   opaque, so it would only be darkening the photograph for nothing. */
+.is-showcase .card-image:after{display:none}
+.is-showcase .card-place{display:none}
+.is-showcase .card-badges{flex-direction:row;align-items:center;flex-wrap:wrap;gap:7px;right:58px}
+.is-showcase .card-body{position:absolute;left:14px;right:14px;bottom:14px;z-index:4;padding:15px 17px;background:#fff;border-radius:var(--radius-sm);box-shadow:0 14px 34px #16251d24}
+.is-showcase .card-name{font-size:17px}
+.is-showcase .facts{padding-top:10px;gap:13px;font-size:11px}
+.is-showcase .facts svg{width:14px;height:14px}
+.is-showcase .card-foot{margin-top:11px;padding-top:10px}
+.is-showcase .card-foot .price{font-size:16px}
+.is-showcase .card-foot .card-demo{font-size:9px}
+
+/* Hidden only where there is a pointer that can reveal it. Touch devices and
+   anything without a fine pointer never enter this block. */
+@media(hover:hover) and (pointer:fine){
+  .is-showcase .card-body{opacity:0;transform:translateY(12px);transition:opacity .34s var(--ease),transform .34s var(--ease);pointer-events:none}
+  .property-card.is-showcase:hover .card-body,
+  .property-card.is-showcase:focus-within .card-body{opacity:1;transform:none;pointer-events:auto}
+  .is-showcase .card-image img{transition:transform 1.1s var(--ease)}
+  .property-card.is-showcase:hover .card-image img{transform:scale(1.04)}
+}
+@media(prefers-reduced-motion:reduce){
+  .is-showcase .card-body{transition:none;transform:none}
+  .property-card.is-showcase:hover .card-image img{transform:none}
+}
+@media(max-width:1000px){
+  .showcase-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .showcase-grid>[data-type],
+  .showcase-grid[data-filter="all"]>[data-type]:nth-child(4),
+  .showcase-grid[data-filter="all"]>[data-type]:nth-child(5){grid-column:span 2}
+}
+@media(max-width:640px){
+  .showcase-grid{grid-template-columns:minmax(0,1fr)}
+  .showcase-grid>[data-type],
+  .showcase-grid[data-filter="all"]>[data-type]:nth-child(4),
+  .showcase-grid[data-filter="all"]>[data-type]:nth-child(5){grid-column:span 1}
+  .is-showcase .card-image{height:auto;aspect-ratio:1.35}
+  .is-showcase .card-body{position:static;left:auto;right:auto;bottom:auto;padding:14px 6px 6px;background:none;border-radius:0;box-shadow:none}
+}
