@@ -307,6 +307,16 @@ export function editorialView({ lead: given, properties, esc, icon, price, typeL
   const why = String(lead.why || '').split(/\n\s*\n/).filter(Boolean);
   const facts = (lead.details || []).filter(d => Array.isArray(d) && String(d[1]).length <= 40).slice(0, 4);
   const shot = (m, cls = '') => `<img class="${cls}" src="${esc(m.url)}" alt="${esc(m.alt)}" loading="lazy" width="1536" height="1032">`;
+  // A photograph is named only when the listing gives it a caption. Nothing is derived from the
+  // alternative text, which is written for a screen reader rather than to be read beside the image.
+  const plate = (m, cls = '') => `<figure class="ed-plate ${cls}" data-reveal><span class="ed-plate-img">${shot(m)}</span>${m.caption ? `<figcaption>${esc(m.caption)}</figcaption>` : ''}</figure>`;
+  const jump = [
+    why.length ? ['#ed-why', 'The property'] : null,
+    facts.length ? ['#ed-facts', 'Key facts'] : null,
+    shots.length > 2 ? ['#ed-plates', 'Photographs'] : null,
+    rest.length ? ['#ed-rest', 'Also with Porli'] : null,
+    ['#ed-enquire', 'Enquire'],
+  ].filter(Boolean);
   return `<div class="ed">
     <section class="ed-open" aria-labelledby="ed-lead">
       <div class="ed-open-media">${shots[0] ? `<img src="${esc(shots[0].url)}" alt="${esc(shots[0].alt)}" width="1536" height="1032" fetchpriority="high">` : ''}<span class="ed-scrim" aria-hidden="true"></span></div>
@@ -318,19 +328,20 @@ export function editorialView({ lead: given, properties, esc, icon, price, typeL
         <div class="ed-actions"><a class="btn" href="/properties/${esc(lead.slug)}">View the property ${icon('arrow')}</a><a class="btn light" href="/properties/${esc(lead.slug)}?enquire=1">Enquire</a></div>
       </div>
     </section>
-    ${why.length ? `<section class="ed-why" data-reveal><p class="eyebrow">The property</p><div class="ed-why-text"><p class="ed-why-lead">${esc(why[0])}</p>${why.slice(1, 2).map(t => `<p>${esc(t)}</p>`).join('')}</div></section>` : ''}
-    ${facts.length ? `<section class="ed-facts" data-reveal aria-label="Key facts"><dl>${facts.map(([k, v]) => `<div><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`).join('')}</dl></section>` : ''}
-    ${shots.length > 2 ? `<section class="ed-plates" aria-label="Photographs of ${esc(lead.title)}">
-      <figure class="ed-plate ed-plate-wide" data-reveal>${shot(shots[1])}</figure>
-      <div class="ed-plate-pair">${shots.slice(2, 4).map(m => `<figure class="ed-plate" data-reveal>${shot(m)}</figure>`).join('')}</div>
-      ${shots[4] ? `<figure class="ed-plate ed-plate-wide" data-reveal>${shot(shots[4])}</figure>` : ''}
+    <nav class="ed-jump" aria-label="On this page"><div class="ed-jump-inner">${jump.map(([href, label]) => `<a href="${href}">${esc(label)}</a>`).join('')}</div></nav>
+    ${why.length ? `<section class="ed-why" id="ed-why" data-reveal><p class="eyebrow">The property</p><div class="ed-why-text"><p class="ed-why-lead">${esc(why[0])}</p>${why.slice(1, 2).map(t => `<p>${esc(t)}</p>`).join('')}</div></section>` : ''}
+    ${facts.length ? `<section class="ed-facts" id="ed-facts" data-reveal aria-label="Key facts"><dl>${facts.map(([k, v]) => `<div><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`).join('')}</dl></section>` : ''}
+    ${shots.length > 2 ? `<section class="ed-plates" id="ed-plates" aria-label="Photographs of ${esc(lead.title)}">
+      ${plate(shots[1], 'ed-plate-wide')}
+      <div class="ed-plate-pair">${shots.slice(2, 4).map(m => plate(m)).join('')}</div>
+      ${shots[4] ? plate(shots[4], 'ed-plate-wide') : ''}
     </section>` : ''}
-    <section class="ed-rest" aria-labelledby="ed-rest-head">
+    <section class="ed-rest" id="ed-rest" aria-labelledby="ed-rest-head">
       <div class="ed-rest-head" data-reveal><h2 id="ed-rest-head">Also with Porli</h2><a class="link" href="/properties?sector=all">Every property ${icon('arrow')}</a></div>
       ${rest.map((p, i) => `<article class="ed-row ${i % 2 ? 'is-flipped' : ''}" data-reveal>
-        <a class="ed-row-media" href="/properties/${esc(p.slug)}" tabindex="-1">${p.media?.[0] ? shot(p.media[0]) : ''}</a>
+        <div class="ed-row-figure"><a class="ed-row-media" href="/properties/${esc(p.slug)}" tabindex="-1">${p.media?.[0] ? shot(p.media[0]) : ''}</a><span class="ed-row-plate" aria-hidden="true">${esc(typeLabel(p))} · ${esc(p.locality)}</span></div>
         <div class="ed-row-copy">
-          <p class="eyebrow">${esc(typeLabel(p))} · ${esc(p.locality)}</p>
+          <p class="sr-only">${esc(typeLabel(p))} · ${esc(p.locality)}</p>
           <h3><a href="/properties/${esc(p.slug)}">${esc(p.title)}</a></h3>
           <p>${esc(p.summary || '')}</p>
           <p class="ed-row-price">${price(p)}</p>
@@ -338,6 +349,6 @@ export function editorialView({ lead: given, properties, esc, icon, price, typeL
         </div>
       </article>`).join('')}
     </section>
-    <section class="ed-close" data-reveal><h2>Talk to the people who manage it.</h2><p>Enquire from any listing and the team replies in your account.</p><a class="btn" href="/properties/${esc(lead.slug)}?enquire=1">Enquire about ${esc(lead.title)} ${icon('arrow')}</a></section>
+    <section class="ed-close" id="ed-enquire" data-reveal><h2>Talk to the people who manage it.</h2><p>Enquire from any listing and the team replies in your account.</p><a class="btn" href="/properties/${esc(lead.slug)}?enquire=1">Enquire about ${esc(lead.title)} ${icon('arrow')}</a></section>
   </div>`;
 }
