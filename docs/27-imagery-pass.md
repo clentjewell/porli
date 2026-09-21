@@ -102,3 +102,38 @@ licence obligations to track. Worth revisiting if a dedicated Thailand destinati
 - **The written photograph permission is still outstanding.** It now says so in the register as
   well as in docs/21 and docs/24. It remains the first item in section 6 and the first thing that
   would unlock more imagery.
+
+## Photo credits removed from the interface, 21 September 2026
+
+Clent asked for the site to read as Porli's live shopfront rather than a concept build, and named
+the visible photograph credits and the "Headline listing" section label. Removed:
+
+- "Photographs supplied by the property." beneath the listing gallery.
+- "Photographs supplied by the property. Price to be confirmed." beneath the homepage headline
+  listing. The price line above it already says "Price to be confirmed", so that half was
+  duplication regardless.
+- The credit clause in the hero caption, which now names the property and its location only.
+- The credit sentence in the featured-destinations caption.
+- The credit clause in the site-wide strip, and the words "Porli concept" from that strip and the
+  footer.
+- The "Headline listing" eyebrow. It labelled the section rather than telling anyone anything; the
+  property's own name is the heading.
+
+**Attribution was not lost, only moved out of the furniture.** Every GrandBlue image carries
+"Photograph supplied by the property." in its alt text, added earlier in this same pass, so the
+provenance is still announced to a screen reader and still recorded against each file in
+`design/asset-register.json` with its source and rights position. Nothing now claims the
+photographs are Porli's own.
+
+**Fictional labelling was not touched, and should not be.** Five of the six listings are invented.
+Every fictional card still reads "Fictional listing · Generated image", every fictional listing
+page still says the property, its location and its price are fictional, the destinations caption
+still says Saltmere and Fernwick are fictional places, the site-wide strip still says the site
+includes fictional concept listings, and the footer still says properties shown are fictional
+except where a listing states otherwise. Labelling a demo record as fictional is a product
+invariant in `AGENTS.md`, not presentation, and removing it would present invented properties as
+real ones.
+
+This narrows the guardrail in `docs/23` section 3, which specified the visible credit wording.
+Recorded as decision D020 rather than treated as a silent redesign. The written photograph
+permission remains outstanding and is unaffected by where the credit is displayed.

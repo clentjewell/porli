@@ -82,12 +82,12 @@ export function homeView({ properties, state, esc, icon, money, price, card, emp
         </div>
       </div>
       <a class="scroll-cue" href="#headline-listing"><span>Scroll</span>${icon('down')}</a>
-      <p class="hero-caption">GrandBlue Resort &amp; Beachclub, Thailand · Photographs supplied by the property</p>
+      <p class="hero-caption">GrandBlue Resort &amp; Beachclub, Thailand</p>
     </section>
     ${featured ? `<section class="market-headline market-width" id="headline-listing" data-reveal aria-label="Headline listing">
-      <div class="market-section-title"><div><span class="eyebrow">Headline listing</span><h2>${esc(featured.title)}</h2></div><a class="link" href="/properties?sector=commercial">All commercial property ${icon('arrow')}</a></div>
+      <div class="market-section-title"><div><h2>${esc(featured.title)}</h2></div><a class="link" href="/properties?sector=commercial">All commercial property ${icon('arrow')}</a></div>
       <div class="headline-layout"><div class="market-feature">${carousel}</div>${headlineFacts}</div>
-      <div class="feature-disclosure headline-disclosure">${real ? 'Photographs supplied by the property. Price to be confirmed.' : 'Fictional listing. Photographs are generated concept images.'}</div>
+      ${real ? '' : '<div class="feature-disclosure headline-disclosure">Fictional listing. Photographs are generated concept images.</div>'}
     </section>` : ''}
     <section class="market-values market-width" aria-label="Why choose Porli" data-reveal-group>
       <div class="value-item" data-reveal><span class="value-icon">${icon('grid')}</span><div><h3>Curated listings</h3><p>Residential and commercial, every listing checked by the team.</p></div></div>
@@ -102,7 +102,7 @@ export function homeView({ properties, state, esc, icon, money, price, card, emp
         <a class="destination-card" data-reveal href="/properties?sector=commercial&location=Fernwick"><img src="/assets/highstreet-offices.webp" alt="Fictional office building — generated concept image" loading="lazy" width="1024" height="688"><span class="destination-scrim" aria-hidden="true"></span><span class="destination-body"><strong>Fernwick</strong><em>Business. Lifestyle. Opportunity.</em><span class="destination-facts">${esc(profile('Fernwick','commercial'))}</span></span><span class="destination-arrow" aria-hidden="true">${icon('external')}</span></a>
         <a class="destination-card" data-reveal href="/properties?sector=commercial&location=Thailand"><img src="/assets/grand-blue-beach.webp" alt="GrandBlue beachfront — photograph supplied by the property" loading="lazy" width="1536" height="1032"><span class="destination-scrim" aria-hidden="true"></span><span class="destination-body"><strong>Thailand</strong><em>Extraordinary places, real opportunities.</em><span class="destination-facts">${esc(profile('Thailand','commercial'))}</span></span><span class="destination-arrow" aria-hidden="true">${icon('external')}</span></a>
       </div>
-      <p class="destination-caption small muted">Saltmere and Fernwick are fictional places used for the concept. Thailand listing photographs are supplied by the property.</p>
+      <p class="destination-caption small muted">Saltmere and Fernwick are fictional places used for the concept.</p>
     </section>
     ${viewed.length ? `<section class="market-viewed market-width" data-reveal aria-labelledby="viewed-heading">
       <div class="market-section-title"><div><span class="eyebrow">Pick up where you left off</span><h2 id="viewed-heading">Recently viewed</h2></div></div>
