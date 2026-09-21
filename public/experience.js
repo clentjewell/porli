@@ -46,8 +46,11 @@ export function homeView({ properties, state, esc, icon, money, price, card, emp
     return priced.length === rows.length && priced[0] === priced.at(-1) ? `${count} · ${from}`
       : `${count} · from ${from}`; };
   const viewed = recentlyViewed(properties);
-  const residentialHomes = homes.filter(p => (p.sector || 'residential') === 'residential');
   const featured = homes[0];
+  // Everything available but the headline listing, which already has the section above it, and the
+  // types actually present so a pill can never return an empty grid.
+  const gridHomes = homes.filter(p => p.id !== featured?.id);
+  const gridTypes = [...new Map(gridHomes.map(p => [p.property_type, typeLabel(p)])).entries()].sort((a, b) => a[1].localeCompare(b[1]));
   const real = featured?.is_demo === false;
   const views = featured?.media || [];
   const defaultHeadline = state.content.headline === 'Find your next place.';
@@ -81,20 +84,14 @@ export function homeView({ properties, state, esc, icon, money, price, card, emp
           <div class="market-locations"><span>Explore popular locations:</span><a href="/properties?sector=residential&location=Saltmere">Saltmere</a><a href="/properties?sector=residential&location=Fernwick">Fernwick</a><a href="/properties?sector=commercial&location=Thailand">Thailand</a></div>
         </div>
       </div>
-      <a class="scroll-cue" href="#headline-listing"><span>Scroll</span>${icon('down')}</a>
-      <p class="hero-caption">GrandBlue Resort &amp; Beachclub, Thailand</p>
     </section>
     ${featured ? `<section class="market-headline market-width" id="headline-listing" data-reveal aria-label="Headline listing">
-      <div class="market-section-title"><div><h2>${esc(featured.title)}</h2></div><a class="link" href="/properties?sector=commercial">All commercial property ${icon('arrow')}</a></div>
-      <div class="headline-layout"><div class="market-feature">${carousel}</div>${headlineFacts}</div>
-      ${real ? '' : '<div class="feature-disclosure headline-disclosure">Fictional listing. Photographs are generated concept images.</div>'}
+      <div class="headline-panel">
+        <div class="market-section-title"><div><span class="eyebrow">${esc(typeLabel(featured))} · ${esc(featured.locality)}</span><h2>${esc(featured.title)}</h2></div><a class="link" href="/properties?sector=commercial">All commercial property ${icon('arrow')}</a></div>
+        <div class="headline-layout"><div class="market-feature">${carousel}</div>${headlineFacts}</div>
+        ${real ? '' : '<div class="feature-disclosure headline-disclosure">Fictional listing. Photographs are generated concept images.</div>'}
+      </div>
     </section>` : ''}
-    <section class="market-values market-width" aria-label="Why choose Porli" data-reveal-group>
-      <div class="value-item" data-reveal><span class="value-icon">${icon('grid')}</span><div><h3>Curated listings</h3><p>Residential and commercial, every listing checked by the team.</p></div></div>
-      <div class="value-item" data-reveal><span class="value-icon">${icon('message')}</span><div><h3>Direct to the team</h3><p>Enquire from any listing and get a reply in your account.</p></div></div>
-      <div class="value-item" data-reveal><span class="value-icon">${icon('heart')}</span><div><h3>Save and compare</h3><p>Keep a shortlist and come back to it on any device.</p></div></div>
-      <div class="value-item" data-reveal><span class="value-icon">${icon('layers')}</span><div><h3>A more open market</h3><p>Sale method, areas, zoning and tenancy shown plainly.</p></div></div>
-    </section>
     <section class="market-destinations market-width" data-reveal aria-label="Featured destinations">
       <div class="market-section-title"><div><span class="eyebrow">Explore</span><h2>Featured destinations</h2></div><a class="link" href="/properties?sector=residential">View all locations ${icon('arrow')}</a></div>
       <div class="destination-grid" data-reveal-group>
@@ -109,10 +106,17 @@ export function homeView({ properties, state, esc, icon, money, price, card, emp
       <div class="market-property-grid" data-reveal-group>${viewed.map(p => `<div data-reveal>${card(p)}</div>`).join('')}</div>
       <p class="small muted">Kept on this device only. No account, and nothing is sent to the team.</p>
     </section>` : ''}
-    <section class="market-listings market-width" aria-labelledby="available-heading"><div class="market-section-title" data-reveal><div><h2 id="available-heading">Available homes</h2><p>Compare prices, property details and availability.</p></div><div class="listing-links"><a href="/properties?sector=residential">View residential ${icon('arrow')}</a><a href="/properties?sector=commercial">View commercial ${icon('arrow')}</a></div></div><div class="market-property-grid" data-reveal-group>${residentialHomes.length ? residentialHomes.slice(0, 3).map(p => `<div data-reveal>${card(p)}</div>`).join('') : empty('No available homes right now.', 'Check back for new listings.', '', '')}</div></section>
-    <section class="market-service"><div class="market-width service-layout"><div class="service-explanation" data-reveal><span class="product-label">What Porli does</span><h2>Find the property.<br>Talk to the people<br>who manage it.</h2><p>Porli is a residential and commercial property marketplace for buyers and investors. The Porli team publishes the listings, answers your questions and manages inspection requests.</p><a class="link" href="/about">How Porli works ${icon('arrow')}</a></div><div class="service-steps"><div data-reveal><div class="step-head"><span class="step-number">01</span><span class="service-icon">${icon('search')}</span></div><div><h3>Search available properties</h3><p>Choose Residential or Commercial, then filter by location, budget and the space you need.</p></div></div><div data-reveal><div class="step-head"><span class="step-number">02</span><span class="service-icon">${icon('heart')}</span></div><div><h3>Save a shortlist</h3><p>Keep the homes you're considering together in your account.</p></div></div><div data-reveal><div class="step-head"><span class="step-number">03</span><span class="service-icon">${icon('message')}</span></div><div><h3>Enquire or arrange a viewing</h3><p>Message the team from a listing. Request an inspection and track its confirmation in your account.</p></div></div></div></div></section>
+    <section class="market-listings market-width" aria-labelledby="available-heading">
+      <div class="market-section-title" data-reveal><div><h2 id="available-heading">Available properties</h2><p>Compare prices, property details and availability.</p></div><a class="link" href="/properties?sector=all">Every property ${icon('arrow')}</a></div>
+      ${gridTypes.length > 1 ? `<div class="type-pills" role="group" aria-label="Filter by property type" data-reveal>
+        <button type="button" class="type-pill is-on" data-action="home-type" data-type="all" aria-pressed="true">All</button>
+        ${gridTypes.map(([key, label]) => `<button type="button" class="type-pill" data-action="home-type" data-type="${esc(key)}" aria-pressed="false">${esc(label)}</button>`).join('')}
+      </div>` : ''}
+      <div class="market-property-grid" data-type-grid data-filter="all" data-reveal-group>${gridHomes.length ? gridHomes.map(p => `<div data-reveal data-type="${esc(p.property_type)}">${card(p)}</div>`).join('') : empty('No available properties right now.', 'Check back for new listings.', '', '')}</div>
+      <p class="sr-only" role="status" data-type-status></p>
+    </section>
+    <section class="market-service"><div class="market-width service-layout"><div class="service-explanation" data-reveal><span class="product-label">What Porli does</span><h2>Find the property.<br>Talk to the people<br>who manage it.</h2><p>Porli is a residential and commercial property marketplace for buyers and investors. The Porli team publishes the listings, answers your questions and manages inspection requests. Sale method, areas, zoning and tenancy are shown plainly on every listing.</p><div class="service-actions"><a class="btn secondary" href="/account/saved">Open your account ${icon('arrow')}</a><a class="link" href="/about">How Porli works ${icon('arrow')}</a></div></div><div class="service-steps"><div data-reveal><div class="step-head"><span class="step-number">01</span><span class="service-icon">${icon('search')}</span></div><div><h3>Search available properties</h3><p>Choose Residential or Commercial, then filter by location, budget and the space you need.</p></div></div><div data-reveal><div class="step-head"><span class="step-number">02</span><span class="service-icon">${icon('heart')}</span></div><div><h3>Save a shortlist</h3><p>Keep the homes you're considering together in your account.</p></div></div><div data-reveal><div class="step-head"><span class="step-number">03</span><span class="service-icon">${icon('message')}</span></div><div><h3>Enquire or arrange a viewing</h3><p>Message the team from a listing. Request an inspection and track its confirmation in your account.</p></div></div></div></div></section>
     <section class="market-commercial market-width" data-reveal><a class="commercial-photo" href="/properties?sector=commercial"><img src="/assets/highstreet-offices.webp" alt="Highstreet Offices, a fictional three-storey office building — generated concept image" loading="lazy" width="1024" height="688"><span>Generated concept image</span></a><div class="commercial-description"><span class="product-label">Commercial property</span><h2>Offices, retail, industrial<br>and leisure assets.</h2><p>Browse commercial listings with floor and land areas, zoning, tenancy and sale method shown clearly. Enquire from the listing when you're ready to talk.</p><a class="btn" href="/properties?sector=commercial">Browse commercial property ${icon('arrow')}</a></div></section>
-    <section class="market-account market-width" data-reveal><div><h2>Your property search, in one place.</h2><p>Saved homes, conversations and inspection requests.</p></div><a class="btn secondary" href="/account/saved">Open your account ${icon('arrow')}</a></section>
   </div>`;
 }
 
