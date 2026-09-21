@@ -91,3 +91,5 @@ dialog{border:1px solid var(--line);padding:0;background:var(--paper);color:var(
 .pill select:hover{border-color:var(--olive)}
 .search-bar{align-items:center}
 @media(max-width:800px){.filter-pills{gap:6px}.pill select{padding:9px 11px;font-size:12px}}
+.media-fields{display:grid;gap:8px;min-width:0}
+.media-caption-field input{font-size:13px}
