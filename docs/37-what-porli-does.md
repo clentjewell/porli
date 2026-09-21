@@ -52,6 +52,24 @@ the card, the icon sat below the number and beside the second line of the paragr
 relating to anything. It was centred against the text block, and then the icons were removed
 altogether, which settles it.
 
+## A third defect, found after release
+
+The numbers sat flush against the left edge of their cards, with no padding between them and the
+white, and the text ran to the card's right edge too.
+
+The cause was not a missing value. `.service-steps>div` — the rule for the divided rows this
+section used to have — was still in the stylesheet, and at one class plus one element it
+out-specifies `.step-card` at one class. So the card kept the old row's `padding: 24px 0`, its
+22px gap, its top alignment and its divider line, and only picked up the white background, radius
+and border because the old rule said nothing about those.
+
+Measured rather than adjusted by eye: computed `padding-left` read `0px` where the card asks for
+22px. The four dead rules were deleted, which is the fix; nudging the number would have left three
+other wrong values in place.
+
+The numbers now sit 23px inside the card and the heading 59px, with their baselines aligned to
+within a pixel, at both widths.
+
 ## Verification
 
 - `npm run check` and `npm test` pass; 28 tests, unchanged.
@@ -64,7 +82,9 @@ altogether, which settles it.
 - The commercial photograph's computed `order` is 2 on desktop and 0 below 860px.
 - 28 routes walked at 1440px and 390px: no console errors, no failed requests, no broken images,
   no unnamed controls.
-- Reduced motion on and off. Cache-busting versions bumped together to 21.
+- Card padding, number and heading offsets and baseline alignment measured at both widths after
+  the dead rules were removed, rather than judged from a screenshot.
+- Reduced motion on and off. Cache-busting versions bumped together to 23.
 
 ## Limitations
 
