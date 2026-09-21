@@ -81,3 +81,43 @@ the first result back down the page.
 - **Headings still fall back to Georgia.** See the correction above.
 - Map view, saved searches and pagination remain unbuilt for the reasons in docs/25 and docs/26:
   one geocoded listing, no email delivery, and six listings in total.
+
+## A rotation coupled to the hero zoom, 21 September 2026
+
+The reference template's motion was measured rather than described. Three findings shaped what was
+taken from it.
+
+**Its signature effect is a slow scale-and-rotate drift, and it is time-based.** Sampling the same
+elements at four scroll positions gave equal increments regardless of how far the page had
+travelled: scale 1.083 → 1.095 → 1.107 → 1.120 → 1.132 over roughly 0.8 second intervals, with a
+rotation rising alongside it at about ten times the scale increment in degrees. It is a continuous
+drift, not a scroll-linked one.
+
+**None of it is CSS.** A scan of every element on the page found no CSS transitions and no CSS
+animations at all; the motion is JavaScript writing inline transforms. That route is closed here —
+no dependencies, no build step, and the Content Security Policy forbids third-party scripts — so
+anything equivalent has to be hand-written CSS.
+
+**It does not respect `prefers-reduced-motion`.** Loaded with reduce set, six blocks below the
+fold still start at opacity 0 and animate in. Porli clears that bar and should keep clearing it,
+so the look was worth taking and the implementation was not.
+
+Porli already had the rest of the vocabulary: a hero zoom, scroll reveals that fade and rise, and
+hover scales on images. The one missing ingredient was the rotation riding along with the zoom,
+which is what stops a straight zoom reading as mechanical. Both zoom keyframes now carry one at
+the ratio measured above:
+
+- `hero-zoom`: `scale(1) rotate(0deg)` → `scale(1.05) rotate(.5deg)` over 10s
+- `kenburns`, on the headline listing photograph: `scale(1.06) rotate(.6deg)`
+
+Both are transform only, so the site-wide reduced-motion rule switches them off along with
+everything else, which was confirmed rather than assumed.
+
+**The risk worth checking was corner exposure.** Rotating an image that exactly covers its frame
+pulls its corners inside the frame and shows the page behind. For a box of aspect ratio *r*, the
+scale needed to stay covered at angle θ is about `cos θ + sin θ × r`: at 0.5° and 1.52:1 that is
+1.013, and the zoom reaches 1.05, so there is roughly four times the margin required. It was
+verified by sampling the four corner pixels of the rendered hero rather than trusting the
+arithmetic — at the shipped values, at 1.02, and at the theoretical minimum of 1.013, across
+desktop, phone, wide-and-short and tall-and-narrow viewports. No corner showed the page colour in
+any of the sixteen combinations.
