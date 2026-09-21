@@ -2748,9 +2748,13 @@ alone.
 Eight bare hairlines were measured on the live page: one under the section heading, six between the
 property rows, and one above the key facts, plus the vertical dividers inside the facts row.
 
-The six row rules disappeared with the rebuild below. The rest are deleted. One full-width rule
-remains, under the sticky jump bar, and it stays: it is the edge of a bar that floats over content,
-which is a job.
+The six row rules disappeared with the rebuild below. The rest are deleted.
+
+The jump bar's own rule was kept at first, on the grounds that the edge of a bar floating over
+content is doing a job. Clent pointed at it again, and he is right: at rest the bar sits on the
+same paper as everything else, so the rule reads as a stray line across the page rather than as an
+edge. It is now a soft shadow, which shows as nothing at rest and gives the bar depth once content
+scrolls beneath it. **No full-width rule is left on the page.**
 
 The key facts now separate by spacing rather than by a grid of rules.
 
@@ -2810,7 +2814,10 @@ enquiry where one is missing, which is better behaviour than a chip that is simp
 - The explore list measured in three states at 1440px: first row active by default, hovering the
   third moves the card and the photograph to the third, focusing the fifth moves both to the fifth.
   All five rows carry a correct link.
-- Borders re-read from the rendered feature page: one full-width rule left, the jump bar's own.
+- Borders re-read from the rendered feature page: **no full-width rules left**. The sixteen that
+  remain are list-row separators and button edges.
+- The jump bar re-tested after losing its rule: each link still sets the hash, scrolls, and
+  leaves the target heading clear of the bar, at both widths.
 - Overview tiles read from three listings — a hotel, a house and a warehouse — at both widths, and
   the enquiry card confirmed present on each.
 - Tap targets on the explore rows: 79px at desktop, 94px and above on a phone, against the 40px

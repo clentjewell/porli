@@ -169,7 +169,10 @@ h1,h2,h3{font-family:var(--serif);font-weight:500;letter-spacing:-.012em;line-he
    docs/25 was to put it where its parent is the full page. */
 /* Opaque, not translucent: the facts row above it ghosted through a blurred bar, which read as a
    rendering fault rather than a material. */
-.ed-jump{position:sticky;top:var(--header-h,82px);z-index:20;background:var(--paper);border-bottom:1px solid var(--line)}
+/* No rule under the bar. It is opaque, so a soft shadow gives it depth when content scrolls
+   beneath it and shows as nothing at rest, where a hairline read as a stray line across the
+   page. */
+.ed-jump{position:sticky;top:var(--header-h,82px);z-index:20;background:var(--paper);box-shadow:0 8px 20px #16251d0d}
 .ed-jump-inner{max-width:1274px;margin:0 auto;display:flex;gap:30px;overflow-x:auto;scrollbar-width:none;padding:0 48px}
 .ed-jump-inner::-webkit-scrollbar{display:none}
 .ed-jump a{flex:0 0 auto;display:inline-flex;align-items:center;min-height:52px;font-size:12px;letter-spacing:.06em;text-transform:uppercase;font-weight:600;color:var(--muted);border-bottom:2px solid transparent;transition:color .2s var(--ease),border-color .2s var(--ease)}
@@ -194,7 +197,7 @@ h1,h2,h3{font-family:var(--serif);font-weight:500;letter-spacing:-.012em;line-he
   .ed-jump{top:var(--header-h,68px)}
   .ed-jump-inner{padding:0 20px;gap:22px}
   /* The bar scrolls sideways on a phone, so the last item fades rather than stopping dead. */
-  .ed-jump:after{content:'';position:absolute;right:0;top:0;bottom:1px;width:38px;background:linear-gradient(90deg,#fcfcfa00,var(--paper));pointer-events:none}
+  .ed-jump:after{content:'';position:absolute;right:0;top:0;bottom:0;width:38px;background:linear-gradient(90deg,#fcfcfa00,var(--paper));pointer-events:none}
   .ed-jump a{min-height:46px;font-size:11px}
   .ed-why,.ed-facts,.ed-plates,.ed-rest,.ed-close{scroll-margin-top:calc(var(--header-h,68px) + 56px)}
 }
