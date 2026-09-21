@@ -45,3 +45,6 @@ h1,h2,h3{font-family:var(--sans);font-weight:600;letter-spacing:-.04em;line-heig
 @media(max-width:370px){#header .nav-links{gap:13px}#header .nav-end .btn{padding:6px 8px;font-size:10px}#header .nav{gap:8px}.market-hero h1{font-size:33px}.listing-links{gap:13px;font-size:9px}.facts{gap:16px}}
 @media(prefers-reduced-motion:reduce){[data-reveal]{opacity:1;transform:none}.hero-rotate{opacity:1;transform:none}.market-view{transition:none}.reading-progress{display:none}.hero-heading .w{opacity:1;transform:none}}
 .location-map{border-radius:3px}
+.destination-facts{display:block;margin-top:7px;font-size:12px;letter-spacing:.02em;color:#e7ece2}
+.market-viewed{padding-top:10px}
+.market-viewed .small.muted{margin-top:14px}
