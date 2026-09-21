@@ -107,9 +107,9 @@ of their hierarchy rather than a current record of it.
   fill out as imagery arrives, but it means the feature currently improves two listings. (An
   earlier version of this document said only GrandBlue had more than one photograph. That was
   wrong; the imagery audit in docs/27 found Courtyard House's gallery.)
-- **The save button is a 32px tap target**, below the 40px floor in docs/23. It predates this
-  change and appears on every card across the site, including the homepage, so widening it is a
-  site-wide change rather than a search-results one. Recorded here rather than fixed in passing.
+- **The save button was a 32px tap target**, below the 40px floor in docs/23. It was site-wide
+  rather than a search-results matter, so it was recorded here rather than fixed in passing, and
+  has since been raised to 40px on phones in the mobile pass (docs/28).
 - **Sold listings are excluded from results entirely**, so the sold treatment is only visible to
   staff previewing a listing. "Include under offer" reaches the under-offer state. Whether recently
   sold stock should appear as proof is a content decision, not a technical one; docs/23 raises the

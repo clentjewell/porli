@@ -63,3 +63,22 @@ dialog{border:1px solid var(--line);padding:0;background:var(--paper);color:var(
 .property-card.is-closed .card-image img{filter:saturate(.4) brightness(.93)}
 .card-ribbon{position:absolute;left:0;right:0;bottom:0;background:var(--clay);color:#fff;font-size:12px;letter-spacing:.07em;text-transform:uppercase;padding:7px 12px;text-align:center;z-index:2}
 @media(max-width:800px){.edition-market .search-bar{position:static}.card-nav{opacity:1;width:40px;height:40px;margin-top:-20px}.card-dots{display:none}}
+.listing-bar{display:none}
+@media(max-width:800px){
+ .listing-bar{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:60;align-items:center;justify-content:space-between;gap:16px;padding:10px 20px;padding-bottom:calc(10px + env(safe-area-inset-bottom,0px));background:var(--paper);border-top:1px solid var(--line);box-shadow:0 -8px 22px -16px rgba(28,36,24,.55)}
+ .listing-bar-facts{display:flex;flex-direction:column;min-width:0}
+ .listing-bar-price{font-size:15px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+ .listing-bar-title{font-size:11px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+ .listing-bar .btn{min-height:44px;white-space:nowrap;flex-shrink:0}
+ .listing-bar{transition:transform .28s ease,opacity .28s ease}
+ .listing-bar.is-tucked{transform:translateY(110%);opacity:0;pointer-events:none}
+ body.edition-property{padding-bottom:74px}
+ /* 2. Results above the fold: the sector is already in the nav and in the heading, so the
+    in-bar switch is a third copy, and the eyebrow labels a page the heading already names. */
+ .edition-market .page-top{padding-top:20px;padding-bottom:0}
+ .edition-market .page-top .eyebrow{display:none}
+ .edition-market .page-top h1{font-size:30px}
+ .edition-market .search-bar .switch{display:none}
+ /* 3. Filters stay reachable while scrolling, which is where a phone needs them most. */
+ .edition-market .search-bar{position:sticky;top:var(--header-h,72px);z-index:30;padding:12px 0}
+}

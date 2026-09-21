@@ -129,6 +129,16 @@ export function mountExperience() {
   document.body.classList.toggle('edition-front',location.pathname==='/');
   document.body.classList.toggle('edition-market',location.pathname==='/properties');
   document.body.classList.toggle('edition-property',location.pathname.startsWith('/properties/'));
+  // The phone enquiry bar repeats the price that sits at the top of a listing, so it tucks away
+  // while that price is on screen and slides back once it has scrolled past. It defaults to
+  // visible in CSS and is only ever tucked by script, so a failed observer leaves it usable.
+  const enquiryBar = document.querySelector('.listing-bar');
+  const priceLine = document.querySelector('.detail-top .price');
+  if (enquiryBar && priceLine) {
+    const tuck = new IntersectionObserver(([entry]) => enquiryBar.classList.toggle('is-tucked', entry.isIntersecting));
+    tuck.observe(priceLine);
+    signal.addEventListener('abort', () => tuck.disconnect());
+  }
   // The full-viewport hero measures the sticky header so it fills exactly what's left of the first screen.
   const setHeaderHeight=()=>document.documentElement.style.setProperty('--header-h',`${header.offsetHeight}px`);
   setHeaderHeight();
