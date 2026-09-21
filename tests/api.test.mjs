@@ -84,6 +84,33 @@ test('listing cards receive every photograph they carry, for the card carousel',
   assert.equal(hotel.media.length,6);
   assert.ok(hotel.media.every(m=>m.url&&m.alt),'every card photograph needs alternative text');});
 
+test('every listing image says where the picture came from',async t=>{const{visitor}=await fixture(t);
+  const list=(await visitor('/properties?sector=all')).data.properties;
+  const detail=(await visitor('/properties/grand-blue-hotel-thailand')).data.property;
+  let checked=0;
+  for(const p of [...list,detail]){assert.ok(p.media.length>0,p.slug+' has no imagery');
+    for(const m of p.media){checked++;
+      assert.ok(m.alt&&m.alt.length>10,`${p.slug}: alt text is missing or too short`);
+      const want=p.is_demo?'Generated concept image.':'Photograph supplied by the property.';
+      assert.ok(m.alt.includes(want),`${p.slug}: alt text must state its source, got ${JSON.stringify(m.alt)}`);
+      // A real photograph must never be described as generated, or the other way round.
+      const wrong=p.is_demo?'Photograph supplied by the property.':'Generated concept image.';
+      assert.ok(!m.alt.includes(wrong),`${p.slug}: alt text claims the wrong source`);}}
+  assert.ok(checked>=13,'expected every seeded image to be checked');});
+
+test('the source sentence is added once, however many times the app starts',{skip:!!remote},async()=>{
+  const path=join(tmpdir(),'porli-alt-'+randomUUID()+'.sqlite');
+  try{
+    let app=createApp({dbPath:path,demo:false,seed:true});
+    const first=JSON.parse(app.db.prepare("SELECT media FROM properties WHERE id='grand-blue-hotel'").get().media);
+    app.db.close();
+    app=createApp({dbPath:path,demo:false,seed:true});
+    const second=JSON.parse(app.db.prepare("SELECT media FROM properties WHERE id='grand-blue-hotel'").get().media);
+    app.db.close();
+    assert.deepEqual(second,first,'a second start must not append the sentence again');
+    assert.equal(second[0].alt.split('Photograph supplied by the property.').length-1,1);
+  } finally { rmSync(path,{force:true}); rmSync(path+'-wal',{force:true}); rmSync(path+'-shm',{force:true}); }});
+
 test('legacy rent rows migrate to buy on every start, idempotently',{skip:!!remote},async()=>{
   const path=join(tmpdir(),'porli-test-'+randomUUID()+'.sqlite');
   try{

@@ -1,5 +1,5 @@
 {
-  "notice": "All images are fictional architectural studies generated through Higgsfield. Never use as photographs of actual listings.",
+  "notice": "This register covers every image in public/assets/. It holds two different kinds and the \"fictional\" flag on each entry tells them apart. fictional: true are architectural studies generated through Higgsfield for the concept; never present one as a photograph of an actual listing. fictional: false are real photographs of a real property, supplied by it, and carry their source and rights position. Alt text must state which kind an image is: \"Generated concept image.\" or \"Photograph supplied by the property.\" (docs/23 section 6).",
   "assets": [
     {
       "file": "public/assets/courtyard.webp",
@@ -78,7 +78,7 @@
       "purpose": "GrandBlue Resort & Beachclub headline listing (cover)",
       "provider": "grandbluethailand.com",
       "source": "Photographs published on grandbluethailand.com (gallery), supplied by the property; resized to 1536×1032 WebP.",
-      "rights": "Use authorised by the client as the listing owner. Written confirmation from the property to be filed before public launch.",
+      "rights": "Use authorised by the client as the listing owner. Written confirmation from the property is still outstanding. The listing has been publicly reachable since it was first deployed, and was given greater prominence on 21 September 2026 (docs/24), so this is owed now rather than before a future launch.",
       "date": "2026-09-17",
       "reference": null,
       "fictional": false
@@ -88,7 +88,7 @@
       "purpose": "GrandBlue Resort & Beachclub headline listing",
       "provider": "grandbluethailand.com",
       "source": "Photographs published on grandbluethailand.com (gallery), supplied by the property; resized to 1536×1032 WebP.",
-      "rights": "Use authorised by the client as the listing owner. Written confirmation from the property to be filed before public launch.",
+      "rights": "Use authorised by the client as the listing owner. Written confirmation from the property is still outstanding. The listing has been publicly reachable since it was first deployed, and was given greater prominence on 21 September 2026 (docs/24), so this is owed now rather than before a future launch.",
       "date": "2026-09-17",
       "reference": null,
       "fictional": false
@@ -98,7 +98,7 @@
       "purpose": "GrandBlue Resort & Beachclub headline listing",
       "provider": "grandbluethailand.com",
       "source": "Photographs published on grandbluethailand.com (gallery), supplied by the property; resized to 1536×1032 WebP.",
-      "rights": "Use authorised by the client as the listing owner. Written confirmation from the property to be filed before public launch.",
+      "rights": "Use authorised by the client as the listing owner. Written confirmation from the property is still outstanding. The listing has been publicly reachable since it was first deployed, and was given greater prominence on 21 September 2026 (docs/24), so this is owed now rather than before a future launch.",
       "date": "2026-09-17",
       "reference": null,
       "fictional": false
@@ -108,7 +108,7 @@
       "purpose": "GrandBlue Resort & Beachclub headline listing",
       "provider": "grandbluethailand.com",
       "source": "Photographs published on grandbluethailand.com (gallery), supplied by the property; resized to 1536×1032 WebP.",
-      "rights": "Use authorised by the client as the listing owner. Written confirmation from the property to be filed before public launch.",
+      "rights": "Use authorised by the client as the listing owner. Written confirmation from the property is still outstanding. The listing has been publicly reachable since it was first deployed, and was given greater prominence on 21 September 2026 (docs/24), so this is owed now rather than before a future launch.",
       "date": "2026-09-17",
       "reference": null,
       "fictional": false
@@ -118,7 +118,7 @@
       "purpose": "GrandBlue Resort & Beachclub headline listing",
       "provider": "grandbluethailand.com",
       "source": "Photographs published on grandbluethailand.com (gallery), supplied by the property; resized to 1536×1032 WebP.",
-      "rights": "Use authorised by the client as the listing owner. Written confirmation from the property to be filed before public launch.",
+      "rights": "Use authorised by the client as the listing owner. Written confirmation from the property is still outstanding. The listing has been publicly reachable since it was first deployed, and was given greater prominence on 21 September 2026 (docs/24), so this is owed now rather than before a future launch.",
       "date": "2026-09-17",
       "reference": null,
       "fictional": false
@@ -128,7 +128,7 @@
       "purpose": "GrandBlue Resort & Beachclub headline listing",
       "provider": "grandbluethailand.com",
       "source": "Photographs published on grandbluethailand.com (gallery), supplied by the property; resized to 1536×1032 WebP.",
-      "rights": "Use authorised by the client as the listing owner. Written confirmation from the property to be filed before public launch.",
+      "rights": "Use authorised by the client as the listing owner. Written confirmation from the property is still outstanding. The listing has been publicly reachable since it was first deployed, and was given greater prominence on 21 September 2026 (docs/24), so this is owed now rather than before a future launch.",
       "date": "2026-09-17",
       "reference": null,
       "fictional": false
