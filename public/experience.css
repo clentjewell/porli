@@ -554,6 +554,9 @@ h1,h2,h3{font-family:var(--serif);font-weight:500;letter-spacing:-.012em;line-he
    the footer wordmark and the sign-off, which are the same name. */
 .wordmark,.footer-sign{font-weight:400;letter-spacing:-.02em}
 .wordmark b,.footer-sign b{font-weight:750}
+/* The footer opens on the mark alone, larger, with the name left to the sign-off below it
+   (docs/46). The link keeps its accessible name. */
+.footer-top .footer-logo{font-size:52px}
 .brand-mark .mark-a{fill:var(--olive)}
 .brand-mark .mark-b{fill:var(--accent)}
 #footer .brand-mark .mark-a{fill:#fff}
