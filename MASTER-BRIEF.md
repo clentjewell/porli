@@ -3645,3 +3645,9 @@ Clent asked for "Common questions" on How it works to sit in the middle. The acc
 900px width but is now centred in the measure, and its eyebrow and heading are centred above
 it. Measured: equal 270px margins either side at 1440px, 62px at 1024px, the gutter at 390px;
 heading likewise; no overflow. Walk 60 clean.
+
+## Addendum, same day: one question fewer
+
+Clent asked for "Are the properties real?" to be removed from the questions. Done; six remain.
+The fictional-listing disclosure does not depend on it: the header strip on every page, the
+label on every fictional card and page, and the terms page all still carry it (docs/27, docs/38).
