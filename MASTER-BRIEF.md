@@ -500,6 +500,45 @@ Validate whether consumers value the presentation and response workflow, and whe
 | D007 | Open | Launch country, currency and region | Fixture defaults do not settle this |
 | D008 | Confirmed | Node.js/SQLite implementation (docs/13); hosting on Cloudflare Workers with static assets and a SQLite Durable Object (docs/17) | User asked to connect the repository to Cloudflare; Pages cannot run the database-backed server, so the Workers successor platform is used |
 | D009 | Open | Commercial model and brand availability | Not investigated or approved |
+| D052 | Proposed | Twelve openly licensed photographs of real Thai places (Rayong coast, Phuket Town shophouses, Bangkok canal houses) from Wikimedia Commons are the first sourced imagery, in section 07 of the brand identity document and the asset register with photographer, source and licence (docs/57). Destination and mood use only, never a listing photograph. Chosen after Clent said the site is a Thailand website, not Australian; no generated set because Higgsfield holds under one credit | Clent, 22 September 2026 |
+| D051 | Confirmed | The brand site becomes the full brand identity document in Jewell's fourteen-section format, every item marked confirmed, proposed or to be confirmed, with a PDF (docs/56). Taken from the Ultimate Labs document's structure and marking, not its look. The live tokens are the colour standard; docs/03 is to be reconciled (register B-08) | Clent, 22 September 2026 |
+| D050 | Confirmed | The team workspace takes four things from the Car Marketplace dealer console (docs/55): a signed-in line and an Add a property button in the sidebar, contact pages per person, a site guide, and an administrator reset-password under Team access. Not taken: an AI assistant, a sell-to-us pipeline and finance enquiries, each a product or service decision for Clent; saved homes stay private to the customer | Clent, 22 September 2026 |
+| D049 | Confirmed | The brand page leaves the website and becomes its own static site on Cloudflare, `realdistrict-brand`, built from `brand/` in this repository (docs/54). The `/brand` route, footer link and brand styles are removed from the marketplace | Clent, 22 September 2026 |
+| D048 | Confirmed | The footer sign-off is centred and sized from the page measure (97.5% fill, capped at 236px) instead of a fixed cap that the lighter "Real" had left short and left-aligned; the rule above the copyright line runs edge to edge in a quiet tone, as on the Domira reference; the questions block on How it works is centred (docs/53) | Clent, 22 September 2026 |
+| D047 | Confirmed | A first-run setup on `/team` creates the first administrator while a host has no team account, then closes for good; the docs/17 secrets route remains (docs/52). Every account can change its own password, ending its other sessions. Built because the live host had no team account and the secrets could not be written from this session. The setup window on a fresh host is stated and accepted; password recovery is still open | Clent, 22 September 2026 |
+| D046 | Confirmed | The team workspace gets a door of its own at `/team` (docs/51), reached from the footer as "Team login" and from any signed-out `/admin` address: a staff sign-in page with no sign-up, on the existing login endpoint. A customer who signs in there is sent to their own account rather than refused. Taken from the "Dealer login" in a reference footer Clent sent; the reference's backend itself was behind a preview password and was not seen. The first live team account still comes from the two Worker secrets in docs/17 | Clent, 22 September 2026 |
+| D045 | Confirmed | On How it works the section rules go, "Reading a listing" goes (two of its items fold into the questions) and the questions become a native accordion in the format Clent chose (docs/50), superseding the open-answers argument in docs/48. A shorthand padding that had pulled every section on How it works and the brand page out of the page gutter since docs/47 is fixed | Clent, 22 September 2026 |
+| D044 | Confirmed | The Find, Ask, Visit steps on How it works become stacked sticky cards with a fact pill and a screenshot of the real screen each (docs/49), taken as a device from a reference Clent sent. The stack is on only where a whole card fits (801px wide, 700px tall) and off under reduced motion. Checked by Clent from the branch before it went live | Clent, 22 September 2026 |
+| D043 | Confirmed | "How it works" rewritten to the customer (docs/48): an opener with a labelled fictional photograph, three sections — Find, Ask, Visit — with practical points, the four account pages as linked cards, the badge meanings and six common questions that carry the concept disclosures in plain answers. The system-facing sections from docs/47 are gone | Clent, 22 September 2026 |
+| D042 | Confirmed | Two informational pages added to the site (docs/47): `/brand`, the identity as built, with the mark, wordmark, colour tokens and measured contrast, type, voice and downloads, ending on the statement that the name is unchecked (D009); and `/how-it-works`, replacing the three-paragraph about page with the buyer's steps, the team's role, the meaning of listing labels and the concept disclosures. `/about` resolves to it. Both are routes on the existing Worker, not a separate Cloudflare Pages project | Clent, 22 September 2026 |
+| D041 | Confirmed | The footer opens on the mark alone at 44px, the name left to the sign-off and the copyright line (docs/46). The favicon link carries a version query so browsers holding the old icon refetch it | Clent, 22 September 2026 |
+| D040 | Confirmed | The wordmark is set as Clent's artwork sets it (docs/45): "Real" at text weight, "District" bold, in the one sans, tracked at -0.02em. The rule covers the header, the footer wordmark and the sign-off. The artwork's geometric typeface was not taken: one typeface and no third-party fonts are guardrails, so adopting it would be a separate decision with a licensed file to self-host | Clent, 22 September 2026 |
+| D039 | Confirmed | The logomark is replaced with Clent's parcel mark (docs/44), superseding D038: four blocks on a square with the right column rounded, two olive and two pale, traced from artwork he supplied. Two shapes with fills set by class rather than one masked shape; the site's own colour tokens on paper, white and mid green on the footer. Placement and the phone-header concessions from docs/42 stand. D009 still open | Clent, 22 September 2026 |
+| D038 | Confirmed | The logomark is redrawn to artwork Clent supplied (docs/43), superseding the drawing in D037: the R's stem is the D's own left edge, the channel is the bowl stroke and the leg, the counter stays solid. Traced from a raster, so a vector original from Clent should replace the source file when one exists. Placement, the mask approach and the phone-header concessions from docs/42 stand. D009 still open | Clent, 22 September 2026 |
+| D037 | Confirmed | RealDistrict has a logomark (docs/42): a D with the R cut through it as one continuous channel, chosen by Clent from four stroked variants after five earlier rounds were rejected for reading as B, P or nothing at small sizes. The channel is a mask, so the mark works on any ground in one file; it sits before the name in the header and footer and replaces the placeholder p as the favicon. Three small phone-header concessions absorb its width. Drawn in-house as SVG; D009 (brand availability) is still open | Clent, 22 September 2026 |
+| D036 | Confirmed | Row rules removed from listing pages — the details table, the documents list and the divider above similar properties (docs/41). Measuring for them found the details table repeating the overview tiles row for row on both commercial listings, a defect introduced by the overview grid; the table now drops any row the tiles already show and hides when nothing is left. Checked against the data, not the rendering: nothing is lost | Clent, 22 September 2026 |
+| D035 | Confirmed | The footer becomes a deep olive panel ending on the name set large and fading into the ground (docs/40), from a reference footer Clent sent. Its address, telephone, email, "chat with an expert" card, newsletter signup and five social icons were refused: the contact page states in plain words that no telephone, email service or office exists, so they would contradict the site's own page or link to nothing. Contrast re-measured against the inverted panel; every footer colour passes AA | Clent, 22 September 2026 |
+| D034 | Confirmed | Feature page hairlines removed and "Also with RealDistrict" rebuilt as an explore list — five property rows beside one photograph that follows the pointer or the focus (docs/39), from a category list Clent sent. Rows are links first, so touch and script-free both work. Listing pages gain an overview grid of icon tiles built only from fields the listing carries, and ticked feature columns, from the reference listing page. Its loan calculator, reviews, comments and agent card were refused as manufactured credibility; the enquiry card is untouched at Clent's instruction | Clent, 21 September 2026 |
+| D033 | Confirmed | The product is renamed from Porli to RealDistrict (docs/38), superseding D001. Every user-visible string changed, with an idempotent migration for prose already stored in the live database and for the bootstrap administrator's display name. The address, the repository, the package, file and function names and the dated change records keep the old name on purpose. D009 (brand availability) is untouched: nobody has checked whether RealDistrict is available as a company name, domain or trade mark. Two regressions the longer name caused were fixed: the header overflowed small phones, and the staff workspace overflowed at 390px because the account button printed the brand as the user's name | Clent, 21 September 2026 |
+| D032 | Confirmed | "What Porli does" rebuilt as a full-bleed photograph beside a tinted panel with the three steps as white cards (docs/37), from the marketplace template's benefits section. Porli's palette, display face and numbered sequence kept: the reference's three cards are unverifiable claims about an agency, where Porli's are things the site does. The commercial block's photograph moved to the other side so the page alternates. Two defects fixed: the heading concatenated at phone width where a media query hid its line breaks, and the step number and icon floated against the text. The step icons were then removed at Clent's direction: they repeated the heading beside them, and the reference's cards carry none | Clent, 21 September 2026 |
+| D031 | Confirmed | Recently viewed removed from the homepage (docs/36). Measured as a returning visitor, four of six listings rendered twice on one page: the strip can only repeat the grid below it at this catalogue size. Nothing replaces it, since any strip of listing cards has the same problem. View history is no longer recorded either, because the line disclosing that it was recorded lived in the strip. Code and CSS parked with a restore note, and a card-height defect the strip exposed fixed in passing | Clent, 21 September 2026 |
+| D030 | Confirmed | Available properties becomes a showcase grid (docs/35): photographs three across then two wider, with each card's detail panel revealed on hover. Hidden only inside a fine-pointer media query, so touch and narrow screens keep the docs/34 card; revealed on focus as well as hover; always in the document for screen readers; and a "Fictional" badge added to the photograph so honest labelling never depends on a hover. A homepage variant only — search results keep the comparable card | Clent, 21 September 2026 |
+| D029 | Confirmed | Property card rebuilt as a panel (docs/34), from the card in the marketplace template Clent sent: locality on the photograph, name-led body, price in a right-aligned footer slot. Two shipped defects fixed on the way — every commercial fact carried the same map pin, and the fact limit was ignored outside land listings, which is why commercial cards were two rows taller. Facts capped at three with tenancy ahead of car spaces; sale-method line, photo dots and the duplicate "Price on request" badge removed. The template's agent row was not taken: Porli has one team, not named agents | Clent, 21 September 2026 |
+| D028 | Confirmed | Homepage redesigned (docs/33) from the reference sites Clent sent: the headline listing lifts 150px into the hero on its own panel, the values strip and the account strip fold into the service block they repeated, and the grid becomes every available listing with in-place type filter pills. Eight modules to five. Cards now lead with the property name rather than the price, which touches the hierarchy question docs/28 reserved and is reversible in one rule. A live phone bug was fixed on the way: the hero search field rendered 260px tall because a row flex-basis became a height in the phone's column layout | Clent, 21 September 2026 |
+| D027 | Confirmed | Feature page second pass (docs/32): a sticky in-page jump bar, short captions on the plate photographs backed by a new optional media caption field and an idempotent migration, and a label plate overlapping each row's photograph. Taken as structure from a single-development landing page Clent sent, never its look. Its build-stage tracker, statistics band, testimonial, email capture and logo strip were rejected as claims with nothing behind them; its room comparison table is held until GrandBlue's room counts and areas are confirmed | Clent, 21 September 2026 |
+| D026 | Confirmed | The editorial format (docs/31) is kept as a property feature page at /feature/<slug>, not as the homepage. It was trialled at /editorial as an alternative front page; Clent's decision was to keep it as a GrandBlue feature, which also avoids giving a property marketplace a front page with no search bar. Linked from the homepage headline listing and the listing's Why block, and only when the listing has a why text | Clent, 21 September 2026 |
+| D025 | Confirmed | Self-hosted EB Garamond (SIL OFL 1.1) becomes the display face, and the hero search promotes property type and bedrooms out of the Filters panel; hero parallax and slower reveals added (docs/30). Narrows the one-typeface rule in docs/23 section 3, which had been implemented invisibly as --serif:var(--sans) in experience.css, so the site had no display face at all | Clent, 21 September 2026 |
+| D024 | Confirmed | Recently viewed gets its own four-column track (docs/26) so a fourth card no longer strands itself on a second row. Every length from one to four checked at three widths | Clent, 21 September 2026 |
+| D023 | Confirmed | Hero and headline-listing zooms gain a coupled rotation (docs/29), matching the drift measured on the reference template. Its implementation was not copied: the template is JavaScript-driven and ignores prefers-reduced-motion, where Porli's is CSS and switches off | Clent, 21 September 2026 |
+| D022 | Confirmed | Surfaces softened to a 10px radius scale and the three most-used filters moved onto the search bar as pills, matching the reference portal (docs/29). Taken from an interior-design template's design qualities at Clent's request, with no colour change; its palette proved to be within a few points of Porli's already. Headings still fall back to Georgia because --serif has no font file | Clent, 21 September 2026 |
+| D021 | Confirmed | Mobile design pass (docs/28): sticky enquiry bar on phone listing pages, search results raised from 500px to 368px by removing duplicated furniture, filter bar made sticky on phones, and tap targets raised to the 40px floor. Desktop unchanged; the type scale and card hierarchy deferred | Clent, 21 September 2026 |
+| D020 | Confirmed | Visible photograph credits and "concept" wording removed from the interface so the site reads as Porli's live shopfront (docs/27). Attribution stays in every image's alt text and in design/asset-register.json; all fictional labelling is unchanged. Narrows the credit wording specified in docs/23 section 3 | Clent, 21 September 2026 |
+| D019 | Confirmed | Imagery pass (docs/27): every listing image's alt text now states its source, applied idempotently on start so the live database is corrected too; the asset register's notice, which claimed all images were generated, and its expired rights note are corrected. No new imagery sourced: more GrandBlue photographs wait on the unsigned written permission, and re-crops of the generated assets were judged padding rather than information | Handover brief docs/23 section 6, 21 September 2026 |
+| D018 | Confirmed | Homepage gains destination profiles (listing count and lowest price, counted from the live catalogue) and a recently viewed strip (local storage only, no account), placed below the headline listing so GrandBlue still leads (docs/26). The "sold and under offer" proof strip is deliberately not built: nothing has sold, and a proof strip with nothing behind it would breach honest labelling | Handover brief docs/23, 21 September 2026 |
+| D017 | Confirmed | Search sort made explicit (docs/25): "Featured" is a named, selectable sort and the default, replacing a hidden reorder of the default view; any other sort turns it off. The results heading now describes the search rather than naming a fixed category. Both were taken from archived copies of realestate.com.au read through the Internet Archive, the live site being unreachable | Reference check, 21 September 2026 |
+| D016 | Confirmed | Search results borrow more of the reference hierarchy (docs/25): a featured real listing leads the default sort only, badges capped at two, sticky filter bar, card photo carousels, and clear under-offer and sold states. Map and list toggle not built: one geocoded listing makes a map worse than none | Handover brief docs/23, 21 September 2026 |
+| D015 | Confirmed | GrandBlue listing page rebuilt for the handover (docs/24): "Why GrandBlue" sourced from the property's own site, grouped features, floor plan and information memorandum slots, real inspection times, same-sector similar properties, and the price label stated once. New `why`, `feature_groups` and `documents` columns | Handover brief docs/23, 21 September 2026 |
+| D014 | Confirmed | Homepage rebuilt to the supplied mockup with site-wide motion (docs/22): carousel, sector toggle, value strip, featured destinations, scroll reveals; all motion transform/opacity only with reduced-motion fallbacks and no CSP change | User request, 18 September 2026 |
 | D013 | Open | Plan on a page V01 (docs/21) proposes the north star "one real property sold through Porli" and asks four answers by Fri 25 Sept 2026: commercial or residential; who trades as Porli; photograph permission for GrandBlue; whether to clear the name | Jewell plan pack, 18 Sept 2026; proposed, not agreed |
 | D012 | Confirmed | Listing pages carry address, click-to-load Google map, navigation links and travel notes (docs/20); the CSP allows Google frames only | User request |
 | D011 | Confirmed | Sale only: renting removed; residential and commercial sectors with commercial conventions from realcommercial.com.au (docs/19) | User direction |
@@ -518,8 +557,6 @@ Approved by/source:
 Documents affected:
 
 Later explicit user decisions supersede proposals. Record changes and update source documents plus MASTER-BRIEF.md.
-
----
 
 <!-- Source: 13-implementation.md -->
 
@@ -3822,3 +3859,91 @@ served at `/realdistrict-brand-identity.pdf`.
 - **Applications are screenshots of today.** They go stale silently when a screen changes; the
   register entries say to retake them.
 - **No design-system diagram** for clear space; the rule is in words.
+
+<!-- Source: 57-sourced-imagery.md -->
+# Sourced imagery for RealDistrict: a Thai set
+
+22 September 2026, after docs/56. Clent asked for images RealDistrict could use for photography
+or imagery, through Higgsfield or any other tool, and then corrected the direction: not
+Australian homes, this is a Thailand website. This record is the result: twelve openly licensed
+photographs of real Thai places, in section 07 of the brand identity document and in the asset
+register, proposed for sign-off. Nothing on the marketplace itself changes.
+
+## Why not generated
+
+The Higgsfield account holds 0.98 credits; one 1k image on the model the concept used costs one
+credit. One street scene was generated before the correction, of an Australian suburb, and was
+discarded unregistered. A generated Thai set of eight to ten images would need credits topped up,
+which is a purchase and Clent's call. The docs/23 brief lists openly licensed photography as the
+next option for destination and mood imagery, so that is what was done.
+
+## What was searched
+
+Wikimedia Commons, by category, with a named research user agent and paced for the API's rate
+limits: Rayong Province, Beaches of Rayong, Houses in Thailand, Shophouses in Thailand, Streets
+in Bangkok and Residential buildings in Thailand. Filter: Creative Commons attribution licences
+(CC0, BY or BY-SA), at least 1600 × 1000, landscape, taken 2008 or later, JPEG. 141 candidates
+were reviewed on contact sheets. Most Bangkok street photographs are traffic and signage, off the
+art direction; the coast, the shophouses and the canal-side houses are what survived.
+
+## The twelve
+
+| File (`brand/public/img/library/`) | Place | Photographer, year | Licence |
+|---|---|---|---|
+| rayong-laem-mae-phim-beach | Laem Mae Phim Beach, Rayong | Vee Satayamas, 2026 | CC BY 4.0 |
+| rayong-laem-mae-phim-calm-sea | Laem Mae Phim, Rayong | Thaweesak Churasri, 2011 | CC BY 3.0 |
+| rayong-chakphong-shore | Chakphong, Klaeng District, Rayong | Андрей Бобровский, 2009 | CC BY 3.0 |
+| rayong-bay-boat | Rayong Province | Charin ninsu, 2012 | CC BY 3.0 |
+| rayong-bay-casuarina | Rayong Province | Charin ninsu, 2013 | CC BY 3.0 |
+| phuket-town-shophouses-1 | Phuket Town | Supanut Arunoprayote, 2019 | CC BY 4.0 |
+| phuket-town-shophouses-2 | Phuket Town | Supanut Arunoprayote, 2019 | CC BY 4.0 |
+| bangkok-baan-ekanak | Baan Ekanak, Bangkok | MOS ss, 2023 | CC BY-SA 4.0 |
+| bangkok-timber-house | Bangkok | Ninara, 2017 | CC BY 2.0 |
+| bangkok-canal-house-plants | Bangkok | Ninara, 2017 | CC BY 2.0 |
+| bangkok-bang-chueak-nang-canal | Bang Chueak Nang, Bangkok | Alexey Komarov, 2014 | CC BY 3.0 |
+| bangkok-khlong-bang-khun-si | Khlong Bang Khun Si, Bangkok | Ahoerstemeier, 2019 | CC BY-SA 4.0 |
+
+Chosen against the art direction in docs/03 and section 07: natural light, straight verticals,
+no sunsets, no resort staging, nobody posed. Three groups: the Rayong coast, which is where
+GrandBlue is, for destination use; Phuket Town's Sino-Portuguese shophouses for the commercial
+side; Bangkok's canal-side houses for the residential side. Two Rayong photographs are titled
+only "ก้นอ่าว" (the head of the bay) on Commons, so the place is recorded as Rayong Province
+and nothing more precise is claimed.
+
+Each original was downloaded, rotated by its EXIF, cropped to 3:2 with an attention crop and
+resized to 1536 × 1032 WebP at quality 82, the same size as the GrandBlue photographs; 2.5 MB
+together. Each has an entry in `design/asset-register.json` with photographer, source page,
+licence and licence address, `fictional: false`, and a rights line that says the credit travels
+with the image. The register's notice now covers `brand/public/img/` as well as `public/assets/`.
+
+## Rules of use
+
+- Destination and mood only: destination cards, the How it works opener, editorial bands, the
+  brand document. Never a listing's gallery, a card's cover or any place a reader could take it
+  for the property itself (docs/23 section 6).
+- A caption names the place, and the photographer, source and licence go wherever the image goes.
+  In the brand document the credit is under every picture with two links.
+- The two share-alike photographs (Baan Ekanak, Khlong Bang Khun Si) keep the same licence on any
+  edited version. Resizing is recorded in the register.
+- Alt text ends "Photograph, openly licensed." so the kind is stated, as with the two existing
+  kinds.
+
+## Verified
+
+- The brand document at 1440px and 390px: twelve figures, all loaded, all with alt text, four
+  columns then one, 20px phone gutters, no horizontal overflow, no request to any other host (the
+  credit links are links, not loads).
+- The PDF re-rendered with the library in it.
+- The marketplace is untouched: no route, asset or style on the site changes.
+
+## Open
+
+- **Sign-off.** The set is marked proposed in the document. Clent chooses which to keep, and
+  whether any goes onto the site.
+- **Locale.** The site still says AUD and Australia/Sydney (D007 open). If the site becomes a
+  Thailand site, these are the images to start the destination cards from, and the currency,
+  time zone and fictional listings all follow.
+- **A cover photograph.** Clent sent a living-room interior for the document's cover in a chat
+  attachment that did not reach the session's disk; it is not in the document. Its provenance
+  (photograph or generated) is needed for the register before it can be used.
+- **Higgsfield.** 0.98 credits remain. A generated Thai set is possible only after a top-up.
