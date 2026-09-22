@@ -757,3 +757,5 @@ h1,h2,h3{font-family:var(--serif);font-weight:500;letter-spacing:-.012em;line-he
   .team-card{padding:26px 20px 24px;border-radius:12px}
   .team-card h1{font-size:28px}
 }
+.settings-heading{font-family:var(--sans);font-size:18px;font-weight:600;letter-spacing:-.015em;margin-top:12px}
+.team-card form .small{margin:0}
