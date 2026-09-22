@@ -88,6 +88,7 @@ Original package: concept and repository starter, version 1.0, 17 September 2026
 - `docs/24-grandblue-listing-page.md`: the GrandBlue listing page rebuilt for the handover: "Why GrandBlue", grouped features, document slots, inspection times and similar properties.
 - `docs/23-handover-brief.md`: handover to Lizelle Vertera: where to work, guardrails, what to borrow from realestate.com.au, how to highlight GrandBlue, and imagery sourcing without Higgsfield.
 - `wrangler.jsonc`, `worker/`: Cloudflare Worker configuration and adapter.
+- `brand/`: the identity document as its own static site on Cloudflare (docs/54).
 - `design/tokens.json`: proposed design values; contrast must be validated in use.
 - `content/site-copy.md`: starter interface copy.
 - `data/demo-properties.json`: eight fictional properties for UI development.

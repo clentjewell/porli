@@ -576,14 +576,13 @@ h1,h2,h3{font-family:var(--serif);font-weight:500;letter-spacing:-.012em;line-he
 }
 
 /* ---------------------------------------------------------------------------
-   How it works and Brand (docs/47). Two informational pages sharing one set
-   of section rules: an eyebrow-and-heading head, step cards borrowed from the
+   How it works (docs/47; the brand page moved to its own site in docs/54). Section rules: an eyebrow-and-heading head, step cards borrowed from the
    homepage service module, and three-column notes. Swatch chips are classes
    rather than inline styles because the Content Security Policy forbids the
    style attribute.
    --------------------------------------------------------------------------- */
 .how-intro{max-width:640px;font-size:16px;line-height:1.7;margin-top:18px}
-.how-section,.brand-section{padding-top:38px;padding-bottom:46px}
+.how-section{padding-top:38px;padding-bottom:46px}
 .how-head{margin-bottom:26px}
 .how-head .eyebrow{display:block;margin-bottom:10px}
 .how-head h2{font-size:34px;letter-spacing:-.035em;line-height:1.15;max-width:640px}
@@ -593,41 +592,9 @@ h1,h2,h3{font-family:var(--serif);font-weight:500;letter-spacing:-.012em;line-he
 .how-columns h3{font-family:var(--sans);font-size:17px;font-weight:600;letter-spacing:-.015em;margin-bottom:8px}
 .how-columns p{font-size:14px;line-height:1.7}
 .how-actions{display:flex;flex-wrap:wrap;gap:14px;align-items:center;padding:40px 0 70px}
-.brand-marks,.brand-lockups{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-bottom:34px}
-.brand-tile,.brand-lockup{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;min-height:230px;border-radius:var(--radius);border:1px solid var(--line);padding:28px}
-.brand-tile span,.brand-lockup small{font-size:11px;letter-spacing:.06em;text-transform:uppercase;font-weight:600;color:var(--muted)}
-.on-paper{background:var(--paper)}
-.on-deep{background:var(--deep);border-color:var(--deep)}
-.on-deep .brand-mark .mark-a{fill:#fff}
-.on-deep .brand-mark .mark-b{fill:#8fa899}
-.on-deep span,.on-deep small{color:#b8c6ba}
-.on-deep .wordmark{color:#fff}
-.brand-tile .brand-mark{width:120px;height:120px}
-.brand-tile-icon img{width:88px;height:88px;border-radius:19px}
-.brand-lockup .wordmark{font-size:40px}
-.brand-lockup .footer-logo{font-size:64px}
-.brand-notes{margin-top:6px}
-.swatches{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:14px}
-.swatch{display:grid;gap:4px;font-size:12px;color:var(--muted)}
-.swatch strong{color:var(--ink);font-size:14px;margin-top:8px}
-.swatch code{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12px;color:var(--ink)}
-.swatch-chip{display:block;aspect-ratio:1.5;border-radius:var(--radius-sm);border:1px solid var(--line)}
-.sw-paper{background:#fcfcfa}.sw-ink{background:#202924}.sw-olive{background:#244d3e}.sw-deep{background:#173c2e}
-.sw-pale{background:#edf1eb}.sw-accent{background:#dce7dc}.sw-line{background:#dde2dc}.sw-muted{background:#657068}.sw-clay{background:#91432f}
-.brand-foot{font-size:13px;line-height:1.7;max-width:640px;margin-top:26px}
-.brand-type{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px}
-.brand-type-sample{border:1px solid var(--line);border-radius:var(--radius);padding:30px 28px}
-.type-sans-h{font-family:var(--sans);font-size:34px;font-weight:600;letter-spacing:-.035em;line-height:1.1;color:var(--ink);margin-bottom:18px}
-.type-serif-h{font-family:var(--serif);font-size:38px;font-weight:400;letter-spacing:-.04em;line-height:1.1;color:var(--ink);margin-bottom:18px}
-.type-sans{font-size:14px;line-height:1.7}
-.brand-files{display:flex;flex-wrap:wrap;gap:12px}
 @media(max-width:560px){
   .how-head h2{font-size:27px}
   .how-intro{font-size:15px}
-    .brand-lockup .wordmark{font-size:30px}
-  .brand-lockup .footer-logo{font-size:52px}
-  .brand-tile,.brand-lockup{min-height:190px}
-  .type-sans-h{font-size:28px}.type-serif-h{font-size:31px}
 }
 
 /* ---------------------------------------------------------------------------

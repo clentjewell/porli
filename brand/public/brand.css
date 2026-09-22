@@ -1,0 +1,80 @@
+/* RealDistrict brand page — a standalone copy of the site's tokens (docs/54). No inline styles,
+   no third-party fonts: the display serif is the same self-hosted EB Garamond the site uses. */
+@font-face{font-family:'Porli Serif';src:url('fonts/eb-garamond-latin.woff2') format('woff2');font-weight:400 500;font-style:normal;font-display:swap}
+:root{--paper:#fcfcfa;--ink:#202924;--olive:#244d3e;--pale:#edf1eb;--line:#dde2dc;--muted:#657068;--deep:#173c2e;--accent:#dce7dc;--clay:#91432f;--radius:10px;--radius-sm:6px;--sans:'Segoe UI Variable','Segoe UI',Arial,sans-serif;--serif:'Porli Serif',Georgia,'Times New Roman',serif}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.6 var(--sans);-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+a:focus-visible,button:focus-visible{outline:3px solid var(--clay);outline-offset:4px}
+h1,h2,h3,p{margin:0}
+h1,h2{font-family:var(--serif);font-weight:400;line-height:1.09;letter-spacing:-.045em}
+p{color:var(--muted)}
+img{display:block;max-width:100%}
+.skip-link{position:fixed;top:-100px;left:20px;background:#fff;z-index:100;padding:12px}
+.skip-link:focus{top:10px}
+.wrap{max-width:1370px;margin:auto;padding:0 48px}
+.eyebrow{font:11px/1.5 var(--sans);letter-spacing:.07em;text-transform:uppercase;font-weight:600;color:var(--olive)}
+.site-head{position:sticky;top:0;background:#fcfcfaf5;backdrop-filter:blur(12px);border-bottom:1px solid var(--line);z-index:10}
+.site-head .wrap{display:flex;align-items:center;justify-content:space-between;height:74px}
+.site-head-note{font-size:13px;color:var(--muted)}
+.wordmark{display:inline-flex;align-items:center;gap:.3em;font-family:var(--sans);font-size:32px;font-weight:400;letter-spacing:-.02em;line-height:1;color:var(--ink)}
+.wordmark b{font-weight:750}
+.brand-mark{width:.84em;height:.84em;flex-shrink:0}
+.brand-mark .mark-a{fill:var(--olive)}
+.brand-mark .mark-b{fill:var(--accent)}
+.on-deep .brand-mark .mark-a{fill:#fff}
+.on-deep .brand-mark .mark-b{fill:#8fa899}
+.page-top{padding-top:44px;padding-bottom:26px}
+.page-top .eyebrow{display:block;margin-bottom:15px}
+.page-top h1{font-size:clamp(40px,4.6vw,58px)}
+.how-intro{max-width:640px;font-size:16px;line-height:1.7;margin-top:18px}
+.brand-section{padding-top:38px;padding-bottom:46px}
+.how-head{margin-bottom:26px}
+.how-head .eyebrow{display:block;margin-bottom:10px}
+.how-head h2{font-size:34px;letter-spacing:-.035em;line-height:1.15;max-width:640px}
+.how-columns{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:32px 40px}
+.how-columns h3{font-family:var(--sans);font-size:17px;font-weight:600;letter-spacing:-.015em;margin-bottom:8px}
+.how-columns p{font-size:14px;line-height:1.7}
+.brand-marks,.brand-lockups{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-bottom:34px}
+.brand-tile,.brand-lockup{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;min-height:230px;border-radius:var(--radius);border:1px solid var(--line);padding:28px}
+.brand-tile span,.brand-lockup small{font-size:11px;letter-spacing:.06em;text-transform:uppercase;font-weight:600;color:var(--muted)}
+.on-paper{background:var(--paper)}
+.on-deep{background:var(--deep);border-color:var(--deep)}
+.on-deep span,.on-deep small{color:#b8c6ba}
+.on-deep .wordmark{color:#fff}
+.brand-tile .brand-mark{width:120px;height:120px}
+.brand-tile-icon img{width:88px;height:88px;border-radius:19px}
+.brand-lockup .wordmark{font-size:40px}
+.brand-lockup .footer-logo{font-size:64px}
+.brand-notes{margin-top:6px}
+.swatches{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:14px}
+.swatch{display:grid;gap:4px;font-size:12px;color:var(--muted)}
+.swatch strong{color:var(--ink);font-size:14px;margin-top:8px}
+.swatch code{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12px;color:var(--ink)}
+.swatch-chip{display:block;aspect-ratio:1.5;border-radius:var(--radius-sm);border:1px solid var(--line)}
+.sw-paper{background:#fcfcfa}.sw-ink{background:#202924}.sw-olive{background:#244d3e}.sw-deep{background:#173c2e}
+.sw-pale{background:#edf1eb}.sw-accent{background:#dce7dc}.sw-line{background:#dde2dc}.sw-muted{background:#657068}.sw-clay{background:#91432f}
+.brand-foot{font-size:13px;line-height:1.7;max-width:640px;margin-top:26px}
+.brand-type{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px}
+.brand-type-sample{border:1px solid var(--line);border-radius:var(--radius);padding:30px 28px}
+.type-sans-h{font-family:var(--sans);font-size:34px;font-weight:600;letter-spacing:-.035em;line-height:1.1;color:var(--ink);margin-bottom:18px}
+.type-serif-h{font-family:var(--serif);font-size:38px;font-weight:400;letter-spacing:-.04em;line-height:1.1;color:var(--ink);margin-bottom:18px}
+.type-sans{font-size:14px;line-height:1.7}
+.brand-files{display:flex;flex-wrap:wrap;gap:12px}
+.btn{display:inline-flex;justify-content:center;align-items:center;gap:14px;min-height:46px;padding:12px 20px;border-radius:4px;border:1px solid var(--line);background:transparent;color:var(--ink);font-size:13px;font-weight:600}
+.btn:hover{background:var(--pale)}
+.btn svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.site-foot{border-top:1px solid var(--line);margin-top:30px;padding:24px 0 40px;font-size:12px;color:var(--muted)}
+.site-foot .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.site-foot a{text-decoration:underline;text-underline-offset:3px}
+@media(max-width:560px){
+  .wrap{padding:0 20px}
+  .site-head .wrap{height:64px}
+  .wordmark{font-size:22px}
+  .how-head h2{font-size:27px}
+  .how-intro{font-size:15px}
+  .brand-lockup .wordmark{font-size:30px}
+  .brand-lockup .footer-logo{font-size:52px}
+  .brand-tile,.brand-lockup{min-height:190px}
+  .type-sans-h{font-size:28px}.type-serif-h{font-size:31px}
+}
