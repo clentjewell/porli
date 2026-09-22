@@ -178,6 +178,18 @@
       "prompt": null,
       "reference": "design/realdistrict-mark.svg",
       "fictional": false
+    },
+    {
+      "file": "public/assets/realdistrict-mark.svg",
+      "purpose": "Public copy of the logomark source, offered for download on /brand (docs/47)",
+      "provider": "Drawn in-house as SVG paths",
+      "model": null,
+      "variant": null,
+      "generation_id": null,
+      "date": "2026-09-22",
+      "prompt": null,
+      "reference": "design/realdistrict-mark.svg",
+      "fictional": false
     }
   ]
 }
