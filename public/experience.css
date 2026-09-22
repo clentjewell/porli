@@ -549,6 +549,11 @@ h1,h2,h3{font-family:var(--serif);font-weight:500;letter-spacing:-.012em;line-he
    --------------------------------------------------------------------------- */
 .wordmark{display:inline-flex;align-items:center;gap:.3em}
 .brand-mark{width:.84em;height:.84em;flex-shrink:0;stroke:none;stroke-width:0}
+/* The name as Clent's artwork sets it (docs/45): "Real" at text weight, "District" bold, in the
+   one sans, tracked a little less tightly than the all-bold setting was. The same rule reaches
+   the footer wordmark and the sign-off, which are the same name. */
+.wordmark,.footer-sign{font-weight:400;letter-spacing:-.02em}
+.wordmark b,.footer-sign b{font-weight:750}
 .brand-mark .mark-a{fill:var(--olive)}
 .brand-mark .mark-b{fill:var(--accent)}
 #footer .brand-mark .mark-a{fill:#fff}
