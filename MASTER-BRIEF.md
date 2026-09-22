@@ -3638,3 +3638,10 @@ every size.
 ## Verified
 
 Sign-off and rule measurements as above; 31-route walk 60 clean; tests 29 pass.
+
+## Addendum, same day: the questions centred
+
+Clent asked for "Common questions" on How it works to sit in the middle. The accordion kept its
+900px width but is now centred in the measure, and its eyebrow and heading are centred above
+it. Measured: equal 270px margins either side at 1440px, 62px at 1024px, the gutter at 390px;
+heading likewise; no overflow. Walk 60 clean.
