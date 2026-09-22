@@ -1,5 +1,8 @@
 # Sourced imagery for RealDistrict: a Thai set
 
+**Withdrawn the same day (docs/58).** Clent said the images were not right; the set was removed from
+the document, the brand site and the register. This record stands as the account of the search.
+
 22 September 2026, after docs/56. Clent asked for images RealDistrict could use for photography
 or imagery, through Higgsfield or any other tool, and then corrected the direction: not
 Australian homes, this is a Thailand website. This record is the result: twelve openly licensed
