@@ -149,6 +149,7 @@ Clear, warm and concise. “Ask about this property”, “Request an inspection
 | `/privacy`, `/terms`, `/contact` | Approved launch content | Public |
 | `/how-it-works` (`/about` resolves here) | How the marketplace works, listing labels, concept disclosures (docs/47) | Public |
 | `/brand` | The identity as built: mark, wordmark, colour, type, voice, downloads (docs/47) | Public |
+| `/team` | Team sign-in; signed-out `/admin` addresses show it (docs/51) | Public page, staff sign-in |
 
 ## Discover and enquire
 Visitor selects Buy or Rent and location on the homepage. Marketplace retains filters in the URL and supports browser back/forward. Property detail exposes essentials before long description. “Ask about this property” opens a composer. Authentication preserves the draft and returns to the property; do not put message text in URL parameters. Sending opens or resumes the existing property thread. Staff reply from the shared inbox. Customer sees the reply and its property context.
@@ -637,7 +638,7 @@ The Worker `porli` already exists in the Cloudflare account as a placeholder. Ei
 Both routes run `wrangler deploy`, which uploads the assets, applies the Durable Object migration and publishes at `https://porli.<account-subdomain>.workers.dev`. Add a custom domain from the Worker's Settings → Domains & Routes when the brand and domain decision is made.
 
 ## First administrator
-There are no demo accounts on a public host, and registration only creates customer accounts. Set two Worker secrets (Settings → Variables and Secrets, type *Secret*): `PORLI_ADMIN_EMAIL` and `PORLI_ADMIN_PASSWORD` (at least 12 characters). On the next request the application creates that administrator, or restores administrator access if the account already exists, and the team can sign in with those details to manage listings and team access. Remove the secrets afterwards if preferred; the account persists.
+There are no demo accounts on a public host, and registration only creates customer accounts. Set two Worker secrets (Settings → Variables and Secrets, type *Secret*): `PORLI_ADMIN_EMAIL` and `PORLI_ADMIN_PASSWORD` (at least 12 characters). On the next request the application creates that administrator, or restores administrator access if the account already exists, and the team can sign in with those details at `/team` (docs/51) to manage listings and team access. Remove the secrets afterwards if preferred; the account persists.
 
 ## Local verification of the Worker
 `npm run cf:dev` starts the Worker locally on port 8788 with demo mode enabled, using Wrangler through `npx`. `PORLI_TEST_BASE=http://localhost:8788 npm test` then runs the full API integration suite against the Worker; each test uses an isolated database via the demo-only `X-Porli-Database` header. Both the Node server and the Worker pass the same eleven tests, and an upload round trip (store, authorised fetch, unauthorised 404, attach to a listing) was checked manually.
@@ -3471,3 +3472,71 @@ and the sections measure at the same left edge as everything else: 83px at 1440p
 - Accordion: seven items, first open; focusing the second and pressing Enter opens it; no
   errors. Works at 1440px and 390px.
 - Left edges as above; no overflow. 30-route walk: 58 clean. Tests: 28 pass.
+
+<!-- Source: 51-team-sign-in.md -->
+
+# The team's own door
+
+22 September 2026, after docs/50. Clent sent the footer of Car Marketplace by Adam Hall, with its
+"Dealer login" link circled, and asked for a backend like it. That site is behind a private
+preview password, so what its dealer login opens could not be seen; the ask was read from the
+footer and from what RealDistrict already has.
+
+## What already existed
+
+RealDistrict has had its backend since the first commit: the team workspace at `/admin`, with an
+overview of the numbers, the property inventory and editor, the shared inbox with internal
+notes, stages and follow-ups, inspection slots and requests, contacts, site content and team
+access. Permissions are enforced on the server for every route, and registration can only make
+customer accounts. What it did not have was a door of its own: the footer said "Team workspace",
+and a signed-out visitor who followed it met the customer empty state — "Your place starts here.
+Sign in to save homes…" — and a sign-in modal that offered to create a customer account. On the
+live site, where the demo shortcuts are off, that modal was the only way in for the team.
+
+## What was built
+
+`/team`: a sign-in page for staff, one card on the page. A work email, a password, a button, and
+a line that says team accounts are created by an administrator under Team access and that
+customers sign in from any listing or from Saved. No sign-up. It posts to the same
+`/api/auth/login` every sign-in uses, with the same rate limit and the same "Email or password is
+incorrect".
+
+- A team member who signs in here lands on the workspace overview.
+- A customer who signs in here is not turned away: they are signed in, taken to their saved
+  homes, and told that this was a customer account. Someone with a valid key should never meet
+  a locked door for using the wrong one.
+- A customer already signed in who opens `/team` sees a notice with a link to their account.
+- A team member already signed in who opens `/team` goes straight to `/admin`.
+- Any signed-out `/admin` address shows the door instead of the customer empty state.
+- The footer link now reads "Team login" and points here.
+
+## What was not built
+
+A separate application. The reference's dealer backend was not visible, and building a second
+workspace beside the one that exists would be a duplicate, not an improvement. The Car
+Marketplace preview gate (a password on the whole site) was not copied either: RealDistrict's
+public side is meant to be public.
+
+## For the live site
+
+The first team account on the public host still comes from the two Worker secrets described in
+docs/17 (`PORLI_ADMIN_EMAIL`, `PORLI_ADMIN_PASSWORD`, twelve characters or more). That is Clent's
+step in the Cloudflare dashboard; nothing in the repository can set it. Once it is set, that
+person signs in at `/team` and creates the rest of the team under Team access.
+
+## What was checked
+
+At 1440px and 390px: signed out, `/admin` and `/team` both show the door with the title "Team
+sign-in"; a wrong password reads "Email or password is incorrect"; a freshly registered customer
+signing in at the door lands on `/account/saved` with the explanatory notice; that customer
+opening `/team` sees the notice with the account link; a staff member opening `/team` lands on
+"Team overview"; the footer link reads "Team login → /team". No overflow. 31-route walk: 60
+clean, the two expected not-found rows. Tests: 28 pass.
+
+## Limitations
+
+- **No password recovery**, as before (docs/38 and the account settings page say so). A team
+  member who forgets their password needs an administrator to reset it, and there is no reset
+  control yet; that is the next thing this door needs.
+- **The reference's backend was not seen.** If Clent has the preview password and wants
+  something specific from it, that is a separate look.

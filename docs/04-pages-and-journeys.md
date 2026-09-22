@@ -23,6 +23,7 @@
 | `/privacy`, `/terms`, `/contact` | Approved launch content | Public |
 | `/how-it-works` (`/about` resolves here) | How the marketplace works, listing labels, concept disclosures (docs/47) | Public |
 | `/brand` | The identity as built: mark, wordmark, colour, type, voice, downloads (docs/47) | Public |
+| `/team` | Team sign-in; signed-out `/admin` addresses show it (docs/51) | Public page, staff sign-in |
 
 ## Discover and enquire
 Visitor selects Buy or Rent and location on the homepage. Marketplace retains filters in the URL and supports browser back/forward. Property detail exposes essentials before long description. “Ask about this property” opens a composer. Authentication preserves the draft and returns to the property; do not put message text in URL parameters. Sending opens or resumes the existing property thread. Staff reply from the shared inbox. Customer sees the reply and its property context.
