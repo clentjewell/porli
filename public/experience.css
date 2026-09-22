@@ -737,3 +737,23 @@ h1,h2,h3{font-family:var(--serif);font-weight:500;letter-spacing:-.012em;line-he
   .faq-body{padding:0 18px 18px}
   .faq-body p{font-size:14px}
 }
+
+/* ---------------------------------------------------------------------------
+   Team sign-in (docs/51): one card on the page, the workspace's own door. It
+   shares the form styling every other form has; only the framing is new.
+   --------------------------------------------------------------------------- */
+.team-page{display:grid;justify-items:center;padding-top:56px;padding-bottom:90px;min-height:60vh}
+.team-card{width:100%;max-width:460px;background:#fff;border-radius:14px;padding:38px 36px 34px;box-shadow:0 22px 54px #16251d14}
+.team-card .eyebrow{margin-bottom:12px}
+.team-card h1{font-size:34px;letter-spacing:-.04em;margin-bottom:12px}
+.team-card>p{font-size:14px;line-height:1.65;margin-bottom:24px}
+.team-card form{display:grid;gap:16px}
+.team-card form .btn{width:100%;margin-top:4px}
+.team-card .notice{border-radius:var(--radius-sm);line-height:1.6}
+.team-card .notice a{text-decoration:underline;text-underline-offset:3px}
+.team-note{margin-top:18px;line-height:1.6}
+@media(max-width:560px){
+  .team-page{padding-top:28px;padding-bottom:60px}
+  .team-card{padding:26px 20px 24px;border-radius:12px}
+  .team-card h1{font-size:28px}
+}
