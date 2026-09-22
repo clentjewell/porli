@@ -154,6 +154,30 @@
       "prompt": "Editorial architectural photograph of a modest modern industrial warehouse unit on a small business estate, clean-lined concrete tilt panel walls in warm grey, a single roller door and a glazed office entry with timber-look cladding, wide sealed hardstand in front, a strip of native planting and one young gum tree, soft overcast daylight, straight verticals, natural restrained colours, warm ivory and olive tones, believable scale, no people, no trucks, no signage, no text, no logos, no CGI sheen, subtle film grain, 35mm perspective. Fictional concept property.",
       "reference": null,
       "fictional": true
+    },
+    {
+      "file": "design/realdistrict-mark.svg",
+      "purpose": "Logomark source: the D with the R cut through it (docs/42). Olive on a transparent ground; the channel is a mask, not a paint",
+      "provider": "Drawn in-house as SVG paths",
+      "model": null,
+      "variant": null,
+      "generation_id": null,
+      "date": "2026-09-22",
+      "prompt": null,
+      "reference": "Reconstructed from a brand sheet Clent sent; not a photograph and not generated imagery",
+      "fictional": false
+    },
+    {
+      "file": "public/favicon.svg",
+      "purpose": "Browser tab icon: the same mark in paper on a deep olive tile",
+      "provider": "Drawn in-house as SVG paths",
+      "model": null,
+      "variant": null,
+      "generation_id": null,
+      "date": "2026-09-22",
+      "prompt": null,
+      "reference": "design/realdistrict-mark.svg",
+      "fictional": false
     }
   ]
 }

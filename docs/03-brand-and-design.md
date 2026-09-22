@@ -4,7 +4,9 @@
 Porli / POR-lee / Find your next place.
 Porli is an invented name inspired by “porch”; it has no claimed established English meaning. Do not invent an etymology or claim exclusive rights.
 
-The wordmark should be a carefully spaced lowercase `porli`, with an optional subtle doorway detail. Readability comes first. Avoid adding a generic house-roof icon as the default identity.
+The name is RealDistrict (D033, docs/38); the paragraph above records the original working name.
+
+The wordmark is the name set in the sans, tightly tracked, with the logomark before it: a D with the R cut through it as one channel (D037, docs/42; source `design/realdistrict-mark.svg`). The channel is a mask, so the mark takes the text colour beside it and shows the ground through the cut. Readability comes first. No house-roof icon.
 
 ## Art direction
 Warm, editorial and composed. Use asymmetry at the homepage opening and consistent grids for comparisons. The property images carry the character. Restraint must not hide search or make prices difficult to scan.
