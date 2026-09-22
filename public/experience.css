@@ -540,13 +540,13 @@ h1,h2,h3{font-family:var(--serif);font-weight:500;letter-spacing:-.012em;line-he
 .more-properties{border-top:0}
 
 /* ---------------------------------------------------------------------------
-   Logomark (docs/42). The mark sits before the name in the header and footer
+   Logomark (docs/42, redrawn to Clent's artwork in docs/43). The mark sits before the name in the header and footer
    and is sized in em so every wordmark size rule above carries it along. The
    global svg rule strokes icons; the mark is a filled shape, so that is undone
-   here. The mask inside it has no stroke to inherit: it is set in the markup.
+   here. It is 61:56, a little wider than tall, hence the two em values.
    --------------------------------------------------------------------------- */
 .wordmark{display:inline-flex;align-items:center;gap:.3em}
-.brand-mark{width:.84em;height:.84em;flex-shrink:0;fill:currentColor;stroke:none;stroke-width:0}
+.brand-mark{width:.92em;height:.84em;flex-shrink:0;fill:currentColor;stroke:none;stroke-width:0}
 /* The mark adds 23px to a header that was already tight on phones (the rules above). Measured
    signed in at 390px and 360px it overflowed by 15px and 36px, so below 420px the account
    button drops its decorative icon beside the name and the wordmark tightens a little more. */

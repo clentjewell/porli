@@ -157,14 +157,14 @@
     },
     {
       "file": "design/realdistrict-mark.svg",
-      "purpose": "Logomark source: the D with the R cut through it (docs/42). Olive on a transparent ground; the channel is a mask, not a paint",
+      "purpose": "Logomark source: the D with the R cut through it (docs/43). Olive on a transparent ground; the channel is a mask, not a paint",
       "provider": "Drawn in-house as SVG paths",
       "model": null,
       "variant": null,
       "generation_id": null,
       "date": "2026-09-22",
       "prompt": null,
-      "reference": "Reconstructed from a brand sheet Clent sent; not a photograph and not generated imagery",
+      "reference": "Traced from artwork Clent sent on 22 September 2026 (kept out of the repository); not a photograph and not generated imagery",
       "fictional": false
     },
     {
