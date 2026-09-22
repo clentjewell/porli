@@ -214,6 +214,126 @@
       "prompt": null,
       "reference": "The screen it shows; retake when that screen changes",
       "fictional": true
+    },
+    {
+      "file": "brand/public/img/header.jpg",
+      "purpose": "The site header, in section 09 of the brand identity document (docs/56)",
+      "provider": "Screenshot of the running site, taken with Chromium at 1.5× scale",
+      "model": null,
+      "variant": null,
+      "generation_id": null,
+      "date": "2026-09-22",
+      "prompt": null,
+      "reference": "The screen it shows; retake when that screen changes. Fictional listings appear labelled; the GrandBlue screenshot shows the property's supplied photographs",
+      "fictional": true
+    },
+    {
+      "file": "brand/public/img/card.jpg",
+      "purpose": "A property card for a fictional listing, in section 09 of the brand identity document (docs/56)",
+      "provider": "Screenshot of the running site, taken with Chromium at 1.5× scale",
+      "model": null,
+      "variant": null,
+      "generation_id": null,
+      "date": "2026-09-22",
+      "prompt": null,
+      "reference": "The screen it shows; retake when that screen changes. Fictional listings appear labelled; the GrandBlue screenshot shows the property's supplied photographs",
+      "fictional": true
+    },
+    {
+      "file": "brand/public/img/listing.jpg",
+      "purpose": "The GrandBlue listing page, showing photographs supplied by the property, in section 09 of the brand identity document (docs/56)",
+      "provider": "Screenshot of the running site, taken with Chromium at 1.5× scale",
+      "model": null,
+      "variant": null,
+      "generation_id": null,
+      "date": "2026-09-22",
+      "prompt": null,
+      "reference": "The screen it shows; retake when that screen changes. Fictional listings appear labelled; the GrandBlue screenshot shows the property's supplied photographs",
+      "fictional": true
+    },
+    {
+      "file": "brand/public/img/search.jpg",
+      "purpose": "The search page with three fictional listings, in section 09 of the brand identity document (docs/56)",
+      "provider": "Screenshot of the running site, taken with Chromium at 1.5× scale",
+      "model": null,
+      "variant": null,
+      "generation_id": null,
+      "date": "2026-09-22",
+      "prompt": null,
+      "reference": "The screen it shows; retake when that screen changes. Fictional listings appear labelled; the GrandBlue screenshot shows the property's supplied photographs",
+      "fictional": true
+    },
+    {
+      "file": "brand/public/img/enquiry.jpg",
+      "purpose": "The enquiry form on a listing, in section 09 of the brand identity document (docs/56)",
+      "provider": "Screenshot of the running site, taken with Chromium at 1.5× scale",
+      "model": null,
+      "variant": null,
+      "generation_id": null,
+      "date": "2026-09-22",
+      "prompt": null,
+      "reference": "The screen it shows; retake when that screen changes. Fictional listings appear labelled; the GrandBlue screenshot shows the property's supplied photographs",
+      "fictional": true
+    },
+    {
+      "file": "brand/public/img/inspection.jpg",
+      "purpose": "The inspection request form, in section 09 of the brand identity document (docs/56)",
+      "provider": "Screenshot of the running site, taken with Chromium at 1.5× scale",
+      "model": null,
+      "variant": null,
+      "generation_id": null,
+      "date": "2026-09-22",
+      "prompt": null,
+      "reference": "The screen it shows; retake when that screen changes. Fictional listings appear labelled; the GrandBlue screenshot shows the property's supplied photographs",
+      "fictional": true
+    },
+    {
+      "file": "brand/public/img/how.jpg",
+      "purpose": "How it works, opener and stacked steps, in section 09 of the brand identity document (docs/56)",
+      "provider": "Screenshot of the running site, taken with Chromium at 1.5× scale",
+      "model": null,
+      "variant": null,
+      "generation_id": null,
+      "date": "2026-09-22",
+      "prompt": null,
+      "reference": "The screen it shows; retake when that screen changes. Fictional listings appear labelled; the GrandBlue screenshot shows the property's supplied photographs",
+      "fictional": true
+    },
+    {
+      "file": "brand/public/img/footer.jpg",
+      "purpose": "The footer, in section 09 of the brand identity document (docs/56)",
+      "provider": "Screenshot of the running site, taken with Chromium at 1.5× scale",
+      "model": null,
+      "variant": null,
+      "generation_id": null,
+      "date": "2026-09-22",
+      "prompt": null,
+      "reference": "The screen it shows; retake when that screen changes. Fictional listings appear labelled; the GrandBlue screenshot shows the property's supplied photographs",
+      "fictional": true
+    },
+    {
+      "file": "brand/public/img/team.jpg",
+      "purpose": "The team sign-in card, in section 09 of the brand identity document (docs/56)",
+      "provider": "Screenshot of the running site, taken with Chromium at 1.5× scale",
+      "model": null,
+      "variant": null,
+      "generation_id": null,
+      "date": "2026-09-22",
+      "prompt": null,
+      "reference": "The screen it shows; retake when that screen changes. Fictional listings appear labelled; the GrandBlue screenshot shows the property's supplied photographs",
+      "fictional": true
+    },
+    {
+      "file": "brand/public/img/workspace.jpg",
+      "purpose": "The team workspace overview, in section 09 of the brand identity document (docs/56)",
+      "provider": "Screenshot of the running site, taken with Chromium at 1.5× scale",
+      "model": null,
+      "variant": null,
+      "generation_id": null,
+      "date": "2026-09-22",
+      "prompt": null,
+      "reference": "The screen it shows; retake when that screen changes. Fictional listings appear labelled; the GrandBlue screenshot shows the property's supplied photographs",
+      "fictional": true
     }
   ]
 }
