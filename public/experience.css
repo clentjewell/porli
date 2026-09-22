@@ -527,3 +527,14 @@ h1,h2,h3{font-family:var(--serif);font-weight:500;letter-spacing:-.012em;line-he
   background:linear-gradient(180deg,#f4f8f3 18%,#17352a 96%);
   -webkit-background-clip:text;background-clip:text;color:transparent}
 @supports not (background-clip:text){.footer-sign{color:#33543f;background:none}}
+
+/* ---------------------------------------------------------------------------
+   Listing page: rules off the rows (docs/41). The details table, the documents
+   list and the divider above the similar properties were all hairlines drawn
+   between rows of the same colour. Spacing separates them instead. Component
+   edges — cards, buttons, the overview grid, the enquiry card — are untouched.
+   --------------------------------------------------------------------------- */
+.details-table th,.details-table td{border-bottom:0;padding-top:9px;padding-bottom:9px}
+.document-list{border-top:0}
+.document-row{border-bottom:0;padding:9px 0}
+.more-properties{border-top:0}
