@@ -190,6 +190,21 @@ export function mountExperience() {
   // Explore list: pointing at or tabbing to a row brings its photograph forward. Every row is a
   // link first, so the list works with the script absent and on a touch screen, where the
   // photograph simply stays on the first property. Opacity only.
+  // How it works (docs/49): the three step cards stack as the page scrolls. Each card is sticky
+  // in CSS; this only eases the card underneath back and down as the next one covers it,
+  // transform and opacity, and does nothing at all when reduced motion is asked for.
+  // A covered card is not faded with opacity — that would show the card beneath it through the
+  // one on top — but veiled with a paper overlay whose opacity rises (--veil, read by ::after).
+  // Stacking is only on when the CSS says so: wide enough and tall enough for a whole card.
+  const stackCards=[...document.querySelectorAll('.how-card')];
+  if (stackCards.length>1 && !matchMedia('(prefers-reduced-motion: reduce)').matches && getComputedStyle(stackCards[0]).position==='sticky') {
+    let ticking=false;
+    const settle=()=>{ticking=false;stackCards.forEach((card,i)=>{const next=stackCards[i+1];if(!next){card.style.transform='';card.style.removeProperty('--veil');return;}
+      const r=card.getBoundingClientRect(),n=next.getBoundingClientRect();const covered=Math.min(Math.max((r.bottom-n.top)/r.height,0),1);
+      card.style.transform=covered?`scale(${(1-covered*.05).toFixed(4)})`:'';if(covered)card.style.setProperty('--veil',(covered*.55).toFixed(3));else card.style.removeProperty('--veil');});};
+    const onScroll=()=>{if(!ticking){ticking=true;requestAnimationFrame(settle);}};
+    addEventListener('scroll',onScroll,{passive:true,signal});addEventListener('resize',onScroll,{passive:true,signal});settle();
+  }
   const exploreRows=[...document.querySelectorAll('.ed-explore-row')];
   if (exploreRows.length) {
     const shots=[...document.querySelectorAll('[data-explore-img]')];

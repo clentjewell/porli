@@ -648,10 +648,6 @@ h1,h2,h3{font-family:var(--serif);font-weight:500;letter-spacing:-.012em;line-he
 .how-hero-art{margin:0}
 .how-hero-art img{height:auto;aspect-ratio:4/3;border-radius:var(--radius)}
 .how-hero-art figcaption{font-size:11px;color:var(--muted);margin-top:10px}
-.how-big{display:grid;grid-template-columns:72px minmax(0,1.2fr) minmax(0,1fr);gap:24px 40px;align-items:start}
-.how-num{font-family:var(--serif);font-size:44px;line-height:1;color:var(--olive);letter-spacing:-.03em}
-.how-big-copy h2{font-size:38px;letter-spacing:-.04em;margin-bottom:14px}
-.how-big-copy p{font-size:16px;line-height:1.7;max-width:560px}
 .how-points{list-style:none;margin:8px 0 0;padding:0;display:grid;gap:14px;align-self:center}
 .how-points li{font-size:14px;line-height:1.65;color:var(--muted);padding-left:18px;position:relative}
 .how-points li:before{content:'';position:absolute;left:0;top:.62em;width:7px;height:7px;border-radius:50%;background:var(--olive)}
@@ -674,16 +670,54 @@ h1,h2,h3{font-family:var(--serif);font-weight:500;letter-spacing:-.012em;line-he
 .how-close .how-actions{padding:0}
 @media(max-width:800px){
   .how-hero{grid-template-columns:1fr;gap:28px;padding-top:30px}
-  .how-big{grid-template-columns:52px minmax(0,1fr)}
-  .how-points{grid-column:2}
-  .how-num{font-size:36px}
 }
 @media(max-width:560px){
   .how-hero-copy p{font-size:15px}
-  .how-big{grid-template-columns:1fr;gap:12px}
-  .how-points{grid-column:1}
-  .how-big-copy h2{font-size:30px}
-  .how-big-copy p{font-size:15px}
   .how-account{padding:38px 0 42px}
   .how-close h2{font-size:28px}
+}
+
+/* ---------------------------------------------------------------------------
+   How it works, the stacked steps (docs/49). Taken as a device from a
+   reference Clent sent: each step is one card that sticks below the header
+   while the next slides up over it. Sticky is CSS; the ease of the covered
+   card is transform and opacity from experience.js, and under reduced motion
+   the cards simply sit in a column. The faint numeral is a chapter mark
+   behind the heading, not the counter.
+   --------------------------------------------------------------------------- */
+.how-stack{display:grid;gap:26px;padding-top:12px;padding-bottom:48px}
+.how-card{position:relative;background:#fff;border:1px solid var(--line);border-radius:14px;padding:44px 48px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:48px;align-items:center;box-shadow:0 22px 54px #16251d14;transform-origin:50% 0;will-change:transform,opacity}
+/* The stack needs room for a whole card below the header, so it is on only where a card fits:
+   wide enough for two columns and at least 700px tall. Elsewhere the cards sit in a column and
+   nothing is hidden under the fold. */
+@media(min-width:801px) and (min-height:700px){
+  .how-card{position:sticky;top:calc(var(--header-h,82px) + 22px)}
+  .how-card:nth-child(2){top:calc(var(--header-h,82px) + 40px)}
+  .how-card:nth-child(3){top:calc(var(--header-h,82px) + 58px)}
+}
+.how-card:after{content:'';position:absolute;inset:-1px;border-radius:inherit;background:var(--paper);opacity:var(--veil,0);pointer-events:none;z-index:2}
+.how-card-copy{position:relative;z-index:1}
+.how-card-num{position:absolute;left:-12px;top:-40px;z-index:-1;font-family:var(--serif);font-size:128px;line-height:1;letter-spacing:-.05em;color:var(--pale);user-select:none;pointer-events:none}
+.how-card-copy h2{font-size:40px;letter-spacing:-.04em;margin-bottom:14px}
+.how-card-copy>p{font-size:16px;line-height:1.7;max-width:520px}
+.how-fact{display:inline-flex;align-items:center;gap:8px;margin:20px 0 22px;padding:7px 14px;border-radius:999px;background:var(--pale);color:var(--olive);font-size:12px;font-weight:600;letter-spacing:.01em}
+.how-fact:before{content:'';width:7px;height:7px;border-radius:50%;background:var(--olive)}
+.how-card .how-points{margin:0}
+.how-card-shot{margin:0;display:grid;justify-items:center;gap:10px}
+.how-card-shot img{width:100%;height:auto;max-height:520px;object-fit:cover;object-position:top;border-radius:10px;border:1px solid var(--line);box-shadow:0 10px 30px #16251d0f}
+.how-card-shot-form img{max-width:440px;max-height:none}
+.how-card-shot figcaption{font-size:11px;color:var(--muted);letter-spacing:.02em}
+@media(prefers-reduced-motion:reduce){.how-card{position:relative;transform:none}}
+@media(max-width:800px){
+  .how-card{grid-template-columns:1fr;gap:28px;padding:32px 28px}
+  .how-card-num{font-size:120px;top:-46px}
+  .how-card-copy h2{font-size:34px}
+}
+@media(max-width:560px){
+  .how-stack{gap:18px}
+  .how-card{padding:26px 20px 28px;border-radius:12px}
+  .how-card-num{font-size:96px;top:-36px;left:-6px}
+  .how-card-copy h2{font-size:30px}
+  .how-card-copy>p{font-size:15px}
+  .how-card-shot img{max-height:360px}
 }
