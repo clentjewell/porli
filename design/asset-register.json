@@ -190,6 +190,42 @@
       "prompt": null,
       "reference": "design/realdistrict-mark.svg",
       "fictional": false
+    },
+    {
+      "file": "public/assets/how-find.jpg",
+      "purpose": "Screenshot of the site's own search page for the Find step on /how-it-works (docs/49). Shows fictional concept listings and their generated images; not a photograph",
+      "provider": "Screenshot of the running site, taken with Chromium at 1.5× scale",
+      "model": null,
+      "variant": null,
+      "generation_id": null,
+      "date": "2026-09-22",
+      "prompt": null,
+      "reference": "The screen it shows; retake when that screen changes",
+      "fictional": true
+    },
+    {
+      "file": "public/assets/how-ask.jpg",
+      "purpose": "Screenshot of the site's own enquiry form for the Ask step on /how-it-works (docs/49)",
+      "provider": "Screenshot of the running site, taken with Chromium at 1.5× scale",
+      "model": null,
+      "variant": null,
+      "generation_id": null,
+      "date": "2026-09-22",
+      "prompt": null,
+      "reference": "The screen it shows; retake when that screen changes",
+      "fictional": true
+    },
+    {
+      "file": "public/assets/how-visit.jpg",
+      "purpose": "Screenshot of the site's own inspection request form for the Visit step on /how-it-works (docs/49)",
+      "provider": "Screenshot of the running site, taken with Chromium at 1.5× scale",
+      "model": null,
+      "variant": null,
+      "generation_id": null,
+      "date": "2026-09-22",
+      "prompt": null,
+      "reference": "The screen it shows; retake when that screen changes",
+      "fictional": true
     }
   ]
 }
