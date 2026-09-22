@@ -167,3 +167,16 @@ test('first-run setup creates the first administrator once, and passwords can be
   assert.equal((await late('/auth/login','POST',{email:'lead@example.com',password:'first-password-12'})).status,401);
   assert.equal((await late('/auth/login','POST',{email:'lead@example.com',password:'second-password-12'})).status,200);
 });
+
+test('an administrator can reset a member\'s password, ending their sessions; staff and self cannot',async t=>{
+  const{staff,admin,customer,client}=await fixture(t);
+  const staffId=(await staff('/session')).data.user.id, customerId=(await customer('/session')).data.user.id, adminId=(await admin('/session')).data.user.id;
+  assert.equal((await staff('/admin/team/password','PATCH',{id:customerId,password:'set-by-staff-12ch'})).status,403,'staff are not administrators');
+  assert.equal((await admin('/admin/team/password','PATCH',{id:adminId,password:'my-own-new-pass-12'})).status,400,'not for your own account');
+  assert.equal((await admin('/admin/team/password','PATCH',{id:staffId,password:'short'})).status,400);
+  assert.equal((await admin('/admin/team/password','PATCH',{id:'nobody',password:'a-long-enough-pass'})).status,404);
+  assert.equal((await admin('/admin/team/password','PATCH',{id:staffId,password:'reset-by-admin-12'})).status,200);
+  assert.equal((await staff('/session')).data.user,null,'the member\'s sessions ended');
+  const fresh=client();const email=(await admin('/admin/team')).data.users.find(x=>x.id===staffId).email;
+  assert.equal((await fresh('/auth/login','POST',{email,password:'reset-by-admin-12'})).status,200,'the new password signs in');
+});
