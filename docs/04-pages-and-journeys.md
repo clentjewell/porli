@@ -22,7 +22,6 @@
 | `/admin/settings` | Team and site configuration | Admin |
 | `/privacy`, `/terms`, `/contact` | Approved launch content | Public |
 | `/how-it-works` (`/about` resolves here) | How the marketplace works, listing labels, concept disclosures (docs/47) | Public |
-| `/brand` | The identity as built: mark, wordmark, colour, type, voice, downloads (docs/47) | Public |
 | `/team` | Team sign-in; signed-out `/admin` addresses show it (docs/51) | Public page, staff sign-in |
 
 ## Discover and enquire

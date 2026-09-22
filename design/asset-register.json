@@ -157,7 +157,7 @@
     },
     {
       "file": "design/realdistrict-mark.svg",
-      "purpose": "Logomark source: four blocks with the right column rounded, olive and pale olive on a transparent ground (docs/44)",
+      "purpose": "Logomark source: four blocks with the right column rounded, olive and pale olive on a transparent ground (docs/44). Published for download on the brand site, brand/public/realdistrict-mark.svg (docs/54)",
       "provider": "Drawn in-house as SVG paths",
       "model": null,
       "variant": null,
@@ -170,18 +170,6 @@
     {
       "file": "public/favicon.svg",
       "purpose": "Browser tab icon: the same mark in paper and mid-green on a deep olive tile",
-      "provider": "Drawn in-house as SVG paths",
-      "model": null,
-      "variant": null,
-      "generation_id": null,
-      "date": "2026-09-22",
-      "prompt": null,
-      "reference": "design/realdistrict-mark.svg",
-      "fictional": false
-    },
-    {
-      "file": "public/assets/realdistrict-mark.svg",
-      "purpose": "Public copy of the logomark source, offered for download on /brand (docs/47)",
       "provider": "Drawn in-house as SVG paths",
       "model": null,
       "variant": null,
