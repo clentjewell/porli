@@ -143,3 +143,27 @@ test('legacy rent rows migrate to buy on every start, idempotently',{skip:!!remo
     for(const suffix of ['','-wal','-shm'])try{rmSync(path+suffix);}catch{}
   }
 });
+
+test('first-run setup creates the first administrator once, and passwords can be changed',{skip:!!remote},async t=>{
+  const app=createApp({dbPath:':memory:',demo:false,seed:true});
+  await new Promise(resolve=>app.server.listen(0,'127.0.0.1',resolve));
+  t.after(async()=>{await new Promise(resolve=>app.server.close(resolve));app.db.close();});
+  const base='http://127.0.0.1:'+app.server.address().port;
+  const client=()=>{let cookie='';return async(path,method='GET',body)=>{const res=await fetch(base+'/api'+path,{method,headers:{'Content-Type':'application/json',Cookie:cookie},body:body===undefined?undefined:JSON.stringify(body)});const set=res.headers.get('set-cookie');if(set)cookie=set.split(';')[0];return {status:res.status,body:await res.json()};};};
+  const first=client(),second=client(),late=client();
+  assert.equal((await first('/setup')).body.needed,true,'a fresh public host has no team account');
+  assert.equal((await first('/setup','POST',{name:'Lead',email:'lead@example.com',password:'short'})).status,400);
+  const made=await first('/setup','POST',{name:'Lead',email:'lead@example.com',password:'first-password-12'});
+  assert.equal(made.status,201);assert.equal(made.body.user.role,'admin');
+  assert.equal((await late('/setup')).body.needed,false,'the door closes once an administrator exists');
+  assert.equal((await late('/setup','POST',{name:'Intruder',email:'x@example.com',password:'another-password-12'})).status,409);
+  assert.equal((await first('/admin/dashboard?days=30')).status,200,'the new administrator can use the workspace');
+  assert.equal((await second('/auth/login','POST',{email:'lead@example.com',password:'first-password-12'})).status,200);
+  assert.equal((await first('/profile/password','PATCH',{current:'wrong-password-12',next:'second-password-12'})).status,401);
+  assert.equal((await first('/profile/password','PATCH',{current:'first-password-12',next:'tiny'})).status,400);
+  assert.equal((await first('/profile/password','PATCH',{current:'first-password-12',next:'second-password-12'})).status,200);
+  assert.equal((await second('/session')).body.user,null,'other sessions end when the password changes');
+  assert.equal((await first('/session')).body.user.role,'admin','the session that changed it stays');
+  assert.equal((await late('/auth/login','POST',{email:'lead@example.com',password:'first-password-12'})).status,401);
+  assert.equal((await late('/auth/login','POST',{email:'lead@example.com',password:'second-password-12'})).status,200);
+});

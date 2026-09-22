@@ -22,6 +22,8 @@ The Worker `porli` already exists in the Cloudflare account as a placeholder. Ei
 Both routes run `wrangler deploy`, which uploads the assets, applies the Durable Object migration and publishes at `https://porli.<account-subdomain>.workers.dev`. Add a custom domain from the Worker's Settings → Domains & Routes when the brand and domain decision is made.
 
 ## First administrator
+Two routes. On a fresh host with no team account, open `/team`: it offers "Create the first administrator" once, and closes as soon as one exists (docs/52). Or set the secrets below before anyone else can reach the site.
+
 There are no demo accounts on a public host, and registration only creates customer accounts. Set two Worker secrets (Settings → Variables and Secrets, type *Secret*): `PORLI_ADMIN_EMAIL` and `PORLI_ADMIN_PASSWORD` (at least 12 characters). On the next request the application creates that administrator, or restores administrator access if the account already exists, and the team can sign in with those details at `/team` (docs/51) to manage listings and team access. Remove the secrets afterwards if preferred; the account persists.
 
 ## Local verification of the Worker
