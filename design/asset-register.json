@@ -157,7 +157,7 @@
     },
     {
       "file": "design/realdistrict-mark.svg",
-      "purpose": "Logomark source: the D with the R cut through it (docs/43). Olive on a transparent ground; the channel is a mask, not a paint",
+      "purpose": "Logomark source: four blocks with the right column rounded, olive and pale olive on a transparent ground (docs/44)",
       "provider": "Drawn in-house as SVG paths",
       "model": null,
       "variant": null,
@@ -169,7 +169,7 @@
     },
     {
       "file": "public/favicon.svg",
-      "purpose": "Browser tab icon: the same mark in paper on a deep olive tile",
+      "purpose": "Browser tab icon: the same mark in paper and mid-green on a deep olive tile",
       "provider": "Drawn in-house as SVG paths",
       "model": null,
       "variant": null,
