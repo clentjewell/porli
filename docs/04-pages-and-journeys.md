@@ -18,6 +18,8 @@
 | `/admin/conversations/:id?` | Shared inbox and follow-ups | Staff/admin |
 | `/admin/inspections` | Slots and requests | Staff/admin |
 | `/admin/contacts` | People who have enquired | Staff/admin |
+| `/admin/contacts/:id` | One person: their conversations and inspection requests (docs/55) | Staff/admin |
+| `/admin/guide` | Site guide for the team (docs/55) | Staff/admin |
 | `/admin/content` | Featured listings and approved copy fields | Admin |
 | `/admin/settings` | Team and site configuration | Admin |
 | `/privacy`, `/terms`, `/contact` | Approved launch content | Public |
