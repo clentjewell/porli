@@ -635,3 +635,55 @@ h1,h2,h3{font-family:var(--serif);font-weight:500;letter-spacing:-.012em;line-he
   .brand-tile,.brand-lockup{min-height:190px}
   .type-sans-h{font-size:28px}.type-serif-h{font-size:31px}
 }
+
+/* ---------------------------------------------------------------------------
+   How it works, second pass (docs/48): written to the customer rather than
+   about the system. Opener with a photograph, three large numbered sections,
+   an account panel on the pale ground, badges, questions and a close.
+   --------------------------------------------------------------------------- */
+.how-hero{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:56px;align-items:center;padding-top:44px;padding-bottom:40px}
+.how-hero-copy h1{font-size:clamp(40px,4.6vw,64px);margin:16px 0 22px}
+.how-hero-copy p{font-size:17px;line-height:1.7;max-width:520px}
+.how-hero-actions{display:flex;flex-wrap:wrap;gap:22px;align-items:center;margin-top:30px}
+.how-hero-art{margin:0}
+.how-hero-art img{height:auto;aspect-ratio:4/3;border-radius:var(--radius)}
+.how-hero-art figcaption{font-size:11px;color:var(--muted);margin-top:10px}
+.how-big{display:grid;grid-template-columns:72px minmax(0,1.2fr) minmax(0,1fr);gap:24px 40px;align-items:start}
+.how-num{font-family:var(--serif);font-size:44px;line-height:1;color:var(--olive);letter-spacing:-.03em}
+.how-big-copy h2{font-size:38px;letter-spacing:-.04em;margin-bottom:14px}
+.how-big-copy p{font-size:16px;line-height:1.7;max-width:560px}
+.how-points{list-style:none;margin:8px 0 0;padding:0;display:grid;gap:14px;align-self:center}
+.how-points li{font-size:14px;line-height:1.65;color:var(--muted);padding-left:18px;position:relative}
+.how-points li:before{content:'';position:absolute;left:0;top:.62em;width:7px;height:7px;border-radius:50%;background:var(--olive)}
+.how-points strong{color:var(--ink);font-weight:600}
+.how-account{background:var(--pale);padding:52px 0 58px;margin:12px 0}
+.how-account .how-head{margin-bottom:28px}
+.how-account-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+.how-account-grid a{display:block;background:#fff;border-radius:var(--radius);padding:22px 22px 24px;border:1px solid var(--line);transition:transform .2s var(--ease),box-shadow .2s var(--ease)}
+@media(hover:hover){.how-account-grid a:hover{transform:translateY(-2px);box-shadow:0 14px 32px #16251d14}.how-account-grid a:hover svg{transform:translateX(3px)}}
+.how-account-grid h3{font-family:var(--sans);font-size:17px;font-weight:600;letter-spacing:-.015em;display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.how-account-grid h3 svg{width:16px;height:16px;transition:transform .2s var(--ease)}
+.how-account-grid p{font-size:13px;line-height:1.65}
+.how-faq{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:26px 48px;margin:0}
+.how-faq>div{display:grid;gap:8px;align-content:start}
+.how-faq dt{font-size:16px;font-weight:600;letter-spacing:-.01em}
+.how-faq dd{margin:0;font-size:14px;line-height:1.7;color:var(--muted)}
+.how-faq dd a{text-decoration:underline;text-underline-offset:3px}
+.how-close{padding:44px 0 70px;border-top:1px solid var(--line)}
+.how-close h2{font-size:34px;letter-spacing:-.035em;margin-bottom:22px}
+.how-close .how-actions{padding:0}
+@media(max-width:800px){
+  .how-hero{grid-template-columns:1fr;gap:28px;padding-top:30px}
+  .how-big{grid-template-columns:52px minmax(0,1fr)}
+  .how-points{grid-column:2}
+  .how-num{font-size:36px}
+}
+@media(max-width:560px){
+  .how-hero-copy p{font-size:15px}
+  .how-big{grid-template-columns:1fr;gap:12px}
+  .how-points{grid-column:1}
+  .how-big-copy h2{font-size:30px}
+  .how-big-copy p{font-size:15px}
+  .how-account{padding:38px 0 42px}
+  .how-close h2{font-size:28px}
+}
