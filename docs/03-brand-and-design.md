@@ -6,7 +6,7 @@ Porli is an invented name inspired by “porch”; it has no claimed established
 
 The name is RealDistrict (D033, docs/38); the paragraph above records the original working name.
 
-The wordmark is the name set in the sans, tightly tracked, with the logomark before it: a D with the R cut through it as one channel (D037, docs/42; source `design/realdistrict-mark.svg`). The channel is a mask, so the mark takes the text colour beside it and shows the ground through the cut. Readability comes first. No house-roof icon.
+The wordmark is the name set in the sans, tightly tracked, with the logomark before it: a D whose left edge is the R's stem, with the bowl and leg cut through it as one channel (D037 and D038, docs/42 and docs/43; source `design/realdistrict-mark.svg`). The channel is a mask, so the mark takes the text colour beside it and shows the ground through the cut. Readability comes first. No house-roof icon.
 
 ## Art direction
 Warm, editorial and composed. Use asymmetry at the homepage opening and consistent grids for comparisons. The property images carry the character. Restraint must not hide search or make prices difficult to scan.
