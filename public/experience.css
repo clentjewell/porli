@@ -718,7 +718,9 @@ h1,h2,h3{font-family:var(--serif);font-weight:500;letter-spacing:-.012em;line-he
    readers get it for free; the answer arrives with a short fade and rise,
    opacity and transform only, and not at all under reduced motion.
    --------------------------------------------------------------------------- */
-.faq{display:grid;gap:12px;max-width:900px}
+.faq{display:grid;gap:12px;max-width:900px;margin:0 auto}
+#questions .how-head{text-align:center;max-width:900px;margin-left:auto;margin-right:auto}
+#questions .how-head h2{margin-left:auto;margin-right:auto}
 .faq-item{background:var(--pale);border-radius:14px;transition:background .2s var(--ease)}
 .faq-item[open]{background:#fff;box-shadow:0 12px 34px #16251d12}
 .faq-item summary{display:flex;align-items:center;justify-content:space-between;gap:20px;cursor:pointer;list-style:none;padding:22px 26px;font-size:18px;font-weight:600;letter-spacing:-.015em;color:var(--ink);border-radius:14px}
