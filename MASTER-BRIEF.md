@@ -496,6 +496,7 @@ Validate whether consumers value the presentation and response workflow, and whe
 | D007 | Open | Launch country, currency and region | Fixture defaults do not settle this |
 | D008 | Confirmed | Node.js/SQLite implementation (docs/13); hosting on Cloudflare Workers with static assets and a SQLite Durable Object (docs/17) | User asked to connect the repository to Cloudflare; Pages cannot run the database-backed server, so the Workers successor platform is used |
 | D009 | Open | Commercial model and brand availability | Not investigated or approved |
+| D058 | Confirmed | The homepage Available properties grid becomes a uniform grid of the standard cards with aligned footers and a closing Browse tile that fills the last row, land first (docs/63). Replaces the three-then-two showcase tiles, which only held five listings | Clent, 23 September 2026 |
 | D057 | Confirmed | Orchard Lane Subdivision uses an aerial photograph Clent supplied, as its cover and in the aerial slot (docs/62). This adds a fourth image kind, a reference photograph of a real place elsewhere supplied by the team, labelled as such at every point, with rights to be confirmed. Untouched fictional land rows now follow the fixture's pictures through one sync migration | Clent, 23 September 2026 |
 | D056 | Confirmed | Each land listing has an Aerial view and site plan section modelled on the reference page's floor-plan accordion (docs/61), with empty slots that ask for what is missing, and the workspace can fill them. The land imagery is sourced without Higgsfield: twelve openly licensed Wikimedia Commons photographs of real places elsewhere, credited at every point and labelled a licensed photograph on a fictional listing, replace the generated studies of D055; the illustrative plans return in the site-plan slot | Clent, 23 September 2026 |
 | D055 | Confirmed | The land listings carry generated concept studies (Higgsfield Soul Location, 0.12 credits each) instead of the illustrative site plans of D054, after Clent asked for photographs like the other listings (docs/60). Six images for eight listings: the development-site pair and the rural pair each share one, as the fictional homes did. A guarded migration rewrites rows that still hold a plan | Clent, 23 September 2026 |
@@ -4440,3 +4441,38 @@ replaced image always gets a new file name.
 - **Drawn boundaries.** The Saltmere Valley and Harbour Road pictures have boundaries drawn
   around real parcels. The listing pages say they show real places elsewhere, but versions
   without the outlines would be clearer.
+
+<!-- Source: 63-homepage-grid.md -->
+# The homepage property grid, cleaned up
+
+23 September 2026, after docs/62. Clent asked for the homepage "Available properties" grid to be
+cleaner and more professional. It had been built for five listings: three tiles, then two wider
+ones, each a bare picture with its details hidden until hover. With seven listings it broke into
+rows of three, two and two, with a gap at the end.
+
+## What changed
+
+- **One uniform grid.** It uses the same card as the search pages, four across on desktop, three
+  from 1150px, two from 800px and one on phones. Every card shows its picture, type, locality,
+  facts, fictional label, price or sale method, and a View property button.
+- **Aligned footers.** Each card is a column with its footer pinned to the bottom, so prices and
+  buttons line up across a row. The price sits above a full-width View property button. Commercial
+  cards now use the same footer as land cards, so the two sectors match.
+- **A closing tile.** The last cell is a pale "Every land and commercial listing" tile linking to
+  the full search. It stretches across whatever the last row leaves, so no row ends in a gap at any
+  width.
+- **Order.** Land comes first, in the order of the land types, then the commercial categories. The
+  filter pills follow the same order.
+- **Two fixes found while measuring.** The homepage search row ran a few pixels past the edge
+  between 701px and 1200px, and now wraps. A land card's price and button now wrap on a narrow card
+  instead of overflowing.
+
+## Verified
+
+Measured at 1440, 1024, 700 and 390px: equal card heights in every row, the closing tile filling the
+last row, no horizontal overflow, and the type pills still filtering. All 33 API tests pass.
+
+## Replaced
+
+The hover-reveal "showcase" card on the homepage (docs/34) is no longer used. Its styles remain for
+now and can be removed later.

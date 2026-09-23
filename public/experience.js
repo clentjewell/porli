@@ -55,7 +55,11 @@ export function homeView({ properties, state, esc, icon, money, price, card, emp
   // Everything available but the headline listing, which already has the section above it, and the
   // types actually present so a pill can never return an empty grid.
   const gridHomes = homes.filter(p => p.id !== featured?.id);
-  const gridTypes = [...new Map(gridHomes.map(p => [p.property_type, typeLabel(p)])).entries()].sort((a, b) => a[1].localeCompare(b[1]));
+  // Land first, in the order of the land types, then commercial categories A to Z (docs/63).
+  const landOrder = landTypes.map(([k]) => k);
+  const rank = p => (p.sector || 'residential') === 'land' ? landOrder.indexOf(p.property_type) : 100;
+  gridHomes.sort((a, b) => rank(a) - rank(b));
+  const gridTypes = [...new Map(gridHomes.map(p => [p.property_type, [typeLabel(p), rank(p)]])).entries()].sort((a, b) => a[1][1] - b[1][1] || a[1][0].localeCompare(b[1][0])).map(([k, [label]]) => [k, label]);
   const real = featured?.is_demo === false;
   const views = featured?.media || [];
   const defaultHeadline = state.content.headline === 'Find your next place.';
@@ -120,7 +124,7 @@ export function homeView({ properties, state, esc, icon, money, price, card, emp
         <button type="button" class="type-pill is-on" data-action="home-type" data-type="all" aria-pressed="true">All</button>
         ${gridTypes.map(([key, label]) => `<button type="button" class="type-pill" data-action="home-type" data-type="${esc(key)}" aria-pressed="false">${esc(label)}</button>`).join('')}
       </div>` : ''}
-      <div class="market-property-grid showcase-grid" data-type-grid data-filter="all" data-reveal-group>${gridHomes.length ? gridHomes.map(p => `<div data-reveal data-type="${esc(p.property_type)}">${card(p, true)}</div>`).join('') : empty('No available properties right now.', 'Check back for new listings.', '', '')}</div>
+      <div class="market-property-grid home-grid" data-type-grid data-filter="all" data-reveal-group>${gridHomes.length ? gridHomes.map(p => `<div data-reveal data-type="${esc(p.property_type)}">${card(p)}</div>`).join('') + `<a class="home-grid-all" data-reveal href="/properties?sector=land"><span class="eyebrow">Browse</span><strong>Every land and commercial listing</strong><span>Search by location, type, price and size.</span><span class="home-grid-all-arrow" aria-hidden="true">${icon('arrow')}</span></a>` : empty('No available properties right now.', 'Check back for new listings.', '', '')}</div>
       <p class="sr-only" role="status" data-type-status></p>
     </section>
     <section class="market-service" aria-labelledby="service-heading">
