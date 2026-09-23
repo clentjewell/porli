@@ -125,7 +125,7 @@ export function homeView({ properties, state, esc, icon, money, price, card, emp
     </section>
     <section class="market-service" aria-labelledby="service-heading">
       <div class="service-split">
-        <div class="service-photo"><img src="/assets/land-saltmere-valley.webp" alt="Green paddocks with a dam and a tree line. Openly licensed photograph of a real place, illustrating the concept." loading="lazy" width="1536" height="1032"></div>
+        <div class="service-photo"><img src="/assets/service-parcel-supplied.webp" alt="Farmland from the air with one parcel outlined in red, a house and sheds by the road. A reference photograph of a real place elsewhere, supplied by the team, illustrating the concept." loading="lazy" width="736" height="736"></div>
         <div class="service-panel"><div class="service-panel-inner">
           <span class="product-label" data-reveal>What RealDistrict does</span>
           <h2 id="service-heading" data-reveal>Find the property.<br>Talk to the people<br>who manage it.</h2>

@@ -614,20 +614,6 @@
       "fictional": false
     },
     {
-      "file": "public/assets/land-saltmere-valley.webp",
-      "purpose": "Homepage service photograph slot (docs/61); no longer the Saltmere Valley Acreage cover since docs/62",
-      "provider": "Wikimedia Commons",
-      "source": "File:Paddocks at Hillview.jpg (https://commons.wikimedia.org/wiki/File:Paddocks_at_Hillview.jpg), original 4608 × 3456 JPEG, cropped and resized to 1536×1032 WebP q82",
-      "photographer": "Shiftchange",
-      "year": 2014,
-      "licence": "CC0",
-      "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-      "rights": "Public domain dedication (CC0); credited anyway.",
-      "date": "2026-09-23",
-      "reference": "The listing page and the plan slot carry the credit in the image caption; the card and the page label the listing fictional and the picture licensed",
-      "fictional": false
-    },
-    {
       "file": "public/assets/land-mill-street.webp",
       "purpose": "Cover of Mill Street Corner (demo-land-02); also the explore-panel image (docs/61). An openly licensed photograph of a real place elsewhere, used to illustrate a fictional listing; never presented as the parcel itself",
       "provider": "Wikimedia Commons",
@@ -777,6 +763,16 @@
       "rights": "Not established. The watermark suggests an agency listing; Clent to confirm the source and the right to use it before any public launch",
       "date": "2026-09-23",
       "reference": "The caption under the destinations says Saltmere and Fernwick are fictional places",
+      "fictional": false
+    },
+    {
+      "file": "public/assets/service-parcel-supplied.webp",
+      "purpose": "Homepage \"What RealDistrict does\" photograph (docs/62). A real parcel elsewhere, outlined, illustrating finding a property; not tied to any listing",
+      "provider": "Supplied by Clent in the session chat, 23 September 2026 (one of the four offered for the Saltmere card)",
+      "source": "Original source not recorded; supplied as a 736 × 736 JPEG with a red boundary drawn on it, used whole",
+      "rights": "Not established. Clent to confirm the source and the right to use it before any public launch",
+      "date": "2026-09-23",
+      "reference": "Alt text says it is a reference photograph of a real place elsewhere",
       "fictional": false
     }
   ]
