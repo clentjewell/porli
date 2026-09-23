@@ -1,5 +1,5 @@
 {
-  "notice": "This register covers every image in public/assets/ and brand/public/img/. It holds two different kinds and the \"fictional\" flag on each entry tells them apart. fictional: true are architectural studies generated through Higgsfield for the concept; never present one as a photograph of an actual listing. fictional: false are real photographs of a real property, supplied by it, and carry their source and rights position. Alt text must state which kind an image is: \"Generated concept image.\" or \"Photograph supplied by the property.\" (docs/23 section 6).",
+  "notice": "This register covers every image in public/assets/ and brand/public/img/. It holds two different kinds and the \"fictional\" flag on each entry tells them apart. fictional: true are architectural studies generated through Higgsfield for the concept, or illustrative site plans drawn in code for the fictional land listings; never present one as a photograph of an actual listing. fictional: false are real photographs of a real property, supplied by it, and carry their source and rights position. Alt text must state which kind an image is: \"Generated concept image.\" or \"Photograph supplied by the property.\" (docs/23 section 6).",
   "assets": [
     {
       "file": "public/assets/courtyard.webp",
@@ -502,6 +502,102 @@
       "prompt": null,
       "reference": "public/assets/grand-blue-evening.webp",
       "fictional": false
+    },
+    {
+      "file": "public/assets/land-harbour-road.webp",
+      "purpose": "Illustrative site plan for the fictional land listing Harbour Road Development Site (demo-land-01) (docs/59). Not a survey, not an aerial photograph",
+      "provider": "Drawn in code: an SVG plan (parcel outline, neighbours, road, dimensions, north arrow, scale bar) rendered by headless Chromium and saved as 1536×1032 WebP q82",
+      "model": null,
+      "variant": null,
+      "generation_id": null,
+      "date": "2026-09-23",
+      "prompt": null,
+      "reference": "The drawing script is not in the repository; the plan is regenerated from the parcel geometry recorded in docs/59 if it is ever redrawn. Alt text ends \"Generated concept image.\" like every other fictional image",
+      "fictional": true
+    },
+    {
+      "file": "public/assets/land-mill-street.webp",
+      "purpose": "Illustrative site plan for the fictional land listing Mill Street Corner (demo-land-02) (docs/59). Not a survey, not an aerial photograph",
+      "provider": "Drawn in code: an SVG plan (parcel outline, neighbours, road, dimensions, north arrow, scale bar) rendered by headless Chromium and saved as 1536×1032 WebP q82",
+      "model": null,
+      "variant": null,
+      "generation_id": null,
+      "date": "2026-09-23",
+      "prompt": null,
+      "reference": "The drawing script is not in the repository; the plan is regenerated from the parcel geometry recorded in docs/59 if it is ever redrawn. Alt text ends \"Generated concept image.\" like every other fictional image",
+      "fictional": true
+    },
+    {
+      "file": "public/assets/land-fernwick-lot-12.webp",
+      "purpose": "Illustrative site plan for the fictional land listing Fernwick Estate, Lot 12 (demo-land-03) (docs/59). Not a survey, not an aerial photograph",
+      "provider": "Drawn in code: an SVG plan (parcel outline, neighbours, road, dimensions, north arrow, scale bar) rendered by headless Chromium and saved as 1536×1032 WebP q82",
+      "model": null,
+      "variant": null,
+      "generation_id": null,
+      "date": "2026-09-23",
+      "prompt": null,
+      "reference": "The drawing script is not in the repository; the plan is regenerated from the parcel geometry recorded in docs/59 if it is ever redrawn. Alt text ends \"Generated concept image.\" like every other fictional image",
+      "fictional": true
+    },
+    {
+      "file": "public/assets/land-elmshore-gateway.webp",
+      "purpose": "Illustrative site plan for the fictional land listing Elmshore Gateway, Lot 3 (demo-land-04) (docs/59). Not a survey, not an aerial photograph",
+      "provider": "Drawn in code: an SVG plan (parcel outline, neighbours, road, dimensions, north arrow, scale bar) rendered by headless Chromium and saved as 1536×1032 WebP q82",
+      "model": null,
+      "variant": null,
+      "generation_id": null,
+      "date": "2026-09-23",
+      "prompt": null,
+      "reference": "The drawing script is not in the repository; the plan is regenerated from the parcel geometry recorded in docs/59 if it is ever redrawn. Alt text ends \"Generated concept image.\" like every other fictional image",
+      "fictional": true
+    },
+    {
+      "file": "public/assets/land-cedar-ridge.webp",
+      "purpose": "Illustrative site plan for the fictional land listing Cedar Ridge (demo-land-05); also the explore-panel image (docs/59). Not a survey, not an aerial photograph",
+      "provider": "Drawn in code: an SVG plan (parcel outline, neighbours, road, dimensions, north arrow, scale bar) rendered by headless Chromium and saved as 1536×1032 WebP q82",
+      "model": null,
+      "variant": null,
+      "generation_id": null,
+      "date": "2026-09-23",
+      "prompt": null,
+      "reference": "The drawing script is not in the repository; the plan is regenerated from the parcel geometry recorded in docs/59 if it is ever redrawn. Alt text ends \"Generated concept image.\" like every other fictional image",
+      "fictional": true
+    },
+    {
+      "file": "public/assets/land-saltmere-valley.webp",
+      "purpose": "Illustrative site plan for the fictional land listing Saltmere Valley Acreage (demo-land-06) (docs/59). Not a survey, not an aerial photograph",
+      "provider": "Drawn in code: an SVG plan (parcel outline, neighbours, road, dimensions, north arrow, scale bar) rendered by headless Chromium and saved as 1536×1032 WebP q82",
+      "model": null,
+      "variant": null,
+      "generation_id": null,
+      "date": "2026-09-23",
+      "prompt": null,
+      "reference": "The drawing script is not in the repository; the plan is regenerated from the parcel geometry recorded in docs/59 if it is ever redrawn. Alt text ends \"Generated concept image.\" like every other fictional image",
+      "fictional": true
+    },
+    {
+      "file": "public/assets/land-orchard-lane.webp",
+      "purpose": "Illustrative site plan for the fictional land listing Orchard Lane Subdivision (demo-land-07); also the homepage service photograph slot (docs/59). Not a survey, not an aerial photograph",
+      "provider": "Drawn in code: an SVG plan (parcel outline, neighbours, road, dimensions, north arrow, scale bar) rendered by headless Chromium and saved as 1536×1032 WebP q82",
+      "model": null,
+      "variant": null,
+      "generation_id": null,
+      "date": "2026-09-23",
+      "prompt": null,
+      "reference": "The drawing script is not in the repository; the plan is regenerated from the parcel geometry recorded in docs/59 if it is ever redrawn. Alt text ends \"Generated concept image.\" like every other fictional image",
+      "fictional": true
+    },
+    {
+      "file": "public/assets/land-elmshore-heights.webp",
+      "purpose": "Illustrative site plan for the fictional land listing Elmshore Heights, Stage 2 (demo-land-08) (docs/59). Not a survey, not an aerial photograph",
+      "provider": "Drawn in code: an SVG plan (parcel outline, neighbours, road, dimensions, north arrow, scale bar) rendered by headless Chromium and saved as 1536×1032 WebP q82",
+      "model": null,
+      "variant": null,
+      "generation_id": null,
+      "date": "2026-09-23",
+      "prompt": null,
+      "reference": "The drawing script is not in the repository; the plan is regenerated from the parcel geometry recorded in docs/59 if it is ever redrawn. Alt text ends \"Generated concept image.\" like every other fictional image",
+      "fictional": true
     }
   ]
 }

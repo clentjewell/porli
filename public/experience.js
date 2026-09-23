@@ -1,7 +1,7 @@
 // Presentation and motion are isolated from the marketplace's data and workflows.
 
 const HERO_PLACEHOLDERS = {
-  residential: ['Saltmere', 'Fernwick', 'Rayong, Thailand'],
+  land: ['Saltmere', 'Fernwick', 'Elmshore'],
   commercial: ['Fernwick', 'Rayong, Thailand', 'Highstreet'],
 };
 
@@ -19,7 +19,7 @@ function wordStagger(html) {
   return html.split(/(<br\s*\/?>)/i).map(part => /^<br\s*\/?>$/i.test(part) ? part : part.split(' ').filter(Boolean).map(word => `<span class="w">${word}</span>`).join(' ')).join(' ');
 }
 
-const HERO_LINES = ['Property to invest in.', 'Places to belong.', 'Offices to grow into.', 'Land to build on.'];
+const HERO_LINES = ['Property to invest in.', 'Sites to develop.', 'Offices to grow into.', 'Acres to hold.'];
 
 // PARKED, 21 September 2026. The Recently viewed strip is not rendered and nothing is recorded:
 // with six listings it could only ever repeat the grid below it, and a site that stores what you
@@ -39,7 +39,7 @@ export function rememberViewed(id) {
     localStorage.setItem('porli-viewed', JSON.stringify([id, ...ids].slice(0, 8)));
   } catch { /* private browsing, or storage disabled: remembering is a convenience, not a feature */ }
 }
-export function homeView({ properties, state, esc, icon, money, price, card, empty, statusBadges, typeLabel, residentialTypes = [], commercialTypes = [], options = () => '' }) {
+export function homeView({ properties, state, esc, icon, money, price, card, empty, statusBadges, typeLabel, landTypes = [], commercialTypes = [], options = () => '' }) {
   const homes = properties.slice().sort((a, b) => b.featured - a.featured);
   // Destination cards became profiles: what is actually listed there, counted from the same
   // listings the marketplace serves, so the numbers cannot drift from the search results.
@@ -59,8 +59,12 @@ export function homeView({ properties, state, esc, icon, money, price, card, emp
   const real = featured?.is_demo === false;
   const views = featured?.media || [];
   const defaultHeadline = state.content.headline === 'Find your next place.';
-  const headline = defaultHeadline ? `<span class="w">Homes</span> <span class="w">to</span> <span class="w">buy.</span><br><span class="w"><span class="hero-rotate" data-hero-rotate>${HERO_LINES[0]}</span></span>` : wordStagger(esc(state.content.headline));
-  const intro = state.content.intro === 'Residential and commercial property, with one team to talk to.' ? 'Search, shortlist and talk directly to the team.' : state.content.intro;
+  const headline = defaultHeadline ? `<span class="w">Land</span> <span class="w">to</span> <span class="w">build</span> <span class="w">on.</span><br><span class="w"><span class="hero-rotate" data-hero-rotate>${HERO_LINES[0]}</span></span>` : wordStagger(esc(state.content.headline));
+  const intro = state.content.intro === 'Land and commercial property, with one team to talk to.' ? 'Search, shortlist and talk directly to the team.' : state.content.intro;
+  // The four land types with what is actually listed under each, counted from the same rows the
+  // marketplace serves, so a category can never promise more than the search returns.
+  const landCount = type => { const n = properties.filter(p => (p.sector || 'residential') === 'land' && p.property_type === type).length; return n ? `${n} ${n === 1 ? 'listing' : 'listings'}` : 'No listings yet'; };
+  const LAND_BLURBS = { development_site: 'Sites with the zoning to build on, in town and by the coast.', commercial_industrial: 'Serviced lots on business estates, ready for warehousing or trade.', rural: 'Grazing land and acreage, with house sites where a dwelling is permitted.', subdivision_investment: 'Parcels with subdivision approval in place or pending, sold as one.' };
   const heroChip = featured ? (featured.transaction_status !== 'available' ? statusBadges({ ...featured, featured: 0, listed_at: '' }) : '') : '';
   const carousel = featured && views.length ? `<div class="market-feature-image" tabindex="0" role="group" aria-roledescription="carousel" aria-label="Photographs of ${esc(featured.title)}">${views.map((m, i) => `<img class="market-view ${i === 0 ? 'is-current' : ''}" src="${esc(m.url)}" alt="${esc(m.alt)}" aria-hidden="${i !== 0}" data-hero-image="${i}" width="1024" height="688" ${i === 0 ? 'fetchpriority="high"' : 'loading="lazy"'}>`).join('')}<div class="feature-label-stack"><span class="feature-label">${esc(typeLabel(featured))} · ${esc(featured.locality)}</span>${heroChip}</div>${views.length > 1 ? `<div class="hero-carousel-controls"><button type="button" class="hero-nav-btn" data-action="hero-prev" aria-label="Previous photograph">${icon('chevron-left')}</button><button type="button" class="hero-nav-btn" data-action="hero-next" aria-label="Next photograph">${icon('chevron-right')}</button></div><div class="hero-meta"><span class="hero-counter" aria-hidden="true"><span data-hero-counter>1</span> / ${views.length}</span><div class="market-view-controls" aria-label="Choose a photograph">${views.map((m, i) => `<button class="${i === 0 ? 'is-current' : ''}" data-hero-pick="${i}" aria-label="Photograph ${i + 1} of ${views.length}" aria-pressed="${i === 0}"></button>`).join('')}</div></div>` : ''}<p class="sr-only" role="status" aria-live="polite" data-hero-status></p></div>` : '';
   // Headline listing facts (right column): locality, price, sale method (commercial, non-default only),
@@ -81,12 +85,12 @@ export function homeView({ properties, state, esc, icon, money, price, card, emp
       </div>
       <div class="hero-scrim" aria-hidden="true"></div>
       <div class="hero-content">
-        <div class="product-label"><span></span>Residential and commercial property, with RealDistrict</div>
+        <div class="product-label"><span></span>Land and commercial property, with RealDistrict</div>
         <h1 class="hero-heading">${headline}</h1>
         <p class="hero-intro">${esc(intro)}</p>
         <div class="hero-search-block">
-          <form class="home-search hero-search" data-form="home-search"><div class="hero-search-row"><div class="switch switch-pill" aria-label="Property search sector"><span class="switch-thumb" aria-hidden="true"></span><button type="button" class="${state.sector === 'residential' ? 'selected' : ''}" data-action="sector" data-sector="residential" aria-pressed="${state.sector === 'residential'}">${icon('home')}Residential</button><button type="button" class="${state.sector === 'commercial' ? 'selected' : ''}" data-action="sector" data-sector="commercial" aria-pressed="${state.sector === 'commercial'}">${icon('building')}Commercial</button></div><label class="sr-only" for="home-location">Search by suburb, region or property name</label><div class="hero-search-field">${icon('search')}<input id="home-location" name="location" placeholder="Suburb or property name" autocomplete="off"></div><div class="hero-quick"><fieldset class="hero-filter-set hero-quick-set" data-sector="residential" ${state.sector === 'commercial' ? 'disabled hidden' : ''}><label class="sr-only" for="hero-type-res">Property type</label><select id="hero-type-res" name="type">${options(residentialTypes, '', 'Property type')}</select><label class="sr-only" for="hero-beds">Bedrooms</label><select id="hero-beds" name="beds">${options([['0','Studio'],['1','1+ beds'],['2','2+ beds'],['3','3+ beds'],['4','4+ beds']], '', 'Beds')}</select></fieldset><fieldset class="hero-filter-set hero-quick-set" data-sector="commercial" ${state.sector === 'commercial' ? '' : 'disabled hidden'}><label class="sr-only" for="hero-type-com">Category</label><select id="hero-type-com" name="type">${options(commercialTypes, '', 'Category')}</select><label class="sr-only" for="hero-tenancy">Tenancy</label><select id="hero-tenancy" name="tenancy">${options([['vacant','Vacant possession'],['leased','Leased investment'],['owner_occupied','Owner occupied']], '', 'Tenancy')}</select></fieldset></div><button type="button" class="hero-filter-toggle" data-action="hero-filters" aria-expanded="false" aria-controls="hero-filters">${icon('filter')}<span>Filters</span><span class="filter-count" data-filter-count hidden></span></button><button class="btn hero-search-submit" aria-label="Search homes">Search ${icon('arrow')}</button></div><div class="hero-filters" id="hero-filters" hidden><fieldset class="hero-filter-set" data-sector="residential" ${state.sector === 'commercial' ? 'disabled hidden' : ''}><label>Bathrooms<select name="baths">${options([['1','1+ bathrooms'],['2','2+ bathrooms'],['3','3+ bathrooms']], '', 'Any')}</select></label></fieldset><fieldset class="hero-filter-set" data-sector="commercial" ${state.sector === 'commercial' ? '' : 'disabled hidden'}><label>Minimum floor area (m²)<input type="number" min="0" name="min_floor" placeholder="No minimum"></label></fieldset><label>Min price (AUD)<input type="number" min="0" name="min" placeholder="No minimum"></label><label>Max price (AUD)<input type="number" min="0" name="max" placeholder="No maximum"></label><div class="hero-filter-actions"><label class="hero-filter-check"><input type="checkbox" name="pending" value="1">Include under offer</label><button type="button" class="link" data-action="hero-filters-reset">Reset</button><button class="btn small">Apply and search ${icon('arrow')}</button></div></div></form>
-          <div class="market-locations"><span>Explore popular locations:</span><a href="/properties?sector=residential&location=Saltmere">Saltmere</a><a href="/properties?sector=residential&location=Fernwick">Fernwick</a><a href="/properties?sector=commercial&location=Thailand">Thailand</a></div>
+          <form class="home-search hero-search" data-form="home-search"><div class="hero-search-row"><div class="switch switch-pill" aria-label="Property search sector"><span class="switch-thumb" aria-hidden="true"></span><button type="button" class="${state.sector === 'land' ? 'selected' : ''}" data-action="sector" data-sector="land" aria-pressed="${state.sector === 'land'}">${icon('layers')}Land</button><button type="button" class="${state.sector === 'commercial' ? 'selected' : ''}" data-action="sector" data-sector="commercial" aria-pressed="${state.sector === 'commercial'}">${icon('building')}Commercial</button></div><label class="sr-only" for="home-location">Search by suburb, region or property name</label><div class="hero-search-field">${icon('search')}<input id="home-location" name="location" placeholder="Suburb or property name" autocomplete="off"></div><div class="hero-quick"><fieldset class="hero-filter-set hero-quick-set" data-sector="land" ${state.sector === 'commercial' ? 'disabled hidden' : ''}><label class="sr-only" for="hero-type-land">Land type</label><select id="hero-type-land" name="type">${options(landTypes, '', 'Land type')}</select><label class="sr-only" for="hero-size">Land size</label><select id="hero-size" name="size">${options([['-2000','Up to 2,000 m²'],['2000-10000','2,000 to 10,000 m²'],['10000-100000','1 to 10 ha'],['100000-','10 ha and over']], '', 'Land size')}</select></fieldset><fieldset class="hero-filter-set hero-quick-set" data-sector="commercial" ${state.sector === 'commercial' ? '' : 'disabled hidden'}><label class="sr-only" for="hero-type-com">Category</label><select id="hero-type-com" name="type">${options(commercialTypes, '', 'Category')}</select><label class="sr-only" for="hero-tenancy">Tenancy</label><select id="hero-tenancy" name="tenancy">${options([['vacant','Vacant possession'],['leased','Leased investment'],['owner_occupied','Owner occupied']], '', 'Tenancy')}</select></fieldset></div><button type="button" class="hero-filter-toggle" data-action="hero-filters" aria-expanded="false" aria-controls="hero-filters">${icon('filter')}<span>Filters</span><span class="filter-count" data-filter-count hidden></span></button><button class="btn hero-search-submit" aria-label="Search homes">Search ${icon('arrow')}</button></div><div class="hero-filters" id="hero-filters" hidden><fieldset class="hero-filter-set" data-sector="commercial" ${state.sector === 'commercial' ? '' : 'disabled hidden'}><label>Minimum floor area (m²)<input type="number" min="0" name="min_floor" placeholder="No minimum"></label></fieldset><label>Min price (AUD)<input type="number" min="0" name="min" placeholder="No minimum"></label><label>Max price (AUD)<input type="number" min="0" name="max" placeholder="No maximum"></label><div class="hero-filter-actions"><label class="hero-filter-check"><input type="checkbox" name="pending" value="1">Include under offer</label><button type="button" class="link" data-action="hero-filters-reset">Reset</button><button class="btn small">Apply and search ${icon('arrow')}</button></div></div></form>
+          <div class="market-locations"><span>Explore popular locations:</span><a href="/properties?sector=land&location=Saltmere">Saltmere</a><a href="/properties?sector=land&location=Fernwick">Fernwick</a><a href="/properties?sector=commercial&location=Thailand">Thailand</a></div>
         </div>
       </div>
     </section>
@@ -98,13 +102,17 @@ export function homeView({ properties, state, esc, icon, money, price, card, emp
       </div>
     </section>` : ''}
     <section class="market-destinations market-width" data-reveal aria-label="Featured destinations">
-      <div class="market-section-title"><div><span class="eyebrow">Explore</span><h2>Featured destinations</h2></div><a class="link" href="/properties?sector=residential">View all locations ${icon('arrow')}</a></div>
+      <div class="market-section-title"><div><span class="eyebrow">Explore</span><h2>Featured destinations</h2></div><a class="link" href="/properties?sector=land">View all locations ${icon('arrow')}</a></div>
       <div class="destination-grid" data-reveal-group>
-        <a class="destination-card" data-reveal href="/properties?sector=residential&location=Saltmere"><img src="/assets/courtyard.webp" alt="Fictional coastal courtyard home — generated concept image" loading="lazy" width="1024" height="688"><span class="destination-scrim" aria-hidden="true"></span><span class="destination-body"><strong>Saltmere</strong><em>Coastal living, reimagined.</em><span class="destination-facts">${esc(profile('Saltmere','residential'))}</span></span><span class="destination-arrow" aria-hidden="true">${icon('external')}</span></a>
+        <a class="destination-card" data-reveal href="/properties?sector=land&location=Saltmere"><img src="/assets/land-harbour-road.webp" alt="Illustrative site plan of a fictional development site at Saltmere — generated concept image" loading="lazy" width="1536" height="1032"><span class="destination-scrim" aria-hidden="true"></span><span class="destination-body"><strong>Saltmere</strong><em>Coastal sites and acreage.</em><span class="destination-facts">${esc(profile('Saltmere','land'))}</span></span><span class="destination-arrow" aria-hidden="true">${icon('external')}</span></a>
         <a class="destination-card" data-reveal href="/properties?sector=commercial&location=Fernwick"><img src="/assets/highstreet-offices.webp" alt="Fictional office building — generated concept image" loading="lazy" width="1024" height="688"><span class="destination-scrim" aria-hidden="true"></span><span class="destination-body"><strong>Fernwick</strong><em>Business. Lifestyle. Opportunity.</em><span class="destination-facts">${esc(profile('Fernwick','commercial'))}</span></span><span class="destination-arrow" aria-hidden="true">${icon('external')}</span></a>
         <a class="destination-card" data-reveal href="/properties?sector=commercial&location=Thailand"><img src="/assets/grand-blue-beach.webp" alt="GrandBlue beachfront — photograph supplied by the property" loading="lazy" width="1536" height="1032"><span class="destination-scrim" aria-hidden="true"></span><span class="destination-body"><strong>Thailand</strong><em>Extraordinary places, real opportunities.</em><span class="destination-facts">${esc(profile('Thailand','commercial'))}</span></span><span class="destination-arrow" aria-hidden="true">${icon('external')}</span></a>
       </div>
       <p class="destination-caption small muted">Saltmere and Fernwick are fictional places used for the concept.</p>
+    </section>
+    <section class="market-land market-width" aria-labelledby="land-heading">
+      <div class="market-section-title" data-reveal><div><span class="eyebrow">Land</span><h2 id="land-heading">Browse land by type</h2><p>Development sites, commercial and industrial land, rural land, and subdivision or investment land. Each listing shows its size, zoning and sale method.</p></div><a class="link" href="/properties?sector=land">All land ${icon('arrow')}</a></div>
+      <div class="land-cats" data-reveal-group>${landTypes.map(([key, label]) => `<a class="land-cat" data-reveal href="/properties?sector=land&type=${esc(key)}"><span class="land-cat-icon">${icon('layers')}</span><strong>${esc(key === 'development_site' ? 'Development sites' : label)}</strong><span class="land-cat-blurb">${esc(LAND_BLURBS[key] || '')}</span><span class="land-cat-count">${esc(landCount(key))}<span class="land-cat-arrow" aria-hidden="true">${icon('arrow')}</span></span></a>`).join('')}</div>
     </section>
     <section class="market-listings market-width" aria-labelledby="available-heading">
       <div class="market-section-title" data-reveal><div><h2 id="available-heading">Available properties</h2><p>Compare prices, property details and availability.</p></div><a class="link" href="/properties?sector=all">Every property ${icon('arrow')}</a></div>
@@ -117,12 +125,12 @@ export function homeView({ properties, state, esc, icon, money, price, card, emp
     </section>
     <section class="market-service" aria-labelledby="service-heading">
       <div class="service-split">
-        <div class="service-photo"><img src="/assets/apartment.webp" alt="A fictional apartment interior with a low sofa and doors onto a garden. Generated concept image." loading="lazy" width="1024" height="688"></div>
+        <div class="service-photo"><img src="/assets/land-orchard-lane.webp" alt="Illustrative site plan of a fictional twelve-lot subdivision. Generated concept image." loading="lazy" width="1536" height="1032"></div>
         <div class="service-panel"><div class="service-panel-inner">
           <span class="product-label" data-reveal>What RealDistrict does</span>
           <h2 id="service-heading" data-reveal>Find the property.<br>Talk to the people<br>who manage it.</h2>
-          <p class="service-intro" data-reveal>RealDistrict is a residential and commercial property marketplace for buyers and investors. The RealDistrict team publishes the listings, answers your questions and manages inspection requests. Sale method, areas, zoning and tenancy are shown plainly on every listing.</p>
-          <div class="service-steps" data-reveal-group><div class="step-card" data-reveal><span class="step-number">01</span><div><h3>Search available properties</h3><p>Choose Residential or Commercial, then filter by location, budget and the space you need.</p></div></div><div class="step-card" data-reveal><span class="step-number">02</span><div><h3>Save a shortlist</h3><p>Keep the homes you're considering together in your account.</p></div></div><div class="step-card" data-reveal><span class="step-number">03</span><div><h3>Enquire or arrange a viewing</h3><p>Message the team from a listing. Request an inspection and track its confirmation in your account.</p></div></div></div>
+          <p class="service-intro" data-reveal>RealDistrict is a land and commercial property marketplace for buyers and investors. The RealDistrict team publishes the listings, answers your questions and manages inspection requests. Sale method, land size, zoning and tenancy are shown plainly on every listing.</p>
+          <div class="service-steps" data-reveal-group><div class="step-card" data-reveal><span class="step-number">01</span><div><h3>Search available properties</h3><p>Choose Land or Commercial, then filter by location, land type, price and land size.</p></div></div><div class="step-card" data-reveal><span class="step-number">02</span><div><h3>Save a shortlist</h3><p>Keep the sites you're considering together in your account.</p></div></div><div class="step-card" data-reveal><span class="step-number">03</span><div><h3>Enquire or arrange a viewing</h3><p>Message the team from a listing. Request an inspection and track its confirmation in your account.</p></div></div></div>
           <div class="service-actions" data-reveal><a class="btn secondary" href="/account/saved">Open your account ${icon('arrow')}</a><a class="link" href="/how-it-works">How it works ${icon('arrow')}</a></div>
         </div></div>
       </div>
@@ -173,7 +181,7 @@ export function mountExperience() {
   // Re-rendered account navigation keeps the same enhancement without duplicate listeners.
   if (!header.querySelector('.explore-toggle')) {
     header.querySelector('.nav-end')?.insertAdjacentHTML('beforeend','<button class="explore-toggle" aria-label="Open navigation menu" aria-expanded="false"><span></span><span></span></button>');
-    header.insertAdjacentHTML('beforeend',`<div class="explore-panel" hidden><div class="explore-panel-inner"><div><span class="edition-label">Explore RealDistrict</span><a href="/properties?sector=residential"><span>Residential property</span><span>01 ↗</span></a><a href="/properties?sector=commercial"><span>Commercial property</span><span>02 ↗</span></a><a href="/account/saved"><span>Your shortlist</span><span>03 ↗</span></a><a href="/how-it-works"><span>How it works</span><span>04 ↗</span></a></div><a class="menu-image" href="/properties?sector=residential"><img src="/assets/courtyard-detail.webp" alt="Explore fictional architectural homes"><span>Find your next place. ↗</span></a></div><p>RealDistrict concept · Includes fictional homes with generated imagery</p></div><span class="reading-progress" aria-hidden="true"></span>`);
+    header.insertAdjacentHTML('beforeend',`<div class="explore-panel" hidden><div class="explore-panel-inner"><div><span class="edition-label">Explore RealDistrict</span><a href="/properties?sector=land"><span>Land</span><span>01 ↗</span></a><a href="/properties?sector=commercial"><span>Commercial property</span><span>02 ↗</span></a><a href="/account/saved"><span>Your shortlist</span><span>03 ↗</span></a><a href="/how-it-works"><span>How it works</span><span>04 ↗</span></a></div><a class="menu-image" href="/properties?sector=land"><img src="/assets/land-cedar-ridge.webp" alt="Explore fictional land listings, shown as illustrative site plans"><span>Find your next place. ↗</span></a></div><p>RealDistrict concept · Includes fictional homes with generated imagery</p></div><span class="reading-progress" aria-hidden="true"></span>`);
   }
   const toggle=header.querySelector('.explore-toggle'),panel=header.querySelector('.explore-panel');
   if(!panel.querySelector('.menu-account')) panel.querySelector('.explore-panel-inner>div')?.insertAdjacentHTML('beforeend','<a class="menu-account" href="/account/messages"><span>Your account</span><span>05 ↗</span></a>');
@@ -240,7 +248,7 @@ export function mountExperience() {
     const toggleBtn=heroForm.querySelector('[data-action="hero-filters"]');
     const panel=heroForm.querySelector('.hero-filters');
     const count=heroForm.querySelector('[data-filter-count]');
-    const setSets=(sector=heroForm.querySelector('.switch-pill button.selected')?.dataset.sector||'residential')=>{heroForm.querySelectorAll('.hero-filter-set').forEach(set=>{const on=set.dataset.sector===sector;set.hidden=!on;set.disabled=!on;});};
+    const setSets=(sector=heroForm.querySelector('.switch-pill button.selected')?.dataset.sector||'land')=>{heroForm.querySelectorAll('.hero-filter-set').forEach(set=>{const on=set.dataset.sector===sector;set.hidden=!on;set.disabled=!on;});};
     const updateCount=()=>{const data=new FormData(heroForm);let n=0;for(const [k,v] of data) if(k!=='location'&&String(v).trim())n++;count.textContent=String(n);count.hidden=!n;};
     heroForm.addEventListener('click',event=>{
       const button=event.target.closest('[data-action]');if(!button)return;
@@ -258,8 +266,8 @@ export function mountExperience() {
     let step=0;
     const cycle=()=>{
       if (document.activeElement===searchInput || searchInput.value) return;
-      const sector=document.querySelector('.switch-pill button.selected')?.dataset.sector || 'residential';
-      const list=HERO_PLACEHOLDERS[sector]||HERO_PLACEHOLDERS.residential;
+      const sector=document.querySelector('.switch-pill button.selected')?.dataset.sector || 'land';
+      const list=HERO_PLACEHOLDERS[sector]||HERO_PLACEHOLDERS.land;
       step=(step+1)%list.length;
       searchInput.placeholder=`Try "${list[step]}"`;
     };
@@ -382,7 +390,7 @@ export function editorialView({ lead: given, properties, esc, icon, price, typeL
       <div class="ed-rest-head" data-reveal>
         <span class="eyebrow">Also with RealDistrict</span>
         <h2 id="ed-rest-head">Explore the other properties</h2>
-        <p>Five more listings, residential and commercial.</p>
+        <p>More listings, land and commercial.</p>
       </div>
       <div class="ed-explore" data-reveal>
         <ul class="ed-explore-list">${rest.map((p, i) => `<li class="ed-explore-row ${i ? '' : 'is-on'}" data-explore="${i}">

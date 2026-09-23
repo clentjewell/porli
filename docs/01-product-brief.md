@@ -1,7 +1,7 @@
 # Product brief
 
 ## Concept
-Porli helps people find residential homes to buy or rent and communicate with the team responsible for them. Its public experience combines thoughtful visual presentation with practical search. Its private workspace keeps property inventory, conversations and follow-ups together.
+RealDistrict (working name Porli) helps buyers and investors find land and commercial property for sale and communicate with the team responsible for it (renting removed in docs/19; residential replaced by land in docs/59). Its public experience combines thoughtful visual presentation with practical search. Its private workspace keeps property inventory, conversations and follow-ups together.
 
 ## Promise
 Find your next place. Discover a home, understand the essentials and get a useful response from the person managing it.
