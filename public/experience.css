@@ -820,3 +820,73 @@ h1,h2,h3{font-family:var(--serif);font-weight:500;letter-spacing:-.012em;line-he
 .price-block{display:grid;gap:2px;min-width:0}
 .price-rate{font-size:12px;color:var(--muted);font-weight:500;letter-spacing:0}
 .page-top .page-intro{margin-top:10px;max-width:640px;font-size:15px;color:var(--muted)}
+/* ---------------------------------------------------------------------------
+   Phones and touch screens (docs/69). Measured at 320-414px: every control a
+   finger uses is at least 44px, form fields use 16px text so iOS Safari does
+   not zoom on focus, and the few layouts that hid content now reflow.
+   --------------------------------------------------------------------------- */
+.side-links{display:flex;flex-direction:column;gap:5px}
+.thread-back{display:none}
+@media(max-width:700px),(pointer:coarse){
+  #header .nav-links a,#header .wordmark{display:inline-flex;align-items:center;min-height:44px}
+  #header .nav-end .btn{min-height:44px}
+  .explore-toggle{width:44px;height:44px}
+  .save-button{width:44px;height:44px}
+  .card-nav{width:44px;height:44px;margin-top:-22px}
+  .hero-nav-btn{width:44px;height:44px}
+  .market-locations a{display:inline-flex;align-items:center;min-height:40px}
+  .footer-links a{display:inline-flex;align-items:center;min-height:44px}
+  .footer-links>div{gap:0}
+  .footer-bottom a{display:inline-flex;align-items:center;min-height:44px}
+  .icon-btn,.modal-inner .icon-btn,.media-row .icon-btn{width:44px;height:44px}
+  .market-view-controls{gap:0}
+  .market-view-controls button{width:44px;height:44px}
+  .link,.chips a,.filter-actions a{min-height:44px;display:inline-flex;align-items:center}
+  label.flex{min-height:44px;align-items:center}
+  input[type=checkbox],input[type=radio]{width:22px;height:22px}
+  .side-links a,.side-nav .signout{min-height:44px}
+  .table-link{display:inline-flex;align-items:center;min-height:44px}
+}
+@media(max-width:700px){
+  body :is(input:not([type=checkbox]):not([type=radio]):not([type=file]),select,textarea){font-size:16px}
+  /* Land and Commercial filters wrap onto a second line instead of hiding off the edge. */
+  .search-bar .filter-pills{flex-wrap:wrap;overflow:visible;flex:1 1 100%}
+  .search-bar .filter-pills .pill{flex:1 1 calc(50% - 6px)}
+  .search-bar .filter-pills .pill select{width:100%}
+  /* Land card: the price above a full-width View property button. */
+  .card-foot-land{flex-direction:column;align-items:stretch;gap:12px}
+  .card-foot-land .card-cta{justify-content:center;width:100%;min-height:44px}
+  .card-foot-land .price{text-align:left}
+  /* Workspace headings wrap so a control never squeezes the title. */
+  .workspace-heading{flex-wrap:wrap}
+  .workspace-heading>div{flex:1 1 240px}
+  .workspace-heading select{min-width:160px}
+  /* Inbox: the list or one conversation at a time, with a way back to the list. */
+  .inbox:not(.is-open) .thread-detail,.inbox.is-open .thread-list{display:none}
+  .inbox .thread-back{display:inline-flex;gap:8px;margin:14px 18px 0}
+  .inbox .thread-back svg,.inbox .thread-back:hover svg:last-child{transform:scaleX(-1)}
+  .inbox .thread-back{border-bottom:0}
+  .inbox{min-height:0}
+  /* Tables become labelled rows. */
+  .table-wrap{overflow:visible}
+  .table,.table tbody,.table tr,.table td{display:block;width:100%}
+  .table thead{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+  .table tr{border:1px solid var(--line);border-radius:10px;background:#fff;padding:6px 14px;margin-bottom:12px}
+  .table td{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:10px 0;border-bottom:1px solid var(--line);text-align:right}
+  .table td:last-child{border-bottom:0}
+  .table td[data-label]:before{content:attr(data-label);font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);text-align:left;flex:0 0 auto}
+  .table td:first-child{justify-content:flex-start;text-align:left}
+  .table td:first-child:before{display:none}
+  .table .property-cell{min-width:0}
+  .table td:last-child:not([data-label]):before,.table td[data-label=""]:before{display:none}
+}
+@media(max-width:800px){
+  /* The workspace menu is one swipeable row under the eyebrow and the Add button. */
+  .side-links{flex-direction:row;flex-wrap:nowrap;overflow-x:auto;gap:4px;margin:0 -20px;padding:0 20px 6px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  .side-links::-webkit-scrollbar{display:none}
+  .side-links a,.side-links .signout{flex:0 0 auto;white-space:nowrap;border-radius:999px;border:1px solid var(--line);padding:0 14px;display:inline-flex;align-items:center;gap:8px;margin:0}
+  .side-links a.active{border-color:var(--olive)}
+  .workspace{grid-template-columns:minmax(0,1fr)}
+  .side-nav{flex-direction:column;flex-wrap:nowrap;min-width:0;max-width:100%}
+  .side-nav .side-add{width:auto;align-self:flex-start;margin-bottom:10px}
+}
