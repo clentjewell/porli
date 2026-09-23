@@ -1,5 +1,13 @@
 # The homepage property grid, cleaned up
 
+**Revised the same day.** Clent compared the two layouts and preferred the original tiled grid
+(three tiles, two wide, then twos), asking only for the Browse tile in the empty space. The tiled
+grid is restored. The Browse tile is sized in the page script to fill whatever the last row
+leaves (six columns on desktop, four from 1000px, full width on phones), and it hides while a
+type pill filters the grid. The overflow fixes below stay. A phone-width bug found while
+measuring the revision is fixed: a tablet rule gave the tile two columns and made a phantom
+second column. The description below is the first version.
+
 23 September 2026, after docs/62. Clent asked for the homepage "Available properties" grid to be
 cleaner and more professional. It had been built for five listings: three tiles, then two wider
 ones, each a bare picture with its details hidden until hover. With seven listings it broke into
