@@ -11,6 +11,7 @@
 | D007 | Open | Launch country, currency and region | Fixture defaults do not settle this |
 | D008 | Confirmed | Node.js/SQLite implementation (docs/13); hosting on Cloudflare Workers with static assets and a SQLite Durable Object (docs/17) | User asked to connect the repository to Cloudflare; Pages cannot run the database-backed server, so the Workers successor platform is used |
 | D009 | Open | Commercial model and brand availability | Not investigated or approved |
+| D061 | Confirmed | Real listings priced in AUD show "A$" (GrandBlue: A$9,000,000); the homepage land types become photo cards with a white label panel, the format Clent chose from two references (docs/66) | Clent, 23 September 2026 |
 | D060 | Confirmed | Elmshore Gateway takes a wider crop of its cover's openly licensed panorama as its aerial, and the homepage Land/Commercial switch gets equal-width buttons so the thumb fits the selected one (docs/65) | Clent, 23 September 2026 |
 | D059 | Confirmed | GrandBlue Resort & Beachclub is priced at A$9,000,000, supplied by Clent (docs/64); currency AUD, sale by expressions of interest. The homepage grid returns to the tiled layout with a Browse tile filling the last row (docs/63, revising D058) | Clent, 23 September 2026 |
 | D058 | Confirmed | The homepage Available properties grid becomes a uniform grid of the standard cards with aligned footers and a closing Browse tile that fills the last row, land first (docs/63). Replaces the three-then-two showcase tiles, which only held five listings | Clent, 23 September 2026 |

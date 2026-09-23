@@ -496,6 +496,7 @@ Validate whether consumers value the presentation and response workflow, and whe
 | D007 | Open | Launch country, currency and region | Fixture defaults do not settle this |
 | D008 | Confirmed | Node.js/SQLite implementation (docs/13); hosting on Cloudflare Workers with static assets and a SQLite Durable Object (docs/17) | User asked to connect the repository to Cloudflare; Pages cannot run the database-backed server, so the Workers successor platform is used |
 | D009 | Open | Commercial model and brand availability | Not investigated or approved |
+| D061 | Confirmed | Real listings priced in AUD show "A$" (GrandBlue: A$9,000,000); the homepage land types become photo cards with a white label panel, the format Clent chose from two references (docs/66) | Clent, 23 September 2026 |
 | D060 | Confirmed | Elmshore Gateway takes a wider crop of its cover's openly licensed panorama as its aerial, and the homepage Land/Commercial switch gets equal-width buttons so the thumb fits the selected one (docs/65) | Clent, 23 September 2026 |
 | D059 | Confirmed | GrandBlue Resort & Beachclub is priced at A$9,000,000, supplied by Clent (docs/64); currency AUD, sale by expressions of interest. The homepage grid returns to the tiled layout with a Browse tile filling the last row (docs/63, revising D058) | Clent, 23 September 2026 |
 | D058 | Confirmed | The homepage Available properties grid becomes a uniform grid of the standard cards with aligned footers and a closing Browse tile that fills the last row, land first (docs/63). Replaces the three-then-two showcase tiles, which only held five listings | Clent, 23 September 2026 |
@@ -4549,3 +4550,37 @@ on a phone, in both positions. It went unnoticed when the labels were "Residenti
 All 33 API tests pass. Measured locally and on the live site at 1440, 1024 and 390px: the thumb and
 the selected button share the same left edge and width in both positions, with no overflow. The
 Elmshore Gateway aerial slot shows the new image and its credit.
+
+<!-- Source: 66-a-dollar-and-land-cards.md -->
+# "A$" on GrandBlue's price; the land types as photo cards
+
+23 September 2026, after docs/65.
+
+## A$9,000,000
+
+Clent asked for an "A" before the dollar sign on GrandBlue's price. A real listing priced in
+Australian dollars now shows "A$". GrandBlue is in Thailand, so a bare "$" could be taken for
+another currency. The rule sits in the one price formatter, so the card, the homepage headline and
+the listing page all read "A$9,000,000". Fictional listings keep the plain "$". If Clent wants
+"A$" everywhere, it is a one-line change.
+
+## Browse land by type
+
+Clent sent two formats for the homepage land section: a single-property gallery with side peeks
+and arrows, and a row of city photo cards, each with a white label panel. The second was chosen.
+It shows all four land types at once and needs no arrows. Each card maps to data we hold (a
+picture, how many listings, the type name, a link), and it matches the destination cards above
+it. The gallery suits the photographs of one property, which the listing page already does.
+
+Each card is a 4:5 photograph with a white panel at the foot. The panel shows the listing count,
+the type name and a round arrow that turns olive on hover or focus. The picture is the cover of
+the first available listing of that type, so it always belongs to something the card leads to. A
+type with no available listing shows a plain pale card. The one-line blurbs are dropped. The
+cards run four across, two from 1000px and one on phones (4:3 there). Every panel is the same
+height, even where a name runs to two lines.
+
+## Verified
+
+All 33 API tests pass. Measured at 1440, 1024, 800 and 390px: four equal cards and equal panels,
+no overflow, no script errors. "A$9,000,000" shows on the homepage headline, the commercial card
+and the listing. Highstreet Offices still shows "$1,850,000".
