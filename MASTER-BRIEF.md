@@ -4383,6 +4383,16 @@ crop) and the aerial slot (the whole frame), under new file names. The register 
 `fictional: true`, supplied by Clent, source not recorded. The Commons cover it replaces is
 removed.
 
+## Harbour Road Development Site
+
+Finally Clent re-sent the Harbour Road picture: a portrait aerial of green land on the edge of a
+town, with a yellow boundary drawn around it and an "Illustrative Only" watermark along the
+bottom edge. The watermark was trimmed off. The cover is a 3:2 crop around the outlined land and
+the aerial slot holds the rest of the frame, both under new file names and both labelled as
+reference photographs supplied by the team. The Commons photograph it replaces stays in use as
+the homepage's Saltmere destination card. This completes the set: all eight land listings now
+have a cover, and six have an aerial.
+
 ## Cache
 
 The first deploy reused the old file names, and images are cached for an hour, so browsers
@@ -4396,4 +4406,6 @@ replaced image always gets a new file name.
   sharp on cards and soft in the full-width gallery. A larger original would fix it.
 - **Rights are unknown.** The file carries no source. Before a public launch it needs the same
   confirmation as GrandBlue's photographs (B-04).
-- **One listing still waits** for its picture: Harbour Road Development Site.
+- **Drawn boundaries.** The Saltmere Valley and Harbour Road pictures have boundaries drawn
+  around real parcels. The listing pages say they show real places elsewhere, but versions
+  without the outlines would be clearer.

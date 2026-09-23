@@ -202,6 +202,6 @@ test('aerial and site plan slots are validated, round-trip, and each fictional l
   assert.equal((await staff('/admin/properties','PATCH',{...p,plans:[{kind:'roof',url:'/assets/plan-cedar-ridge.webp',alt:'x'}]})).status,400);
   assert.equal((await staff('/admin/properties','PATCH',{...p,plans:[{kind:'aerial',url:'/assets/missing.webp',alt:'x'}]})).status,400);
   assert.equal((await staff('/admin/properties','PATCH',{...p,plans:[{kind:'aerial',url:'/assets/plan-cedar-ridge.webp',alt:''}]})).status,400);
-  const ok=await staff('/admin/properties','PATCH',{...p,plans:[...p.plans,{kind:'aerial',url:'/assets/land-cedar-ridge-supplied.webp',alt:'An aerial view',caption:'Looking north',extra:'dropped'}]});assert.equal(ok.status,200);
+  const ok=await staff('/admin/properties','PATCH',{...p,plans:[...p.plans.filter(x=>x.kind!=='aerial'),{kind:'aerial',url:'/assets/land-cedar-ridge-supplied.webp',alt:'An aerial view',caption:'Looking north',extra:'dropped'}]});assert.equal(ok.status,200);
   const aerial=ok.data.property.plans.find(x=>x.kind==='aerial');assert.deepEqual(aerial,{kind:'aerial',url:'/assets/land-cedar-ridge-supplied.webp',alt:'An aerial view',caption:'Looking north'});
   const again=await staff('/admin/properties','PATCH',{...ok.data.property,plans:[]});assert.equal(again.status,200);assert.deepEqual(again.data.property.plans,[]);});
