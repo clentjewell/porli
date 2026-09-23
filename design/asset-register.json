@@ -628,20 +628,6 @@
       "fictional": false
     },
     {
-      "file": "public/assets/aerial-orchard-lane.webp",
-      "purpose": "Aerial-view slot of Orchard Lane Subdivision (demo-land-07) (docs/61). An openly licensed photograph of a real place elsewhere, used to illustrate a fictional listing; never presented as the parcel itself",
-      "provider": "Wikimedia Commons",
-      "source": "File:Burrawang Aerial.jpg (https://commons.wikimedia.org/wiki/File:Burrawang_Aerial.jpg), original 2288 × 1712 JPEG, cropped and resized to 1536×1032 WebP q82",
-      "photographer": "Graeme Bartlett",
-      "year": 2008,
-      "licence": "CC BY 3.0",
-      "licence_url": "https://creativecommons.org/licenses/by/3.0/",
-      "rights": "Openly licensed; credit the photographer, link the source and licence wherever the image appears",
-      "date": "2026-09-23",
-      "reference": "The listing page and the plan slot carry the credit in the image caption; the card and the page label the listing fictional and the picture licensed",
-      "fictional": false
-    },
-    {
       "file": "public/assets/aerial-cedar-ridge.webp",
       "purpose": "Aerial-view slot of Cedar Ridge (demo-land-05) (docs/61). An openly licensed photograph of a real place elsewhere, used to illustrate a fictional listing; never presented as the parcel itself",
       "provider": "Wikimedia Commons",
@@ -712,20 +698,6 @@
       "fictional": false
     },
     {
-      "file": "public/assets/land-orchard-lane.webp",
-      "purpose": "Cover of Orchard Lane Subdivision (demo-land-07) (docs/61). An openly licensed photograph of a real place elsewhere, used to illustrate a fictional listing; never presented as the parcel itself",
-      "provider": "Wikimedia Commons",
-      "source": "File:A view from the heavens (29872415050).jpg (https://commons.wikimedia.org/wiki/File:A_view_from_the_heavens_(29872415050).jpg), original 5961 × 3974 JPEG, cropped and resized to 1536×1032 WebP q82",
-      "photographer": "Lenny K Photography from Sydney, Australia",
-      "year": null,
-      "licence": "CC BY 2.0",
-      "licence_url": "https://creativecommons.org/licenses/by/2.0/",
-      "rights": "Openly licensed; credit the photographer, link the source and licence wherever the image appears",
-      "date": "2026-09-23",
-      "reference": "The listing page and the plan slot carry the credit in the image caption; the card and the page label the listing fictional and the picture licensed",
-      "fictional": false
-    },
-    {
       "file": "public/assets/land-fernwick-lot-12.webp",
       "purpose": "Cover of Fernwick Estate, Lot 12 (demo-land-03) (docs/61). An openly licensed photograph of a real place elsewhere, used to illustrate a fictional listing; never presented as the parcel itself",
       "provider": "Wikimedia Commons",
@@ -765,6 +737,26 @@
       "rights": "Openly licensed; credit the photographer, link the source and licence wherever the image appears; share-alike, so any edited version carries the same licence",
       "date": "2026-09-23",
       "reference": "The listing page and the plan slot carry the credit in the image caption; the card and the page label the listing fictional and the picture licensed",
+      "fictional": false
+    },
+    {
+      "file": "public/assets/land-orchard-lane.webp",
+      "purpose": "Cover of Orchard Lane Subdivision (demo-land-07), a 3:2 crop at the original 577 px width (docs/62). A real place elsewhere, never presented as the parcel itself",
+      "provider": "Supplied by Clent in the session chat, 23 September 2026",
+      "source": "Original source and photographer not recorded; supplied as a 577 × 867 JPEG",
+      "rights": "Not established. Clent to confirm the source and the right to use it before any public launch (as for GrandBlue, register B-04)",
+      "date": "2026-09-23",
+      "reference": "Alt text ends \"Reference photograph supplied by the team.\"; the card reads \"Fictional listing · Reference photograph\"",
+      "fictional": false
+    },
+    {
+      "file": "public/assets/aerial-orchard-lane.webp",
+      "purpose": "Aerial-view slot of Orchard Lane Subdivision (demo-land-07), the full portrait frame, 577 × 867 (docs/62). A real place elsewhere, never presented as the parcel itself",
+      "provider": "Supplied by Clent in the session chat, 23 September 2026",
+      "source": "Original source and photographer not recorded; supplied as a 577 × 867 JPEG",
+      "rights": "Not established. Clent to confirm the source and the right to use it before any public launch (as for GrandBlue, register B-04)",
+      "date": "2026-09-23",
+      "reference": "Alt text ends \"Reference photograph supplied by the team.\"; the card reads \"Fictional listing · Reference photograph\"",
       "fictional": false
     }
   ]
