@@ -24,6 +24,16 @@ send them again.
 - **The aerial slot fits portrait images.** Images are capped at 720px tall and centred, and fill
   the width on phones. A default 40px figure margin that had narrowed every plan image is removed.
 
+## Saltmere Valley Acreage
+
+Later the same day Clent re-sent the Saltmere Valley picture: an aerial of green paddocks with a
+red boundary drawn around one parcel. It works the same way as Orchard Lane. It is the cover and
+the aerial slot (`land-saltmere-valley-supplied.webp`, `aerial-saltmere-valley-supplied.webp`,
+735 × 489, already 3:2). It is labelled a reference photograph supplied by the team, and its
+rights are to be confirmed. The Commons aerial it replaces is removed. The Commons cover stays
+only as the homepage service photograph. The drawn boundary marks a real parcel elsewhere, and
+the listing page says so.
+
 ## Cache
 
 The first deploy reused the old file names, and images are cached for an hour, so browsers
@@ -37,4 +47,5 @@ replaced image always gets a new file name.
   sharp on cards and soft in the full-width gallery. A larger original would fix it.
 - **Rights are unknown.** The file carries no source. Before a public launch it needs the same
   confirmation as GrandBlue's photographs (B-04).
-- **Four listings still wait** for the pictures that did not arrive.
+- **Three listings still wait** for their pictures: Cedar Ridge, Fernwick Estate Lot 12 and
+  Harbour Road Development Site.
