@@ -774,6 +774,20 @@
       "date": "2026-09-23",
       "reference": "Alt text says it is a reference photograph of a real place elsewhere",
       "fictional": false
+    },
+    {
+      "file": "public/assets/aerial-elmshore-gateway.webp",
+      "purpose": "Aerial-view slot of Elmshore Gateway, Lot 3 (demo-land-04) (docs/65): a wider crop of the same panorama as the cover, showing the graded lot, the boulevard and the freeway beyond. An openly licensed photograph of a real place elsewhere, never presented as the parcel itself",
+      "provider": "Wikimedia Commons",
+      "source": "File:Aerial panorama of Williams Landing.jpg (https://commons.wikimedia.org/wiki/File:Aerial_panorama_of_Williams_Landing.jpg), original 9377 × 2710 panorama, cropped (500,0,4065 × 2710) and resized to 1536×1024 WebP q84",
+      "photographer": "Bob T",
+      "year": 2017,
+      "licence": "CC BY-SA 4.0",
+      "licence_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "rights": "Openly licensed; credit the photographer, link the source and licence wherever the image appears; share-alike, so any edited version carries the same licence",
+      "date": "2026-09-23",
+      "reference": "The listing page and the plan slot carry the credit in the image caption; the card and the page label the listing fictional and the picture licensed",
+      "fictional": false
     }
   ]
 }

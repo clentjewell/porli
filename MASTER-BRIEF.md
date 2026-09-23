@@ -496,6 +496,7 @@ Validate whether consumers value the presentation and response workflow, and whe
 | D007 | Open | Launch country, currency and region | Fixture defaults do not settle this |
 | D008 | Confirmed | Node.js/SQLite implementation (docs/13); hosting on Cloudflare Workers with static assets and a SQLite Durable Object (docs/17) | User asked to connect the repository to Cloudflare; Pages cannot run the database-backed server, so the Workers successor platform is used |
 | D009 | Open | Commercial model and brand availability | Not investigated or approved |
+| D060 | Confirmed | Elmshore Gateway takes a wider crop of its cover's openly licensed panorama as its aerial, and the homepage Land/Commercial switch gets equal-width buttons so the thumb fits the selected one (docs/65) | Clent, 23 September 2026 |
 | D059 | Confirmed | GrandBlue Resort & Beachclub is priced at A$9,000,000, supplied by Clent (docs/64); currency AUD, sale by expressions of interest. The homepage grid returns to the tiled layout with a Browse tile filling the last row (docs/63, revising D058) | Clent, 23 September 2026 |
 | D058 | Confirmed | The homepage Available properties grid becomes a uniform grid of the standard cards with aligned footers and a closing Browse tile that fills the last row, land first (docs/63). Replaces the three-then-two showcase tiles, which only held five listings | Clent, 23 September 2026 |
 | D057 | Confirmed | Orchard Lane Subdivision uses an aerial photograph Clent supplied, as its cover and in the aerial slot (docs/62). This adds a fourth image kind, a reference photograph of a real place elsewhere supplied by the team, labelled as such at every point, with rights to be confirmed. Untouched fictional land rows now follow the fixture's pictures through one sync migration | Clent, 23 September 2026 |
@@ -4517,3 +4518,34 @@ an estimate.
 
 Room count, land and floor area, sale terms and whether the street address stays public
 (register B-05). Written permission for the photographs (B-04).
+
+<!-- Source: 65-gateway-aerial-and-switch.md -->
+# Elmshore Gateway aerial; the sector switch
+
+23 September 2026, after docs/64.
+
+## Elmshore Gateway, Lot 3: an aerial
+
+It was the only available land listing without an aerial. It now uses a wider crop of the same
+openly licensed Wikimedia Commons panorama as its cover ("Aerial panorama of Williams Landing",
+Bob T, CC BY-SA 4.0). The cover is the close view of the graded lot. The aerial shows that lot
+beside the boulevard, with the freeway and the suburb beyond, which fits the listing's "highway
+exposure". The file is `aerial-elmshore-gateway.webp`, 1536 × 1024. Its caption credits the
+photographer and licence, its alt text ends "Openly licensed photograph.", and it is in the
+asset register. As a share-alike image, the crop carries the same licence. No Higgsfield credit
+was used.
+
+## The Land / Commercial switch on the homepage
+
+The dark thumb is always half the switch's width, but the two buttons were each sized to their
+label. "Land" is much shorter than "Commercial", so on Land the thumb ran past its label and
+crowded "Commercial". The switch is now a two-column grid of equal columns, both the width of the
+longer label. The thumb now covers exactly the selected button: 130px each on desktop, 161px each
+on a phone, in both positions. It went unnoticed when the labels were "Residential" and
+"Commercial", which are close in length.
+
+## Verified
+
+All 33 API tests pass. Measured locally and on the live site at 1440, 1024 and 390px: the thumb and
+the selected button share the same left edge and width in both positions, with no overflow. The
+Elmshore Gateway aerial slot shows the new image and its credit.
