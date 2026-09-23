@@ -4349,6 +4349,13 @@ send them again.
 - **The aerial slot fits portrait images.** Images are capped at 720px tall and centred, and fill
   the width on phones. A default 40px figure margin that had narrowed every plan image is removed.
 
+## Cache
+
+The first deploy reused the old file names, and images are cached for an hour, so browsers
+kept showing the Commons picture. The files are now `land-orchard-lane-supplied.webp` and
+`aerial-orchard-lane-supplied.webp`, and the sync migration moves the live row to them. A
+replaced image always gets a new file name.
+
 ## Limitations
 
 - **Resolution.** The supplied file is 577 × 867, so the cover is stored at 577px wide. It is
