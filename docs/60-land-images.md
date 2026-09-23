@@ -1,5 +1,9 @@
 # Land images: generated studies replace the site plans
 
+**Superseded the same day (docs/61).** Clent asked for imagery sourced without Higgsfield; the six
+studies below were replaced by openly licensed photographs and the site plans returned in a slot
+of their own.
+
 23 September 2026, after docs/59. Clent saw the land cards with their illustrative site plans and
 asked for "the perfect image like before": photographs in the manner of the other listings, not
 drawings. This record replaces the imagery section of docs/59.

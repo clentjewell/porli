@@ -91,11 +91,14 @@ test('every listing image says where the picture came from',async t=>{const{visi
   for(const p of [...list,detail]){assert.ok(p.media.length>0,p.slug+' has no imagery');
     for(const m of p.media){checked++;
       assert.ok(m.alt&&m.alt.length>10,`${p.slug}: alt text is missing or too short`);
-      const want=p.is_demo?'Generated concept image.':'Photograph supplied by the property.';
-      assert.ok(m.alt.includes(want),`${p.slug}: alt text must state its source, got ${JSON.stringify(m.alt)}`);
+      // Three kinds (docs/61): a generated study or an openly licensed photograph of a real place
+      // elsewhere on a fictional listing; a photograph supplied by the property on a real one.
+      const want=p.is_demo?['Generated concept image.','Openly licensed photograph.']:['Photograph supplied by the property.'];
+      assert.ok(want.some(w=>m.alt.includes(w)),`${p.slug}: alt text must state its source, got ${JSON.stringify(m.alt)}`);
       // A real photograph must never be described as generated, or the other way round.
-      const wrong=p.is_demo?'Photograph supplied by the property.':'Generated concept image.';
-      assert.ok(!m.alt.includes(wrong),`${p.slug}: alt text claims the wrong source`);}}
+      const wrong=p.is_demo?['Photograph supplied by the property.']:['Generated concept image.','Openly licensed photograph.'];
+      assert.ok(!wrong.some(w=>m.alt.includes(w)),`${p.slug}: alt text claims the wrong source`);
+      assert.equal(want.filter(w=>m.alt.includes(w)).length,1,`${p.slug}: alt text names one kind only`);}}
   assert.ok(checked>=13,'expected every seeded image to be checked');});
 
 test('the source sentence is added once, however many times the app starts',{skip:!!remote},async()=>{
@@ -193,3 +196,12 @@ test('land listings filter by type and size, and the residential demos are retir
 test('a land listing publishes on a sale method alone, but a private sale still needs a price or a label',async t=>{const{staff}=await fixture(t);const media=[{url:'/assets/land-cedar-ridge.webp',alt:'A'},{url:'/assets/land-orchard-lane.webp',alt:'B'},{url:'/assets/land-mill-street.webp',alt:'C'}];const base={title:'Tender Lot',sector:'land',property_type:'development_site',price_minor:0,price_label:'',currency:'AUD',bedrooms:0,bathrooms:0,parking:0,locality:'Nowhere',summary:'S',description:'D',publication_state:'published',transaction_status:'available',media,features:[],details:[],highlights:[],floor_area:0,land_area:900,zoning:'Mixed use',tenancy:''};
   assert.equal((await staff('/admin/properties','POST',{...base,sale_method:'private_sale'})).status,400);
   const ok=await staff('/admin/properties','POST',{...base,sale_method:'tender'});assert.equal(ok.status,200);assert.equal(ok.data.property.sale_method,'tender');assert.equal(ok.data.property.land_area,900);});
+test('aerial and site plan slots are validated, round-trip, and each fictional land listing ships with a site plan',async t=>{const{visitor,staff}=await fixture(t);
+  const land=(await visitor('/properties?sector=land')).data.properties;assert.ok(land.length>0);for(const p of land){const plan=p.plans.find(x=>x.kind==='site_plan');assert.ok(plan);assert.match(plan.url,/^\/assets\/plan-[a-z0-9-]+\.webp$/);assert.match(plan.alt,/not a survey/);assert.match(p.media[0].alt,/Openly licensed photograph\.$/);assert.doesNotMatch(p.media[0].alt,/Generated concept image/);assert.match(p.media[0].caption,/Wikimedia Commons/);for(const a of p.plans.filter(x=>x.kind==='aerial'))assert.match(a.caption,/Wikimedia Commons/);}assert.ok(land.some(p=>p.plans.some(x=>x.kind==='aerial')));
+  const p=(await staff('/properties/harbour-road-development-site')).data.property;
+  assert.equal((await staff('/admin/properties','PATCH',{...p,plans:[{kind:'roof',url:'/assets/plan-cedar-ridge.webp',alt:'x'}]})).status,400);
+  assert.equal((await staff('/admin/properties','PATCH',{...p,plans:[{kind:'aerial',url:'/assets/missing.webp',alt:'x'}]})).status,400);
+  assert.equal((await staff('/admin/properties','PATCH',{...p,plans:[{kind:'aerial',url:'/assets/plan-cedar-ridge.webp',alt:''}]})).status,400);
+  const ok=await staff('/admin/properties','PATCH',{...p,plans:[...p.plans,{kind:'aerial',url:'/assets/land-cedar-ridge.webp',alt:'An aerial view',caption:'Looking north',extra:'dropped'}]});assert.equal(ok.status,200);
+  const aerial=ok.data.property.plans.find(x=>x.kind==='aerial');assert.deepEqual(aerial,{kind:'aerial',url:'/assets/land-cedar-ridge.webp',alt:'An aerial view',caption:'Looking north'});
+  const again=await staff('/admin/properties','PATCH',{...ok.data.property,plans:[]});assert.equal(again.status,200);assert.deepEqual(again.data.property.plans,[]);});
