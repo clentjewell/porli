@@ -759,3 +759,25 @@ h1,h2,h3{font-family:var(--serif);font-weight:500;letter-spacing:-.012em;line-he
 .reset-form label{font-size:12px}
 @media(max-width:800px){.side-nav .signed-in{width:100%;margin:0 0 6px}.side-nav .side-add{width:auto}}
 @media(max-width:560px){.guide-part{padding:18px 18px}.guide-part h2{font-size:20px}}
+/* Land (docs/59): card call to action and the browse-by-type section */
+.card-demo-land{display:block;margin-top:12px;font-size:10px;color:var(--muted)}
+.card-foot-land{margin-top:8px;padding-top:12px;border-top:1px solid var(--line)}
+.card-foot-land .price{font-size:18px}
+.card-cta{min-height:36px;padding:0 13px;font-size:13px;white-space:nowrap}
+.market-land{padding-top:43px}
+.market-land .market-section-title p{max-width:62ch;margin-top:6px;color:var(--muted)}
+.land-cats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.land-cat{display:grid;grid-template-rows:auto auto 1fr auto;gap:10px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:22px 22px 18px;color:var(--ink);text-decoration:none;transition:border-color .2s,transform .35s cubic-bezier(.2,.7,.2,1)}
+.land-cat:hover,.land-cat:focus-visible{border-color:var(--olive);transform:translateY(-3px)}
+.land-cat-icon{display:inline-grid;place-items:center;width:38px;height:38px;border-radius:10px;background:var(--pale);color:var(--olive)}
+.land-cat-icon svg{width:20px;height:20px}
+.land-cat strong{font-size:17px;font-weight:600;letter-spacing:-.01em;line-height:1.3}
+.land-cat-blurb{font-size:13.5px;line-height:1.5;color:var(--muted)}
+.land-cat-count{display:flex;justify-content:space-between;align-items:center;font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--olive);padding-top:12px;border-top:1px solid var(--line)}
+.land-cat-arrow svg{width:16px;height:16px;transition:transform .2s}
+.land-cat:hover .land-cat-arrow svg{transform:translateX(3px)}
+@media(max-width:1000px){.land-cats{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:560px){.land-cats{grid-template-columns:1fr;gap:12px}.land-cat{padding:18px}}
+@media(prefers-reduced-motion:reduce){.land-cat,.land-cat-arrow svg{transition:none}.land-cat:hover{transform:none}}
+/* A site plan is a drawing: show the whole sheet in the listing gallery rather than a crop */
+.is-land .gallery-main img{object-fit:contain;background:#fcfcfa}

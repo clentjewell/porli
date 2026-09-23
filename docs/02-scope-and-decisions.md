@@ -2,7 +2,7 @@
 
 ## Confirmed by the user
 - Working brand name: Porli.
-- Residential real estate marketplace with Buy and Rent discovery.
+- Land and commercial property marketplace, sale only (originally residential with Buy and Rent discovery; see docs/19 and docs/59).
 - Homepage showing available properties and leading into marketplace search.
 - A fixed template for adding and presenting properties.
 - Distinctive, carefully designed visual direction.
