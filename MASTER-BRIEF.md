@@ -496,6 +496,7 @@ Validate whether consumers value the presentation and response workflow, and whe
 | D007 | Open | Launch country, currency and region | Fixture defaults do not settle this |
 | D008 | Confirmed | Node.js/SQLite implementation (docs/13); hosting on Cloudflare Workers with static assets and a SQLite Durable Object (docs/17) | User asked to connect the repository to Cloudflare; Pages cannot run the database-backed server, so the Workers successor platform is used |
 | D009 | Open | Commercial model and brand availability | Not investigated or approved |
+| D062 | Confirmed | The homepage "Browse land by type" section is removed: it repeated the type buttons above Available properties, the search's Land type and the Land page (docs/67, superseding the section in D054 and D061) | Clent, 23 September 2026 |
 | D061 | Confirmed | Real listings priced in AUD show "A$" (GrandBlue: A$9,000,000); the homepage land types become photo cards with a white label panel, the format Clent chose from two references (docs/66) | Clent, 23 September 2026 |
 | D060 | Confirmed | Elmshore Gateway takes a wider crop of its cover's openly licensed panorama as its aerial, and the homepage Land/Commercial switch gets equal-width buttons so the thumb fits the selected one (docs/65) | Clent, 23 September 2026 |
 | D059 | Confirmed | GrandBlue Resort & Beachclub is priced at A$9,000,000, supplied by Clent (docs/64); currency AUD, sale by expressions of interest. The homepage grid returns to the tiled layout with a Browse tile filling the last row (docs/63, revising D058) | Clent, 23 September 2026 |
@@ -4584,3 +4585,38 @@ height, even where a name runs to two lines.
 All 33 API tests pass. Measured at 1440, 1024, 800 and 390px: four equal cards and equal panels,
 no overflow, no script errors. "A$9,000,000" shows on the homepage headline, the commercial card
 and the listing. Highstreet Offices still shows "$1,850,000".
+
+<!-- Source: 67-land-types-section-removed.md -->
+# The "Browse land by type" section removed
+
+23 September 2026, after docs/66. Clent asked first for the photographs to come off the homepage's
+"Browse land by type" cards, because they repeated the listing covers in "Available properties".
+Then he asked whether the whole section should go. It should, and it has.
+
+## Why
+
+The section duplicated three ways of browsing by land type that sit on the same page or one click
+away:
+
+- the type buttons directly above "Available properties", which filter those listings in place;
+- the Land type select in the homepage search;
+- the Land page (`/properties?sector=land`), with its Land type filter.
+
+With one or two listings per type, a separate row of type cards added a stop without adding
+information. Clent's original Land brief asked for a simple way to browse by category, and the
+buttons, the search and the Land page still meet it.
+
+A photo-free version of the cards (plain white card, count, name, arrow) was built and deployed
+for a few minutes before the section was removed. It is not kept.
+
+## Also fixed
+
+The Thailand destination card built its "from" price without knowing the listing was real, so it
+showed "$9,000,000" while the listing showed "A$9,000,000". The card now formats the price from the
+listing itself and reads "1 listing · A$9,000,000".
+
+## Verified
+
+Homepage at 1440px and 390px: the order is headline listing, Featured destinations, Available
+properties, then "What RealDistrict does". There is no overflow and no script error, and the type
+buttons still filter. All 33 API tests pass.
