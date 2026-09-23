@@ -78,7 +78,7 @@ when a real land listing exists; the brand document's shot list now says so.
   and a live count of what is listed under each, counted from the same rows the search serves.
 - **Search page (`/properties?sector=land`):** heading "Land." (or the type, place and tenancy
   searched for); pills for land type, price and land size; the filter panel has land type, land
-  size, minimum and maximum price and "include under offer"; chips show the readable label of a
+  size, minimum and maximum price; chips show the readable label of a
   size or type.
 - **Card:** site plan with the locality on it, the type tag, then the name, three facts (land size,
   zoning, sale method), the line "Fictional listing · Illustrative site plan", and a footer with
@@ -119,3 +119,9 @@ when a real land listing exists; the brand document's shot list now says so.
   shot list now asks for aerial photography of land.
 - **Locale is unchanged** (AUD, Australia/Sydney; D007 open) and the fictional places are the
   same Saltmere, Fernwick and Elmshore.
+
+## Later change: no under-offer tickbox for land
+
+23 September 2026. Clent asked for the land filters to be exactly location, land type, price and
+land size. The "Include under offer" tickbox now appears only for Commercial, in the filter panel
+and in the homepage search. The `pending=1` address still works if someone types it in.
