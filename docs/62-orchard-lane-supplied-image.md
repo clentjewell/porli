@@ -68,6 +68,22 @@ reference photographs supplied by the team. The Commons photograph it replaces s
 the homepage's Saltmere destination card. This completes the set: all eight land listings now
 have a cover, and six have an aerial.
 
+## The Saltmere destination card
+
+Clent offered four pictures for the homepage's Saltmere card and asked which fitted best. The card
+says "Coastal sites and acreage", so the coastal estate aerial was chosen: an ocean beach,
+lagoons and open green land. It is cropped to the card's portrait shape from the upper right of
+the frame, which leaves out the mansion, the drawn boundary lines and the "B" watermark.
+
+The others were set aside for these reasons. The canola field is inland and repeats the Saltmere
+Valley picture's red boundary. The dense coastal subdivision is all pools and large houses, which
+the art direction avoids. The map-pinned farmland looks generated.
+
+The file is `dest-saltmere-supplied.webp`. Its alt text says it is a reference photograph of a
+real place elsewhere standing in for fictional Saltmere, and the line under the cards already
+says Saltmere is fictional. The Commons photograph it replaces is no longer used anywhere and is
+removed.
+
 ## Cache
 
 The first deploy reused the old file names, and images are cached for an hour, so browsers

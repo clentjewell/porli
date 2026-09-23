@@ -642,20 +642,6 @@
       "fictional": false
     },
     {
-      "file": "public/assets/land-harbour-road.webp",
-      "purpose": "Homepage Saltmere destination card (docs/61); no longer the Harbour Road Development Site cover since docs/62",
-      "provider": "Wikimedia Commons",
-      "source": "File:Tremayne Road Mundoolun.jpg (https://commons.wikimedia.org/wiki/File:Tremayne_Road_Mundoolun.jpg), original 4608 × 3456 JPEG, cropped and resized to 1536×1032 WebP q82",
-      "photographer": "Shiftchange",
-      "year": 2014,
-      "licence": "CC0",
-      "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-      "rights": "Public domain dedication (CC0); credited anyway.",
-      "date": "2026-09-23",
-      "reference": "The listing page and the plan slot carry the credit in the image caption; the card and the page label the listing fictional and the picture licensed",
-      "fictional": false
-    },
-    {
       "file": "public/assets/aerial-elmshore-heights.webp",
       "purpose": "Aerial-view slot of Elmshore Heights, Stage 2 (demo-land-08) (docs/61). An openly licensed photograph of a real place elsewhere, used to illustrate a fictional listing; never presented as the parcel itself",
       "provider": "Wikimedia Commons",
@@ -781,6 +767,16 @@
       "rights": "Not established. The watermark suggests an agency listing; Clent to confirm the source and the right to use it before any public launch (as for GrandBlue, register B-04)",
       "date": "2026-09-23",
       "reference": "Alt text ends \"Reference photograph supplied by the team.\"; the card reads \"Fictional listing · Reference photograph\"",
+      "fictional": false
+    },
+    {
+      "file": "public/assets/dest-saltmere-supplied.webp",
+      "purpose": "Homepage Saltmere destination card (docs/62). A real coastline elsewhere standing in for fictional Saltmere, never presented as the place itself",
+      "provider": "Supplied by Clent in the session chat, 23 September 2026 (one of four offered; chosen for the card's \"Coastal sites and acreage\")",
+      "source": "Original source not recorded; supplied as a 736 × 920 JPEG with boundary lines and a \"B\" watermark. The card uses the upper right 436 × 581, which has neither",
+      "rights": "Not established. The watermark suggests an agency listing; Clent to confirm the source and the right to use it before any public launch",
+      "date": "2026-09-23",
+      "reference": "The caption under the destinations says Saltmere and Fernwick are fictional places",
       "fictional": false
     }
   ]
