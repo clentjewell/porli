@@ -4409,6 +4409,15 @@ real place elsewhere standing in for fictional Saltmere, and the line under the 
 says Saltmere is fictional. The Commons photograph it replaces is no longer used anywhere and is
 removed.
 
+## The "What RealDistrict does" photograph
+
+Clent then asked which of the same four pictures suited the homepage band "Find the property. Talk
+to the people who manage it." The canola field with one parcel outlined in red was chosen, because
+it says "find the property" at a glance. Away from a listing, the boundary cannot be read as a
+fictional parcel's. It is used whole (`service-parcel-supplied.webp`, 736 × 736), and the band's
+centre crop keeps the outlined parcel. The Commons photograph it replaces is no longer used and is
+removed.
+
 ## Cache
 
 The first deploy reused the old file names, and images are cached for an hour, so browsers
