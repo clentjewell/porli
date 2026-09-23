@@ -496,6 +496,7 @@ Validate whether consumers value the presentation and response workflow, and whe
 | D007 | Open | Launch country, currency and region | Fixture defaults do not settle this |
 | D008 | Confirmed | Node.js/SQLite implementation (docs/13); hosting on Cloudflare Workers with static assets and a SQLite Durable Object (docs/17) | User asked to connect the repository to Cloudflare; Pages cannot run the database-backed server, so the Workers successor platform is used |
 | D009 | Open | Commercial model and brand availability | Not investigated or approved |
+| D057 | Confirmed | Orchard Lane Subdivision uses an aerial photograph Clent supplied, as its cover and in the aerial slot (docs/62). This adds a fourth image kind, a reference photograph of a real place elsewhere supplied by the team, labelled as such at every point, with rights to be confirmed. Untouched fictional land rows now follow the fixture's pictures through one sync migration | Clent, 23 September 2026 |
 | D056 | Confirmed | Each land listing has an Aerial view and site plan section modelled on the reference page's floor-plan accordion (docs/61), with empty slots that ask for what is missing, and the workspace can fill them. The land imagery is sourced without Higgsfield: twelve openly licensed Wikimedia Commons photographs of real places elsewhere, credited at every point and labelled a licensed photograph on a fictional listing, replace the generated studies of D055; the illustrative plans return in the site-plan slot | Clent, 23 September 2026 |
 | D055 | Confirmed | The land listings carry generated concept studies (Higgsfield Soul Location, 0.12 credits each) instead of the illustrative site plans of D054, after Clent asked for photographs like the other listings (docs/60). Six images for eight listings: the development-site pair and the rural pair each share one, as the fictional homes did. A guarded migration rewrites rows that still hold a plan | Clent, 23 September 2026 |
 | D054 | Confirmed | Residential is replaced by Land (docs/59): two sectors, land and commercial; four land types (development site, commercial and industrial land, rural land, subdivision or investment land); land size, zoning and sale method as the facts; a price or a sale method where there is no figure; filters limited to location, land type, price and land size; a View property button on every land card. The fictional homes are archived, not deleted. Land images are illustrative site plans drawn in code until aerial photography exists | Clent, 23 September 2026 |
@@ -4320,3 +4321,38 @@ Two, both guarded and idempotent, inside the seed block so the fixture data is i
   still wants the vendor's own aerials when a real land listing exists; the shot list says so.
 - **Three aerial slots are empty** by design.
 - **Bedrooms, bathrooms and car spaces** still show in the editor for land (docs/59).
+
+<!-- Source: 62-orchard-lane-supplied-image.md -->
+# Orchard Lane: a picture supplied by Clent
+
+23 September 2026, after docs/61. Clent sent an aerial photograph of a built-out housing estate
+for Orchard Lane Subdivision. He also sent pictures for Saltmere Valley Acreage, Cedar Ridge,
+Fernwick Estate Lot 12 (two) and Harbour Road Development Site, but those arrived while work was
+running and never reached the session's disk. They are not on the site, and he has been asked to
+send them again.
+
+## What changed
+
+- **Orchard Lane Subdivision** uses the picture twice. The cover is a 3:2 crop and the aerial
+  slot holds the whole portrait frame. The Commons photographs it replaces (docs/61) are gone.
+- **A fourth kind of image.** A photograph Clent supplied, of a real place elsewhere, with no
+  recorded source or licence. Its alt text ends "Reference photograph supplied by the team." and
+  the server leaves that ending alone. The card reads "Fictional listing · Reference photograph".
+  The listing page says "Reference photograph of a real place elsewhere, supplied by the team,
+  used to illustrate a fictional listing". The caption credits the team.
+- **Register.** Both files are in `design/asset-register.json` with `fictional: false`. The
+  source is marked not recorded and the rights are marked not established, for Clent to confirm.
+- **One sync migration replaces the two in docs/61.** Every fictional land row that no staff
+  member has saved (version 1) follows the fixture's current pictures, plans and description.
+  An edited row is never touched. It is proven stable across restarts, so the next pictures Clent
+  sends need only a fixture change.
+- **The aerial slot fits portrait images.** Images are capped at 720px tall and centred, and fill
+  the width on phones. A default 40px figure margin that had narrowed every plan image is removed.
+
+## Limitations
+
+- **Resolution.** The supplied file is 577 × 867, so the cover is stored at 577px wide. It is
+  sharp on cards and soft in the full-width gallery. A larger original would fix it.
+- **Rights are unknown.** The file carries no source. Before a public launch it needs the same
+  confirmation as GrandBlue's photographs (B-04).
+- **Four listings still wait** for the pictures that did not arrive.

@@ -93,10 +93,10 @@ test('every listing image says where the picture came from',async t=>{const{visi
       assert.ok(m.alt&&m.alt.length>10,`${p.slug}: alt text is missing or too short`);
       // Three kinds (docs/61): a generated study or an openly licensed photograph of a real place
       // elsewhere on a fictional listing; a photograph supplied by the property on a real one.
-      const want=p.is_demo?['Generated concept image.','Openly licensed photograph.']:['Photograph supplied by the property.'];
+      const want=p.is_demo?['Generated concept image.','Openly licensed photograph.','Reference photograph supplied by the team.']:['Photograph supplied by the property.'];
       assert.ok(want.some(w=>m.alt.includes(w)),`${p.slug}: alt text must state its source, got ${JSON.stringify(m.alt)}`);
       // A real photograph must never be described as generated, or the other way round.
-      const wrong=p.is_demo?['Photograph supplied by the property.']:['Generated concept image.','Openly licensed photograph.'];
+      const wrong=p.is_demo?['Photograph supplied by the property.']:['Generated concept image.','Openly licensed photograph.','Reference photograph supplied by the team.'];
       assert.ok(!wrong.some(w=>m.alt.includes(w)),`${p.slug}: alt text claims the wrong source`);
       assert.equal(want.filter(w=>m.alt.includes(w)).length,1,`${p.slug}: alt text names one kind only`);}}
   assert.ok(checked>=13,'expected every seeded image to be checked');});
@@ -197,7 +197,7 @@ test('a land listing publishes on a sale method alone, but a private sale still 
   assert.equal((await staff('/admin/properties','POST',{...base,sale_method:'private_sale'})).status,400);
   const ok=await staff('/admin/properties','POST',{...base,sale_method:'tender'});assert.equal(ok.status,200);assert.equal(ok.data.property.sale_method,'tender');assert.equal(ok.data.property.land_area,900);});
 test('aerial and site plan slots are validated, round-trip, and each fictional land listing ships with a site plan',async t=>{const{visitor,staff}=await fixture(t);
-  const land=(await visitor('/properties?sector=land')).data.properties;assert.ok(land.length>0);for(const p of land){const plan=p.plans.find(x=>x.kind==='site_plan');assert.ok(plan);assert.match(plan.url,/^\/assets\/plan-[a-z0-9-]+\.webp$/);assert.match(plan.alt,/not a survey/);assert.match(p.media[0].alt,/Openly licensed photograph\.$/);assert.doesNotMatch(p.media[0].alt,/Generated concept image/);assert.match(p.media[0].caption,/Wikimedia Commons/);for(const a of p.plans.filter(x=>x.kind==='aerial'))assert.match(a.caption,/Wikimedia Commons/);}assert.ok(land.some(p=>p.plans.some(x=>x.kind==='aerial')));
+  const land=(await visitor('/properties?sector=land')).data.properties;assert.ok(land.length>0);for(const p of land){const plan=p.plans.find(x=>x.kind==='site_plan');assert.ok(plan);assert.match(plan.url,/^\/assets\/plan-[a-z0-9-]+\.webp$/);assert.match(plan.alt,/not a survey/);assert.match(p.media[0].alt,/(Openly licensed photograph|Reference photograph supplied by the team)\.$/);assert.doesNotMatch(p.media[0].alt,/Generated concept image/);assert.match(p.media[0].caption,/Wikimedia Commons|supplied by the RealDistrict team/);for(const a of p.plans.filter(x=>x.kind==='aerial'))assert.match(a.caption,/Wikimedia Commons|supplied by the RealDistrict team/);}assert.ok(land.some(p=>p.plans.some(x=>x.kind==='aerial')));
   const p=(await staff('/properties/harbour-road-development-site')).data.property;
   assert.equal((await staff('/admin/properties','PATCH',{...p,plans:[{kind:'roof',url:'/assets/plan-cedar-ridge.webp',alt:'x'}]})).status,400);
   assert.equal((await staff('/admin/properties','PATCH',{...p,plans:[{kind:'aerial',url:'/assets/missing.webp',alt:'x'}]})).status,400);
