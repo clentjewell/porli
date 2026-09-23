@@ -656,20 +656,6 @@
       "fictional": false
     },
     {
-      "file": "public/assets/land-fernwick-lot-12.webp",
-      "purpose": "Cover of Fernwick Estate, Lot 12 (demo-land-03) (docs/61). An openly licensed photograph of a real place elsewhere, used to illustrate a fictional listing; never presented as the parcel itself",
-      "provider": "Wikimedia Commons",
-      "source": "File:Cobalt Street Carole Park.jpg (https://commons.wikimedia.org/wiki/File:Cobalt_Street_Carole_Park.jpg), original 4608 × 3456 JPEG, cropped and resized to 1536×1032 WebP q82",
-      "photographer": "Shiftchange",
-      "year": 2014,
-      "licence": "CC0",
-      "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/",
-      "rights": "Public domain dedication (CC0); credited anyway.",
-      "date": "2026-09-23",
-      "reference": "The listing page and the plan slot carry the credit in the image caption; the card and the page label the listing fictional and the picture licensed",
-      "fictional": false
-    },
-    {
       "file": "public/assets/aerial-elmshore-heights.webp",
       "purpose": "Aerial-view slot of Elmshore Heights, Stage 2 (demo-land-08) (docs/61). An openly licensed photograph of a real place elsewhere, used to illustrate a fictional listing; never presented as the parcel itself",
       "provider": "Wikimedia Commons",
@@ -756,6 +742,26 @@
       "date": "2026-09-23",
       "reference": "Alt text ends \"Reference photograph supplied by the team.\"",
       "fictional": false
+    },
+    {
+      "file": "public/assets/land-fernwick-lot-12-supplied.webp",
+      "purpose": "Cover of Fernwick Estate, Lot 12 (demo-land-03), a 3:2 crop (705 × 470) (docs/62). An illustrative render of an imagined business park, not a photograph and not the parcel",
+      "provider": "Supplied by Clent in the session chat, 23 September 2026",
+      "source": "Original source not recorded; it looks computer-generated (uniform trees, repeated buildings), so it is treated as generated",
+      "rights": "Not established. Clent to confirm the source and the right to use it before any public launch",
+      "date": "2026-09-23",
+      "reference": "Alt text ends \"Generated concept image.\"; the card reads \"Fictional listing · Generated image\"; the caption reads \"Illustrative render supplied by the RealDistrict team\"",
+      "fictional": true
+    },
+    {
+      "file": "public/assets/aerial-fernwick-lot-12-supplied.webp",
+      "purpose": "Aerial-view slot of Fernwick Estate, Lot 12 (demo-land-03), the whole frame (736 × 470) (docs/62). An illustrative render of an imagined business park, not a photograph and not the parcel",
+      "provider": "Supplied by Clent in the session chat, 23 September 2026",
+      "source": "Original source not recorded; it looks computer-generated (uniform trees, repeated buildings), so it is treated as generated",
+      "rights": "Not established. Clent to confirm the source and the right to use it before any public launch",
+      "date": "2026-09-23",
+      "reference": "Alt text ends \"Generated concept image.\"; the card reads \"Fictional listing · Generated image\"; the caption reads \"Illustrative render supplied by the RealDistrict team\"",
+      "fictional": true
     }
   ]
 }

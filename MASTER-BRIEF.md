@@ -4372,6 +4372,17 @@ Clent then sent an overhead photograph of a suburban street for the Cedar Ridge 
 is used whole, 735 × 893, as `aerial-cedar-ridge-supplied.webp`. The Murrumbidgee aerial is
 removed, so both Cedar Ridge pictures are now reference photographs supplied by the team.
 
+## Fernwick Estate, Lot 12
+
+Clent sent an elevated view of a business park beside a divided road for Fernwick Lot 12. It looks
+computer-generated, with uniform trees, repeated green-roofed buildings and an unreal horizon, so
+it is not labelled as a photograph. It gets the site's existing generated kind: alt text ending
+"Generated concept image.", the card line "Fictional listing · Generated image", and the
+caption "Illustrative render supplied by the RealDistrict team". It is both the cover (a 3:2
+crop) and the aerial slot (the whole frame), under new file names. The register records it as
+`fictional: true`, supplied by Clent, source not recorded. The Commons cover it replaces is
+removed.
+
 ## Cache
 
 The first deploy reused the old file names, and images are cached for an hour, so browsers
@@ -4385,5 +4396,4 @@ replaced image always gets a new file name.
   sharp on cards and soft in the full-width gallery. A larger original would fix it.
 - **Rights are unknown.** The file carries no source. Before a public launch it needs the same
   confirmation as GrandBlue's photographs (B-04).
-- **Two listings still wait** for their pictures: Fernwick Estate Lot 12 and Harbour Road
-  Development Site.
+- **One listing still waits** for its picture: Harbour Road Development Site.
