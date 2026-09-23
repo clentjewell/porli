@@ -825,3 +825,8 @@ h1,h2,h3{font-family:var(--serif);font-weight:500;letter-spacing:-.012em;line-he
 .showcase-grid .home-grid-all.span6-2{grid-column:span 2}.showcase-grid .home-grid-all.span6-3{grid-column:span 3}.showcase-grid .home-grid-all.span6-4{grid-column:span 4}.showcase-grid .home-grid-all.span6-6{grid-column:1/-1}
 @media(max-width:1000px){.showcase-grid .home-grid-all.span4-2{grid-column:span 2}.showcase-grid .home-grid-all.span4-4{grid-column:1/-1}}
 @media(max-width:640px){.showcase-grid .home-grid-all[class]{grid-column:1/-1;height:auto;min-height:170px}}
+/* The sector switch (docs/65): the thumb is always half the pill, so the two buttons must be equal
+   width; with "Land" and "Commercial" sized to their text the thumb overran "Land". An auto-sized
+   grid of two 1fr columns gives both the width of the longer label. */
+.switch-pill{display:inline-grid;grid-template-columns:repeat(2,minmax(0,1fr))}
+.switch-pill button{min-width:0}
