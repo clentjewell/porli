@@ -496,6 +496,7 @@ Validate whether consumers value the presentation and response workflow, and whe
 | D007 | Open | Launch country, currency and region | Fixture defaults do not settle this |
 | D008 | Confirmed | Node.js/SQLite implementation (docs/13); hosting on Cloudflare Workers with static assets and a SQLite Durable Object (docs/17) | User asked to connect the repository to Cloudflare; Pages cannot run the database-backed server, so the Workers successor platform is used |
 | D009 | Open | Commercial model and brand availability | Not investigated or approved |
+| D064 | Confirmed | Every page works on phones and touch screens: 44px controls, 16px form fields, wrapping filters, a swipeable workspace menu, stacked workspace tables and a one-at-a-time inbox (docs/69) | Clent, 23 September 2026 |
 | D063 | Confirmed | Land listings show a price per m² or hectare derived from stated figures, frontage in the overview, a land-size sort and a one-line page intro; the sale method no longer repeats on unpriced cards (docs/68) | Clent, 23 September 2026 |
 | D062 | Confirmed | The homepage "Browse land by type" section is removed: it repeated the type buttons above Available properties, the search's Land type and the Land page (docs/67, superseding the section in D054 and D061) | Clent, 23 September 2026 |
 | D061 | Confirmed | Real listings priced in AUD show "A$" (GrandBlue: A$9,000,000); the homepage land types become photo cards with a white label panel, the format Clent chose from two references (docs/66) | Clent, 23 September 2026 |
@@ -4656,3 +4657,56 @@ The look is unchanged: the same cards, type, palette and spacing as the rest of 
 1440px and 390px: no overflow and no script errors. The rates appear on the two priced land cards
 and their listing overviews. Unpriced cards show the sale method once. The size sort orders Cedar
 Ridge, Saltmere Valley, Orchard Lane, Fernwick and Harbour Road.
+
+<!-- Source: 69-phones-and-touch.md -->
+# Phones and touch screens
+
+23 September 2026, after docs/68. Clent asked for RealDistrict, the Team login page and every other
+page to work properly on phones. Every public page, the Team login, the customer account pages,
+all ten team workspace pages and five dialogs were measured in Chromium at 320, 360, 375, 390, 414,
+768, 1024 and 1440px: 272 page loads. None overflowed sideways and none logged a script error
+before or after this change. The problems were smaller controls and layouts that hid content.
+
+## What changed
+
+1. **Controls a finger uses are at least 44px** on phones and touch screens: header links, the
+   wordmark, the menu toggle, the account button, save hearts, card and hero photo arrows, the hero
+   photo picker, footer links, location chips, "Open inbox", "Reset filters", table links, and the
+   editor's and dialogs' round icon buttons. Checkboxes are 22px inside a label at least 44px tall,
+   so the whole line is the target.
+2. **Form fields use 16px text on phones**, so iOS Safari no longer zooms in when a field is
+   focused. This covers the home search, the Land and Commercial filters, the sign-in, enquiry and
+   inspection dialogs, the Team login, account settings and every workspace form.
+3. **Land and Commercial filters wrap** onto a second line instead of scrolling sideways. At 390px
+   "Land size" was hidden past the edge.
+4. **The workspace menu is one swipeable row** under the Add a property button, with the current
+   page scrolled into view. Before, the links wrapped into a block about 250px tall on every team
+   page. Desktop keeps the column.
+5. **Workspace tables stack into labelled rows** below 700px. The Properties table showed only two
+   of its five columns on a phone; each row now reads Price, Publication, Availability and Edit.
+   The column names are copied from the table header, so the markup stays a real table.
+6. **The inbox shows the list or one conversation, not both**, for customers and the team. An open
+   conversation has an "All conversations" link back to the list.
+7. **Headings wrap** so the dashboard's "Last 30 days" menu is no longer squeezed beside the title.
+8. **Land cards on phones** put the price above a full-width View property button.
+9. **Leftover residential wording removed:** "Add a home", "Available homes", "Homes receiving
+   enquiries", "Every home has its own conversation", the missing-listing message and three links
+   that still pointed to the retired Residential search now say property or listing and go to Land.
+
+No motion was added, the Content Security Policy is unchanged (no inline styles or scripts), and
+no dependency was added.
+
+## Verified
+
+The same 272 page loads after the change: no sideways overflow, no script errors, no broken
+images, no unnamed controls, no control under 44px on a phone except inline card-title links, and
+no form field under 16px. The inbox was checked on a phone with a real conversation, as the
+customer and as the team, list then thread then back. Screenshots at 320 and 390px were reviewed
+by eye. `npm run check` passes and all 34 API tests pass.
+
+## Limits
+
+Card titles are inline heading links and stay at their text height; the whole card has a
+full-size View property button or photo link. The measurements use Chromium's phone emulation, not
+physical iOS and Android devices. The land editor still offers bedroom and bathroom fields, which
+is a separate change.

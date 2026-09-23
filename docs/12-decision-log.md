@@ -11,6 +11,7 @@
 | D007 | Open | Launch country, currency and region | Fixture defaults do not settle this |
 | D008 | Confirmed | Node.js/SQLite implementation (docs/13); hosting on Cloudflare Workers with static assets and a SQLite Durable Object (docs/17) | User asked to connect the repository to Cloudflare; Pages cannot run the database-backed server, so the Workers successor platform is used |
 | D009 | Open | Commercial model and brand availability | Not investigated or approved |
+| D064 | Confirmed | Every page works on phones and touch screens: 44px controls, 16px form fields, wrapping filters, a swipeable workspace menu, stacked workspace tables and a one-at-a-time inbox (docs/69) | Clent, 23 September 2026 |
 | D063 | Confirmed | Land listings show a price per m² or hectare derived from stated figures, frontage in the overview, a land-size sort and a one-line page intro; the sale method no longer repeats on unpriced cards (docs/68) | Clent, 23 September 2026 |
 | D062 | Confirmed | The homepage "Browse land by type" section is removed: it repeated the type buttons above Available properties, the search's Land type and the Land page (docs/67, superseding the section in D054 and D061) | Clent, 23 September 2026 |
 | D061 | Confirmed | Real listings priced in AUD show "A$" (GrandBlue: A$9,000,000); the homepage land types become photo cards with a white label panel, the format Clent chose from two references (docs/66) | Clent, 23 September 2026 |
