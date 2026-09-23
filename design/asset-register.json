@@ -643,7 +643,7 @@
     },
     {
       "file": "public/assets/land-harbour-road.webp",
-      "purpose": "Cover of Harbour Road Development Site (demo-land-01); also the Saltmere destination card (docs/61). An openly licensed photograph of a real place elsewhere, used to illustrate a fictional listing; never presented as the parcel itself",
+      "purpose": "Homepage Saltmere destination card (docs/61); no longer the Harbour Road Development Site cover since docs/62",
       "provider": "Wikimedia Commons",
       "source": "File:Tremayne Road Mundoolun.jpg (https://commons.wikimedia.org/wiki/File:Tremayne_Road_Mundoolun.jpg), original 4608 × 3456 JPEG, cropped and resized to 1536×1032 WebP q82",
       "photographer": "Shiftchange",
@@ -762,6 +762,26 @@
       "date": "2026-09-23",
       "reference": "Alt text ends \"Generated concept image.\"; the card reads \"Fictional listing · Generated image\"; the caption reads \"Illustrative render supplied by the RealDistrict team\"",
       "fictional": true
+    },
+    {
+      "file": "public/assets/land-harbour-road-supplied.webp",
+      "purpose": "Cover of Harbour Road Development Site (demo-land-01), a 3:2 crop around the outlined parcel (736 × 491) (docs/62). A real place elsewhere, never presented as the parcel itself",
+      "provider": "Supplied by Clent in the session chat, 23 September 2026",
+      "source": "Original source not recorded; supplied as a 736 × 980 JPEG with a yellow boundary drawn on it and an \"Illustrative Only\" watermark at the bottom edge, trimmed off",
+      "rights": "Not established. The watermark suggests an agency listing; Clent to confirm the source and the right to use it before any public launch (as for GrandBlue, register B-04)",
+      "date": "2026-09-23",
+      "reference": "Alt text ends \"Reference photograph supplied by the team.\"; the card reads \"Fictional listing · Reference photograph\"",
+      "fictional": false
+    },
+    {
+      "file": "public/assets/aerial-harbour-road-supplied.webp",
+      "purpose": "Aerial-view slot of Harbour Road Development Site (demo-land-01), the frame less its bottom 30 px (736 × 950) (docs/62). A real place elsewhere, never presented as the parcel itself",
+      "provider": "Supplied by Clent in the session chat, 23 September 2026",
+      "source": "Original source not recorded; supplied as a 736 × 980 JPEG with a yellow boundary drawn on it and an \"Illustrative Only\" watermark at the bottom edge, trimmed off",
+      "rights": "Not established. The watermark suggests an agency listing; Clent to confirm the source and the right to use it before any public launch (as for GrandBlue, register B-04)",
+      "date": "2026-09-23",
+      "reference": "Alt text ends \"Reference photograph supplied by the team.\"; the card reads \"Fictional listing · Reference photograph\"",
+      "fictional": false
     }
   ]
 }
