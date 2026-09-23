@@ -740,7 +740,7 @@
       "fictional": false
     },
     {
-      "file": "public/assets/land-orchard-lane.webp",
+      "file": "public/assets/land-orchard-lane-supplied.webp",
       "purpose": "Cover of Orchard Lane Subdivision (demo-land-07), a 3:2 crop at the original 577 px width (docs/62). A real place elsewhere, never presented as the parcel itself",
       "provider": "Supplied by Clent in the session chat, 23 September 2026",
       "source": "Original source and photographer not recorded; supplied as a 577 × 867 JPEG",
@@ -750,7 +750,7 @@
       "fictional": false
     },
     {
-      "file": "public/assets/aerial-orchard-lane.webp",
+      "file": "public/assets/aerial-orchard-lane-supplied.webp",
       "purpose": "Aerial-view slot of Orchard Lane Subdivision (demo-land-07), the full portrait frame, 577 × 867 (docs/62). A real place elsewhere, never presented as the parcel itself",
       "provider": "Supplied by Clent in the session chat, 23 September 2026",
       "source": "Original source and photographer not recorded; supplied as a 577 × 867 JPEG",
