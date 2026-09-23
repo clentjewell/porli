@@ -53,6 +53,9 @@ an illustrative site plan."
 
 ## The images: illustrative site plans, not aerials
 
+**Superseded the same day (docs/60).** Clent asked for photographs like the other listings; the
+plans were replaced by generated studies. The paragraphs below describe the first version.
+
 Clent asked for an aerial or site image on each listing. Higgsfield holds under one credit and
 no aerial photograph of a fictional parcel exists, so each listing carries an **illustrative site
 plan drawn in code**: parcel outline on a faint grid, neighbouring lots, the road with its name,
