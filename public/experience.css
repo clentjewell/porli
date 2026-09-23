@@ -764,23 +764,6 @@ h1,h2,h3{font-family:var(--serif);font-weight:500;letter-spacing:-.012em;line-he
 .card-foot-land{margin-top:8px;padding-top:12px;border-top:1px solid var(--line)}
 .card-foot-land .price{font-size:18px}
 .card-cta{min-height:36px;padding:0 13px;font-size:13px;white-space:nowrap}
-.market-land{padding-top:43px}
-.market-land .market-section-title p{max-width:62ch;margin-top:6px;color:var(--muted)}
-.land-cats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
-/* Photo cards with a white label panel, after the "explore cities" reference Clent chose (docs/66). */
-.land-cat{position:relative;display:block;aspect-ratio:4/5;border-radius:14px;overflow:hidden;background:var(--pale);color:var(--ink);text-decoration:none;isolation:isolate}
-.land-cat img,.land-cat-blank{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .9s var(--ease)}
-.land-cat-panel{position:absolute;left:10px;right:10px;bottom:10px;display:grid;grid-template-columns:1fr auto;grid-template-rows:auto auto;column-gap:12px;row-gap:2px;align-items:center;padding:14px 14px 14px 16px;min-height:92px;align-content:center;background:#fff;border-radius:10px;box-shadow:0 10px 26px #16251d1f}
-.land-cat-count{grid-column:1;font-size:12px;color:var(--muted)}
-.land-cat strong{grid-column:1;font-size:16px;font-weight:600;letter-spacing:-.01em;line-height:1.25}
-.land-cat-arrow{grid-column:2;grid-row:1/3;display:grid;place-items:center;width:40px;height:40px;border-radius:50%;border:1px solid var(--line);color:var(--ink);transition:background .2s,color .2s,border-color .2s}
-.land-cat-arrow svg{width:17px;height:17px}
-.land-cat:hover img{transform:scale(1.04)}
-.land-cat:hover .land-cat-arrow,.land-cat:focus-visible .land-cat-arrow{background:var(--olive);border-color:var(--olive);color:#fff}
-.land-cat:focus-visible{outline:3px solid var(--clay);outline-offset:3px}
-@media(max-width:1000px){.land-cats{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media(max-width:560px){.land-cats{grid-template-columns:minmax(0,1fr);gap:12px}.land-cat{aspect-ratio:4/3}}
-@media(prefers-reduced-motion:reduce){.land-cat img,.land-cat-arrow{transition:none}.land-cat:hover img{transform:none}}
 /* Aerial view and site plan (docs/61): an accordion of one row per kind, after the reference's floor plans */
 .plan-list{display:grid;gap:12px;margin-top:6px}
 .plan-item{background:#fff;border:1px solid var(--line);border-radius:14px}

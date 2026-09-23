@@ -45,10 +45,11 @@ export function homeView({ properties, state, esc, icon, money, price, card, emp
   // listings the marketplace serves, so the numbers cannot drift from the search results.
   const profile = (location, sector) => { const rows = properties.filter(p => (p.sector || 'residential') === sector && (p.locality || '').toLowerCase().includes(location.toLowerCase()));
     if (!rows.length) return 'No listings yet';
-    const priced = rows.filter(p => p.price_minor > 0).map(p => p.price_minor).sort((a, b) => a - b);
+    const pricedRows = rows.filter(p => p.price_minor > 0).sort((a, b) => a.price_minor - b.price_minor);
+    const priced = pricedRows.map(p => p.price_minor);
     const count = `${rows.length} ${rows.length === 1 ? 'listing' : 'listings'}`;
     if (!priced.length) return `${count} · price on request`;
-    const from = money({ price_minor: priced[0], currency: rows[0].currency });
+    const from = money(pricedRows[0]);
     return priced.length === rows.length && priced[0] === priced.at(-1) ? `${count} · ${from}`
       : `${count} · from ${from}`; };
   const featured = homes[0];
@@ -65,12 +66,6 @@ export function homeView({ properties, state, esc, icon, money, price, card, emp
   const defaultHeadline = state.content.headline === 'Find your next place.';
   const headline = defaultHeadline ? `<span class="w">Land</span> <span class="w">to</span> <span class="w">build</span> <span class="w">on.</span><br><span class="w"><span class="hero-rotate" data-hero-rotate>${HERO_LINES[0]}</span></span>` : wordStagger(esc(state.content.headline));
   const intro = state.content.intro === 'Land and commercial property, with one team to talk to.' ? 'Search, shortlist and talk directly to the team.' : state.content.intro;
-  // The four land types with what is actually listed under each, counted from the same rows the
-  // marketplace serves, so a category can never promise more than the search returns.
-  const landCount = type => { const n = properties.filter(p => (p.sector || 'residential') === 'land' && p.property_type === type).length; return n ? `${n} ${n === 1 ? 'listing' : 'listings'}` : 'No listings yet'; };
-  // Each type card shows the cover of the first available listing of that type (docs/66), so the
-  // picture always belongs to something the card leads to; no listing, no picture.
-  const landCover = type => properties.find(p => (p.sector || 'residential') === 'land' && p.property_type === type && p.media?.[0])?.media[0];
   const heroChip = featured ? (featured.transaction_status !== 'available' ? statusBadges({ ...featured, featured: 0, listed_at: '' }) : '') : '';
   const carousel = featured && views.length ? `<div class="market-feature-image" tabindex="0" role="group" aria-roledescription="carousel" aria-label="Photographs of ${esc(featured.title)}">${views.map((m, i) => `<img class="market-view ${i === 0 ? 'is-current' : ''}" src="${esc(m.url)}" alt="${esc(m.alt)}" aria-hidden="${i !== 0}" data-hero-image="${i}" width="1024" height="688" ${i === 0 ? 'fetchpriority="high"' : 'loading="lazy"'}>`).join('')}<div class="feature-label-stack"><span class="feature-label">${esc(typeLabel(featured))} · ${esc(featured.locality)}</span>${heroChip}</div>${views.length > 1 ? `<div class="hero-carousel-controls"><button type="button" class="hero-nav-btn" data-action="hero-prev" aria-label="Previous photograph">${icon('chevron-left')}</button><button type="button" class="hero-nav-btn" data-action="hero-next" aria-label="Next photograph">${icon('chevron-right')}</button></div><div class="hero-meta"><span class="hero-counter" aria-hidden="true"><span data-hero-counter>1</span> / ${views.length}</span><div class="market-view-controls" aria-label="Choose a photograph">${views.map((m, i) => `<button class="${i === 0 ? 'is-current' : ''}" data-hero-pick="${i}" aria-label="Photograph ${i + 1} of ${views.length}" aria-pressed="${i === 0}"></button>`).join('')}</div></div>` : ''}<p class="sr-only" role="status" aria-live="polite" data-hero-status></p></div>` : '';
   // Headline listing facts (right column): locality, price, sale method (commercial, non-default only),
@@ -115,10 +110,6 @@ export function homeView({ properties, state, esc, icon, money, price, card, emp
         <a class="destination-card" data-reveal href="/properties?sector=commercial&location=Thailand"><img src="/assets/grand-blue-beach.webp" alt="GrandBlue beachfront — photograph supplied by the property" loading="lazy" width="1536" height="1032"><span class="destination-scrim" aria-hidden="true"></span><span class="destination-body"><strong>Thailand</strong><em>Extraordinary places, real opportunities.</em><span class="destination-facts">${esc(profile('Thailand','commercial'))}</span></span><span class="destination-arrow" aria-hidden="true">${icon('external')}</span></a>
       </div>
       <p class="destination-caption small muted">Saltmere and Fernwick are fictional places used for the concept.</p>
-    </section>
-    <section class="market-land market-width" aria-labelledby="land-heading">
-      <div class="market-section-title" data-reveal><div><span class="eyebrow">Land</span><h2 id="land-heading">Browse land by type</h2><p>Development sites, commercial and industrial land, rural land, and subdivision or investment land. Each listing shows its size, zoning and sale method.</p></div><a class="link" href="/properties?sector=land">All land ${icon('arrow')}</a></div>
-      <div class="land-cats" data-reveal-group>${landTypes.map(([key, label]) => { const cover = landCover(key); return `<a class="land-cat" data-reveal href="/properties?sector=land&type=${esc(key)}">${cover ? `<img src="${esc(cover.url)}" alt="${esc(cover.alt)}" loading="lazy" width="600" height="750">` : '<span class="land-cat-blank" aria-hidden="true"></span>'}<span class="land-cat-panel"><span class="land-cat-count">${esc(landCount(key))}</span><strong>${esc(key === 'development_site' ? 'Development sites' : label)}</strong><span class="land-cat-arrow" aria-hidden="true">${icon('arrow')}</span></span></a>`; }).join('')}</div>
     </section>
     <section class="market-listings market-width" aria-labelledby="available-heading">
       <div class="market-section-title" data-reveal><div><h2 id="available-heading">Available properties</h2><p>Compare prices, property details and availability.</p></div><a class="link" href="/properties?sector=all">Every property ${icon('arrow')}</a></div>
