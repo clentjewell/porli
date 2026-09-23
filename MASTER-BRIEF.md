@@ -496,6 +496,7 @@ Validate whether consumers value the presentation and response workflow, and whe
 | D007 | Open | Launch country, currency and region | Fixture defaults do not settle this |
 | D008 | Confirmed | Node.js/SQLite implementation (docs/13); hosting on Cloudflare Workers with static assets and a SQLite Durable Object (docs/17) | User asked to connect the repository to Cloudflare; Pages cannot run the database-backed server, so the Workers successor platform is used |
 | D009 | Open | Commercial model and brand availability | Not investigated or approved |
+| D059 | Confirmed | GrandBlue Resort & Beachclub is priced at A$9,000,000, supplied by Clent (docs/64); currency AUD, sale by expressions of interest. The homepage grid returns to the tiled layout with a Browse tile filling the last row (docs/63, revising D058) | Clent, 23 September 2026 |
 | D058 | Confirmed | The homepage Available properties grid becomes a uniform grid of the standard cards with aligned footers and a closing Browse tile that fills the last row, land first (docs/63). Replaces the three-then-two showcase tiles, which only held five listings | Clent, 23 September 2026 |
 | D057 | Confirmed | Orchard Lane Subdivision uses an aerial photograph Clent supplied, as its cover and in the aerial slot (docs/62). This adds a fourth image kind, a reference photograph of a real place elsewhere supplied by the team, labelled as such at every point, with rights to be confirmed. Untouched fictional land rows now follow the fixture's pictures through one sync migration | Clent, 23 September 2026 |
 | D056 | Confirmed | Each land listing has an Aerial view and site plan section modelled on the reference page's floor-plan accordion (docs/61), with empty slots that ask for what is missing, and the workspace can fill them. The land imagery is sourced without Higgsfield: twelve openly licensed Wikimedia Commons photographs of real places elsewhere, credited at every point and labelled a licensed photograph on a fictional listing, replace the generated studies of D055; the illustrative plans return in the site-plan slot | Clent, 23 September 2026 |
@@ -4443,7 +4444,16 @@ replaced image always gets a new file name.
   without the outlines would be clearer.
 
 <!-- Source: 63-homepage-grid.md -->
+
 # The homepage property grid, cleaned up
+
+**Revised the same day.** Clent compared the two layouts and preferred the original tiled grid
+(three tiles, two wide, then twos), asking only for the Browse tile in the empty space. The tiled
+grid is restored. The Browse tile is sized in the page script to fill whatever the last row
+leaves (six columns on desktop, four from 1000px, full width on phones), and it hides while a
+type pill filters the grid. The overflow fixes below stay. A phone-width bug found while
+measuring the revision is fixed: a tablet rule gave the tile two columns and made a phantom
+second column. The description below is the first version.
 
 23 September 2026, after docs/62. Clent asked for the homepage "Available properties" grid to be
 cleaner and more professional. It had been built for five listings: three tiles, then two wider
@@ -4476,3 +4486,34 @@ last row, no horizontal overflow, and the type pills still filtering. All 33 API
 
 The hover-reveal "showcase" card on the homepage (docs/34) is no longer used. Its styles remain for
 now and can be removed later.
+
+<!-- Source: 64-grandblue-price.md -->
+# GrandBlue priced at A$9,000,000
+
+23 September 2026, after docs/63. Clent set GrandBlue Resort & Beachclub's price at $9 million
+Australian dollars. Until now the listing read "Price to be confirmed" in Thai baht. Clent is the
+person authorised to supply GrandBlue's facts (docs/23), so this is recorded as his figure, not
+an estimate.
+
+## What changed
+
+- **Price and currency.** The listing is A$9,000,000 in Australian dollars. It shows as
+  "$9,000,000" on the card, the homepage headline and the listing page. The sale method stays
+  expressions of interest, so the page reads "$9,000,000 · Sale by expressions of interest".
+- **Removed wording.** The "Price to be confirmed" highlight chip and the "Price: To be confirmed"
+  details row are gone. The description's last paragraph now starts "The price is A$9,000,000."
+  and still says that room count, land area and sale terms are to be confirmed.
+- **The "Why" paragraph stays price-free.** A test keeps that editorial copy from stating a price.
+  Its last line now says "the price is shown on the listing".
+- **Migration.** The live row changes once, guarded by the old label, so it never overwrites a
+  later price.
+- **Tests.** GrandBlue is now the highest-priced commercial listing, and it now appears in
+  results with a minimum price. The listing that sorts last on "price low to high" is Millrace
+  Warehouse, whose "Contact the team" label is not a number.
+- **Brand document.** The verbatim label becomes "Photographs supplied by the property.", and
+  register row B-05 records the price as supplied.
+
+## Still open
+
+Room count, land and floor area, sale terms and whether the street address stays public
+(register B-05). Written permission for the photographs (B-04).

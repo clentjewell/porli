@@ -805,13 +805,9 @@ h1,h2,h3{font-family:var(--serif);font-weight:500;letter-spacing:-.012em;line-he
 .plan-row .media-fields{display:grid;gap:8px}
 @media(max-width:560px){.plan-figure img{width:100%;max-height:none}.plan-item summary{padding:16px 18px;font-size:15px}.plan-facts{display:none}.plan-body{padding:0 18px 18px}.plan-row{grid-template-columns:1fr;gap:10px}.plan-row img,.plan-row-empty{width:100%}}
 @media(prefers-reduced-motion:reduce){.plan-label svg{transition:none}.plan-item[open] .plan-body{animation:none}}
-/* Available properties on the homepage (docs/63): one uniform grid of the same cards the search
-   page uses, four across, closed by a tile that leads to the full search. Replaces the showcase
-   pattern of three-then-two tiles, which only held five listings evenly. */
-.home-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:24px}
-.home-grid>[data-reveal]{display:flex}
-.home-grid>[data-reveal]>.property-card{flex:1 1 auto}
-.home-grid-all{display:flex;flex-direction:column;justify-content:flex-end;gap:8px;min-height:100%;padding:26px;border-radius:var(--radius);background:var(--pale);color:var(--ink);text-decoration:none;position:relative;transition:background .2s}
+/* The Browse tile in the homepage tiled grid (docs/63): same height as a tile, spans whatever the
+   last row leaves, hidden while a type pill filters the grid. */
+.home-grid-all{display:flex;flex-direction:column;justify-content:flex-end;gap:8px;height:clamp(250px,23vw,340px);padding:26px;border-radius:var(--radius);background:var(--pale);color:var(--ink);text-decoration:none;position:relative;transition:background .2s}
 .home-grid-all strong{font-family:var(--serif,inherit);font-size:24px;font-weight:400;letter-spacing:-.02em;line-height:1.2}
 .home-grid-all>span:not(.eyebrow):not(.home-grid-all-arrow){font-size:13px;color:var(--muted)}
 .home-grid-all-arrow{position:absolute;top:22px;right:22px;display:grid;place-items:center;width:42px;height:42px;border-radius:50%;background:#fff;color:var(--olive)}
@@ -819,25 +815,13 @@ h1,h2,h3{font-family:var(--serif);font-weight:500;letter-spacing:-.012em;line-he
 .home-grid-all:hover{background:var(--accent)}
 .home-grid-all:hover .home-grid-all-arrow svg{transform:translateX(3px)}
 .home-grid-all:focus-visible{outline:3px solid var(--clay);outline-offset:3px}
-@media(max-width:1150px){.home-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
-@media(max-width:800px){.home-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media(max-width:560px){.home-grid{grid-template-columns:minmax(0,1fr)}.home-grid-all{min-height:180px}}
 @media(prefers-reduced-motion:reduce){.home-grid-all,.home-grid-all-arrow svg{transition:none}}
 /* A land card's price and View property button share one line when they fit and wrap when a sale
    method such as "Expressions of interest" is too long for a narrow card (docs/63). */
 .card-foot-land{flex-wrap:wrap;row-gap:10px}
 /* The homepage search row wraps between 701 and 1200px instead of running past the edge. */
 @media(min-width:701px) and (max-width:1200px){.hero-search-row{flex-wrap:wrap}.hero-search-field{flex:1 1 280px}}
-/* In the homepage grid every card is a column with its footer pinned to the bottom, so feet line
-   up across a row; a land card's price sits above a full-width View property button. */
-.home-grid .property-card{display:flex;flex-direction:column}
-.home-grid .card-body{flex:1 1 auto;display:flex;flex-direction:column}
-.home-grid .card-foot,.home-grid .card-demo-land{margin-top:auto}
-.home-grid .card-demo-land+.card-foot-land{margin-top:8px}
-.home-grid .card-foot-land{flex-direction:column;align-items:stretch;gap:12px}
-.home-grid .card-foot-land .price{text-align:left}
-.home-grid .card-cta{justify-content:center;width:100%}
-/* The Browse tile stretches across whatever the last row leaves, so no row ends in a gap. */
-@media(min-width:1151px){.home-grid-all:nth-child(4n+2){grid-column:span 3}.home-grid-all:nth-child(4n+3){grid-column:span 2}}
-@media(min-width:801px) and (max-width:1150px){.home-grid-all:nth-child(3n+2){grid-column:span 2}}
-@media(min-width:561px) and (max-width:800px){.home-grid-all:nth-child(odd){grid-column:span 2}}
+.showcase-grid:not([data-filter="all"]) .home-grid-all{display:none}
+.showcase-grid .home-grid-all.span6-2{grid-column:span 2}.showcase-grid .home-grid-all.span6-3{grid-column:span 3}.showcase-grid .home-grid-all.span6-4{grid-column:span 4}.showcase-grid .home-grid-all.span6-6{grid-column:1/-1}
+@media(max-width:1000px){.showcase-grid .home-grid-all.span4-2{grid-column:span 2}.showcase-grid .home-grid-all.span4-4{grid-column:1/-1}}
+@media(max-width:640px){.showcase-grid .home-grid-all[class]{grid-column:1/-1;height:auto;min-height:170px}}
