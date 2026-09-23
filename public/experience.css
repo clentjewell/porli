@@ -779,5 +779,3 @@ h1,h2,h3{font-family:var(--serif);font-weight:500;letter-spacing:-.012em;line-he
 @media(max-width:1000px){.land-cats{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:560px){.land-cats{grid-template-columns:1fr;gap:12px}.land-cat{padding:18px}}
 @media(prefers-reduced-motion:reduce){.land-cat,.land-cat-arrow svg{transition:none}.land-cat:hover{transform:none}}
-/* A site plan is a drawing: show the whole sheet in the listing gallery rather than a crop */
-.is-land .gallery-main img{object-fit:contain;background:#fcfcfa}
