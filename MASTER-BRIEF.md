@@ -4359,6 +4359,15 @@ rights are to be confirmed. The Commons aerial it replaces is removed. The Commo
 only as the homepage service photograph. The drawn boundary marks a real parcel elsewhere, and
 the listing page says so.
 
+## Cedar Ridge
+
+Clent then sent a picture for Cedar Ridge: a ground-level photograph of large houses along a
+lake. It is not an aerial, so it became the cover only (`land-cedar-ridge-supplied.webp`), and
+the openly licensed Murrumbidgee aerial stays in the aerial slot. A listing-site watermark in
+the bottom-right corner was cropped out, leaving 684 × 456. The photograph shows a built
+suburban estate, not the 42 hectares of grazing land the listing describes. This was flagged to
+Clent, and the choice is his. The Commons cover it replaces is removed.
+
 ## Cache
 
 The first deploy reused the old file names, and images are cached for an hour, so browsers
@@ -4372,5 +4381,5 @@ replaced image always gets a new file name.
   sharp on cards and soft in the full-width gallery. A larger original would fix it.
 - **Rights are unknown.** The file carries no source. Before a public launch it needs the same
   confirmation as GrandBlue's photographs (B-04).
-- **Three listings still wait** for their pictures: Cedar Ridge, Fernwick Estate Lot 12 and
-  Harbour Road Development Site.
+- **Two listings still wait** for their pictures: Fernwick Estate Lot 12 and Harbour Road
+  Development Site.
