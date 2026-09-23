@@ -43,6 +43,10 @@ the bottom-right corner was cropped out, leaving 684 × 456. The photograph show
 suburban estate, not the 42 hectares of grazing land the listing describes. This was flagged to
 Clent, and the choice is his. The Commons cover it replaces is removed.
 
+Clent then sent an overhead photograph of a suburban street for the Cedar Ridge aerial slot. It
+is used whole, 735 × 893, as `aerial-cedar-ridge-supplied.webp`. The Murrumbidgee aerial is
+removed, so both Cedar Ridge pictures are now reference photographs supplied by the team.
+
 ## Cache
 
 The first deploy reused the old file names, and images are cached for an hour, so browsers
